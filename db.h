@@ -30,19 +30,20 @@
 
 /* public procedures in db.c */
 
-void boot_db (void);
-void save_char (struct char_data *ch, sh_int load_room);
-int create_entry (char *name);
-void zone_update (void);
-void init_char (struct char_data *ch);
-void clear_char (struct char_data *ch);
-void clear_object (struct obj_data *obj);
-void reset_char (struct char_data *ch);
-void free_char (struct char_data *ch);
-int real_room (int virtual);
-char *fread_string (FILE * fl);
-int real_object (int virtual);
-int real_mobile (int virtual);
+extern void boot_db (void);
+extern void save_char (struct char_data *ch, sh_int load_room);
+extern int create_entry (char *name);
+extern void zone_update (void);
+extern void init_char (struct char_data *ch);
+extern void clear_char (struct char_data *ch);
+extern void clear_object (struct obj_data *obj);
+extern void reset_char (struct char_data *ch);
+extern void free_char (struct char_data *ch);
+extern int real_room (int virtual);
+extern char *fread_string (FILE * fl);
+extern int real_object (int virtual);
+extern int real_mobile (int virtual);
+extern void update_time (void);
 
 #define REAL 0
 #define VIRTUAL 1
