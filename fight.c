@@ -74,8 +74,9 @@ void load_messages (void)
   struct message_type *messages;
   char chk[100];
 
-  if (!(f1 = fopen (MESS_FILE, "r"))) {
+  if (!(f1 = fopen (MESS_FILE, "rb"))) {
     perror ("read messages");
+    WIN32CLEANUP
     exit (0);
   }
 
@@ -93,6 +94,7 @@ void load_messages (void)
       (fight_messages[i].a_type); i++);
     if (i >= MAX_MESSAGES) {
       log ("Too many combat messages.");
+      WIN32CLEANUP
       exit (0);
     }
 
