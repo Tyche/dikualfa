@@ -8,9 +8,12 @@
 #include "structs.h"
 #include "utils.h"
 #include "comm.h"
+#include "db.h"
 #include "spells.h"
 #include "handler.h"
 #include "limits.h"
+#include "interpreter.h"
+#include "prototypes.h"
 
 /* Extern structures */
 extern struct room_data *world;
@@ -1067,8 +1070,6 @@ void spell_word_of_recall (byte level, struct char_data *ch,
   extern int top_of_world;
   int loc_nr, location;
   bool found = FALSE;
-
-  void do_look (struct char_data *ch, char *argument, int cmd);
 
   assert (victim);
 
