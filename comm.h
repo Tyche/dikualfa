@@ -26,3 +26,7 @@ void act (char *str, int hide_invisible, struct char_data *ch,
 int write_to_descriptor (int desc, char *txt);
 void write_to_q (char *txt, struct txt_q *queue);
 #define SEND_TO_Q(messg, desc)  write_to_q((messg), &(desc)->output)
+
+extern sigset_t mask;
+extern sigset_t currmask;
+extern sigset_t zeromask;
