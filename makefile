@@ -35,7 +35,7 @@ PDATA= $(patsubst %,lib/%,$(DATA))
 
 # Files in the standard distribution
 DISTFILES= $(CFILES) $(HEADERS) $(PDOCS) $(PDATA) $(UTILITIES) \
-	$(OTHERSTUFF) nightrun opstart readme \
+	$(OTHERSTUFF) nightrun opstart readme INSTALL_NOTES \
 	makefile makefile.bor makefile.dgm makefile.vc6 makefile.lcc 
 PDIST= $(patsubst %,diku-alfa/%,$(DISTFILES))
 RELEASE=dist
