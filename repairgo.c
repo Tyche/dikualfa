@@ -4,25 +4,30 @@
 
 void do_it (FILE * src, FILE * trg, FILE * out);
 
-main (int argc, char **argv)
+int main (int argc, char **argv)
 {
   FILE *src, *trg, *out;
 
   if (argc != 4) {
     fprintf (stderr, "Usage: %s source target ulit\n", argv[0]);
-    exit (0);
-  } else if (!(src = fopen (argv[1], "rb")))
+    return 0;
+  } else if (!(src = fopen (argv[1], "rb"))) {
     fprintf (stderr, "%s: Could not open.\n", argv[1]);
-  else if (!(trg = fopen (argv[2], "rb")))
+    return 1;
+  } else if (!(trg = fopen (argv[2], "rb"))) {
     fprintf (stderr, "%s: Could not open.\n", argv[2]);
-  else if (!(out = fopen (argv[3], "wb")))
+    return 1;
+  } else if (!(out = fopen (argv[3], "wb"))) {
     fprintf (stderr, "%s: Could not open.\n", argv[3]);
-  else
+    return 1;
+  } else {
     do_it (src, trg, out);
+  }
 
   fclose (src);
   fclose (trg);
   fclose (out);
+  return 0;
 }
 
 
