@@ -22,7 +22,7 @@ void del (char *filename, int name)
   int pos, num;
   long end;
 
-  if (!(fl = fopen (filename, "r+"))) {
+  if (!(fl = fopen (filename, "r+b"))) {
     perror ("list");
     exit (1);
   }
@@ -58,10 +58,18 @@ void del (char *filename, int name)
   end = ftell (fl);
   fclose (fl);
 
+#if !defined WIN32
   if (truncate (filename, end - sizeof (player))) {
     perror ("truncate");
     exit (1);
   }
+#else
+//  Windows doesn't have anything like truncate.
+//  openfile
+//  lseek()
+//  SetEndOfFile()
+//  closefile
+#endif
 }
 
 
