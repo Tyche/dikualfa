@@ -106,7 +106,7 @@
 #define SAVING_SPELL  4
 
 
-#define MAX_SPL_LIST	127
+#define MAX_SPL_LIST  127
 
 
 #define TAR_IGNORE        1
@@ -123,15 +123,15 @@
 
 struct spell_info_type
 {
-	void (*spell_pointer) (byte level, struct char_data *ch, char *arg, int type,
-	                       struct char_data *tar_ch, struct obj_data *tar_obj);
-	byte minimum_position;  /* Position for caster 						 */
-	ubyte min_usesmana;     /* Amount of mana used by a spell	 */
-	byte beats;             /* Heartbeats until ready for next */
+  void (*spell_pointer) (byte level, struct char_data *ch, char *arg, int type,
+                         struct char_data *tar_ch, struct obj_data *tar_obj);
+  byte minimum_position;  /* Position for caster             */
+  ubyte min_usesmana;     /* Amount of mana used by a spell  */
+  byte beats;             /* Heartbeats until ready for next */
 
-	byte min_level_cleric;  /* Level required for cleric       */
-	byte min_level_magic;   /* Level required for magic user   */
-	sh_int targets;         /* See below for use with TAR_XXX  */
+  byte min_level_cleric;  /* Level required for cleric       */
+  byte min_level_magic;   /* Level required for magic user   */
+  sh_int targets;         /* See below for use with TAR_XXX  */
 };
 
 /* Possible Targets:
@@ -163,4 +163,3 @@ struct attack_hit_type {
   char *plural;
 };
 
-

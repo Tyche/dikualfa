@@ -79,22 +79,22 @@ struct char_data *read_mobile(int nr, int type);
 /* structure for the reset commands */
 struct reset_com
 {
-	char command;   /* current command                      */ 
-	bool if_flag;   /* if TRUE: exe only if preceding exe'd */
-	int arg1;       /*                                      */
-	int arg2;       /* Arguments to the command             */
-	int arg3;       /*                                      */
+  char command;   /* current command                      */
+  bool if_flag;   /* if TRUE: exe only if preceding exe'd */
+  int arg1;       /*                                      */
+  int arg2;       /* Arguments to the command             */
+  int arg3;       /*                                      */
 
-	/* 
-	*  Commands:              *
-	*  'M': Read a mobile     *
-	*  'O': Read an object    *
-	*  'G': Give obj to mob   *
-	*  'P': Put obj in obj    *
-	*  'G': Obj to char       *
-	*  'E': Obj to char equip *
-	*  'D': Set state of door *
-	*/
+  /*
+  *  Commands:              *
+  *  'M': Read a mobile     *
+  *  'O': Read an object    *
+  *  'G': Give obj to mob   *
+  *  'P': Put obj in obj    *
+  *  'G': Obj to char       *
+  *  'E': Obj to char equip *
+  *  'D': Set state of door *
+  */
 };
 
 
@@ -102,20 +102,20 @@ struct reset_com
 /* zone definition structure. for the 'zone-table'   */
 struct zone_data
 {
-	char *name;             /* name of this zone                  */
-	int lifespan;           /* how long between resets (minutes)  */
-	int age;                /* current age of this zone (minutes) */
-	int top;                /* upper limit for rooms in this zone */
+  char *name;             /* name of this zone                  */
+  int lifespan;           /* how long between resets (minutes)  */
+  int age;                /* current age of this zone (minutes) */
+  int top;                /* upper limit for rooms in this zone */
 
-	int reset_mode;         /* conditions for reset (see below)   */
-	struct reset_com *cmd;  /* command table for reset	           */
+  int reset_mode;         /* conditions for reset (see below)   */
+  struct reset_com *cmd;  /* command table for reset             */
 
-	/*
-	*  Reset mode:                              *
-	*  0: Don't reset, and don't update age.    *
-	*  1: Reset if no PC's are located in zone. *
-	*  2: Just reset.                           *
-	*/
+  /*
+  *  Reset mode:                              *
+  *  0: Don't reset, and don't update age.    *
+  *  1: Reset if no PC's are located in zone. *
+  *  2: Just reset.                           *
+  */
 };
 
 
@@ -124,10 +124,10 @@ struct zone_data
 /* element in monster and object index-tables   */
 struct index_data
 {
-	int virtual;    /* virtual number of this mob/obj           */
-	long pos;       /* file position of this field              */
-	int number;     /* number of existing units of this mob/obj	*/
-	int (*func)();  /* special procedure for this mob/obj       */
+  int virtual;    /* virtual number of this mob/obj           */
+  long pos;       /* file position of this field              */
+  int number;     /* number of existing units of this mob/obj */
+  int (*func)();  /* special procedure for this mob/obj       */
 };
 
 
@@ -136,8 +136,8 @@ struct index_data
 /* for queueing zones for update   */
 struct reset_q_element
 {
-	int zone_to_reset;            /* ref to zone_data */
-	struct reset_q_element *next;	
+  int zone_to_reset;            /* ref to zone_data */
+  struct reset_q_element *next;
 };
 
 
@@ -145,22 +145,21 @@ struct reset_q_element
 /* structure for the update queue     */
 struct reset_q_type
 {
-	struct reset_q_element *head;
-	struct reset_q_element *tail;
+  struct reset_q_element *head;
+  struct reset_q_element *tail;
 } reset_q;
 
 
 
 struct player_index_element
 {
-	char *name;
-	int nr;
+  char *name;
+  int nr;
 };
 
 
 struct help_index_element
 {
-	char *keyword;
-	long pos;
+  char *keyword;
+  long pos;
 };
-

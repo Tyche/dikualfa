@@ -1,4 +1,4 @@
-CC = /usr/local/games/dikumud/gcc/gcc -B/usr/local/games/dikumud/gcc/
+CC = gcc 
 CFLAGS =
 HEADERFILES = structs.h utils.h comm.h interpreter.h db.h
 dmserver : comm.o act.comm.o act.informative.o act.movement.o act.obj1.o act.obj2.o act.offensive.o act.other.o act.social.o act.wizard.o handler.o db.o interpreter.o utility.o spec_assign.o shop.o limits.o mobact.o fight.o modify.o weather.o spell_parser.o spells1.o spells2.o reception.o constants.o spec_procs.o signals.o board.o mar_fiz_maz.o magic.o
@@ -88,4 +88,4 @@ mar_fiz_maz.o : mar_fiz_maz.c structs.h utils.h comm.h interpreter.h \
 	$(CC) -c $(CFLAGS) mar_fiz_maz.c
 dmserver : comm.c act.comm.c act.informative.c act.movement.c act.obj1.c act.obj2.c act.offensive.c act.other.c act.social.c act.wizard.c handler.c db.c interpreter.c utility.c spec_assign.c shop.c limits.c mobact.c fight.c modify.c weather.c spells1.c spells2.c spell_parser.c reception.c constants.c spec_procs.c signals.c board.c mar_fiz_maz.c magic.c
 	$(CC) -o dmserver $(CFLAGS) comm.o act.comm.o act.informative.o act.movement.o act.obj1.o act.obj2.o act.offensive.o act.other.o act.social.o act.wizard.o handler.o db.o interpreter.o utility.o spec_assign.o shop.o limits.o mobact.o fight.o modify.o weather.o spells1.o spells2.o spell_parser.o reception.o constants.o spec_procs.o signals.o board.o mar_fiz_maz.o magic.o
-
+

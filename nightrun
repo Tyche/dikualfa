@@ -39,4 +39,3 @@ echo "Nightrun ($user) restarting game at `date`." >> runlog
 tail -3 syslog >> runlog
 
 end
-

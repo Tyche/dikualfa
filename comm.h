@@ -16,7 +16,7 @@ void perform_complex(struct char_data *ch1, struct char_data *ch2,
                      char *mess, byte mess_type, bool hide);
 
 void act(char *str, int hide_invisible, struct char_data *ch,
-	struct obj_data *obj, void *vict_obj, int type);
+  struct obj_data *obj, void *vict_obj, int type);
 
 #define TO_ROOM    0
 #define TO_VICT    1
@@ -26,4 +26,3 @@ void act(char *str, int hide_invisible, struct char_data *ch,
 int write_to_descriptor(int desc, char *txt);
 void write_to_q(char *txt, struct txt_q *queue);
 #define SEND_TO_Q(messg, desc)  write_to_q((messg), &(desc)->output)
-

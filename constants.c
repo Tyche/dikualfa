@@ -66,66 +66,66 @@ const char *spell_wear_off_msg[] = {
 };
 
 
-const int rev_dir[] = 
+const int rev_dir[] =
 {
-	2,
-	3,
-	0,
-	1,	
-	5,
-	4
-}; 
+  2,
+  3,
+  0,
+  1,
+  5,
+  4
+};
 
 const int movement_loss[]=
 {
-	1,	/* Inside     */
-	2,  /* City       */
-	2,  /* Field      */
-	3,  /* Forest     */
-	4,  /* Hills      */
-	6,  /* Mountains  */
+  1,  /* Inside     */
+  2,  /* City       */
+  2,  /* Field      */
+  3,  /* Forest     */
+  4,  /* Hills      */
+  6,  /* Mountains  */
   4,  /* Swimming   */
   1   /* Unswimable */
 };
 
-const char *dirs[] = 
+const char *dirs[] =
 {
-	"north",
-	"east",
-	"south",
-	"west",
-	"up",
-	"down",
-	"\n"
+  "north",
+  "east",
+  "south",
+  "west",
+  "up",
+  "down",
+  "\n"
 };
 
-const char *weekdays[7] = { 
-	"the Day of the Moon",
-	"the Day of the Bull",
-	"the Day of the Deception",
-	"the Day of Thunder",
-	"the Day of Freedom",
-	"the day of the Great Gods",
-	"the Day of the Sun" };
+const char *weekdays[7] = {
+  "the Day of the Moon",
+  "the Day of the Bull",
+  "the Day of the Deception",
+  "the Day of Thunder",
+  "the Day of Freedom",
+  "the day of the Great Gods",
+  "the Day of the Sun" };
 
 const char *month_name[17] = {
-	"Month of Winter",           /* 0 */
-	"Month of the Winter Wolf",
-	"Month of the Frost Giant",
-	"Month of the Old Forces",
-	"Month of the Grand Struggle",
-	"Month of the Spring",
-	"Month of Nature",
-	"Month of Futility",
-	"Month of the Dragon",
-	"Month of the Sun",
-	"Month of the Heat",
-	"Month of the Battle",
-	"Month of the Dark Shades",
-	"Month of the Shadows",
-	"Month of the Long Shadows",
-	"Month of the Ancient Darkness",
-	"Month of the Great Evil"
+  "Month of Winter",           /* 0 */
+  "Month of the Winter Wolf",
+  "Month of the Frost Giant",
+  "Month of the Old Forces",
+  "Month of the Grand Struggle",
+  "Month of the Spring",
+  "Month of Nature",
+  "Month of Futility",
+  "Month of the Dragon",
+  "Month of the Sun",
+  "Month of the Heat",
+  "Month of the Battle",
+  "Month of the Dark Shades",
+  "Month of the Shadows",
+  "Month of the Long Shadows",
+  "Month of the Ancient Darkness",
+  "Month of the Great Evil"
 };
 
 const int sharp[] = {
@@ -143,111 +143,111 @@ const int sharp[] = {
    0 };  /* Pierce   */
 
 const char *where[] = {
-	"<used as light>      ",
-	"<worn on finger>     ",
-	"<worn on finger>     ",
-	"<worn around neck>   ",
-	"<worn around neck>   ",
-	"<worn on body>       ",
-	"<worn on head>       ",
-	"<worn on legs>       ",
-	"<worn on feet>       ",
-	"<worn on hands>      ",
-	"<worn on arms>       ",
-	"<worn as shield>     ",
-	"<worn about body>    ",
-	"<worn about waist>   ",
-	"<worn around wrist>  ",
-	"<worn around wrist>  ",
-	"<wielded>            ",
-	"<held>               " 
-}; 
+  "<used as light>      ",
+  "<worn on finger>     ",
+  "<worn on finger>     ",
+  "<worn around neck>   ",
+  "<worn around neck>   ",
+  "<worn on body>       ",
+  "<worn on head>       ",
+  "<worn on legs>       ",
+  "<worn on feet>       ",
+  "<worn on hands>      ",
+  "<worn on arms>       ",
+  "<worn as shield>     ",
+  "<worn about body>    ",
+  "<worn about waist>   ",
+  "<worn around wrist>  ",
+  "<worn around wrist>  ",
+  "<wielded>            ",
+  "<held>               "
+};
 
 const char *drinks[]=
 {
-	"water",
-	"beer",
-	"wine",
-	"ale",
-	"dark ale",
-	"whisky",
-	"lemonade",
-	"firebreather",
-	"local speciality",
-	"slime mold juice",
-	"milk",
-	"tea",
-	"coffee",
-	"blood",
-	"salt water",
-	"coca cola"
+  "water",
+  "beer",
+  "wine",
+  "ale",
+  "dark ale",
+  "whisky",
+  "lemonade",
+  "firebreather",
+  "local speciality",
+  "slime mold juice",
+  "milk",
+  "tea",
+  "coffee",
+  "blood",
+  "salt water",
+  "coca cola"
 };
 
 const char *drinknames[]=
 {
-	"water",
-	"beer",
-	"wine",
-	"ale",
-	"ale",
-	"whisky",
-	"lemonade",
-	"firebreather",
-	"local",
-	"juice",
-	"milk",
-	"tea",
-	"coffee",
-	"blood",
-	"salt",
-	"cola"
+  "water",
+  "beer",
+  "wine",
+  "ale",
+  "ale",
+  "whisky",
+  "lemonade",
+  "firebreather",
+  "local",
+  "juice",
+  "milk",
+  "tea",
+  "coffee",
+  "blood",
+  "salt",
+  "cola"
 };
 
 const int drink_aff[][3] = {
-	{ 0,1,10 },  /* Water    */
-	{ 3,2,5 },   /* beer     */
-	{ 5,2,5 },   /* wine     */
-	{ 2,2,5 },   /* ale      */
-	{ 1,2,5 },   /* ale      */
-	{ 6,1,4 },   /* Whiskey  */
-	{ 0,1,8 },   /* lemonade */
-	{ 10,0,0 },  /* firebr   */
-	{ 3,3,3 },   /* local    */
-	{ 0,4,-8 },  /* juice    */
-	{ 0,3,6 },
-	{ 0,1,6 },
-	{ 0,1,6 },
-	{ 0,2,-1 },
-	{ 0,1,-2 },
-	{ 0,1,5 }
+  { 0,1,10 },  /* Water    */
+  { 3,2,5 },   /* beer     */
+  { 5,2,5 },   /* wine     */
+  { 2,2,5 },   /* ale      */
+  { 1,2,5 },   /* ale      */
+  { 6,1,4 },   /* Whiskey  */
+  { 0,1,8 },   /* lemonade */
+  { 10,0,0 },  /* firebr   */
+  { 3,3,3 },   /* local    */
+  { 0,4,-8 },  /* juice    */
+  { 0,3,6 },
+  { 0,1,6 },
+  { 0,1,6 },
+  { 0,2,-1 },
+  { 0,1,-2 },
+  { 0,1,5 }
 };
 
 const char *color_liquid[]=
 {
-	"clear",
-	"brown",
-	"clear",
-	"brown",
-	"dark",
-	"golden",
-	"red",
-	"green",
-	"clear",
-	"light green",
-	"white",
-	"brown",
-	"black",
-	"red",
-	"clear",
-	"black"
+  "clear",
+  "brown",
+  "clear",
+  "brown",
+  "dark",
+  "golden",
+  "red",
+  "green",
+  "clear",
+  "light green",
+  "white",
+  "brown",
+  "black",
+  "red",
+  "clear",
+  "black"
 };
 
 const char *fullness[] =
 {
-	"less than half ",
-	"about half ",
-	"more than half ",
-	""
+  "less than half ",
+  "about half ",
+  "more than half ",
+  ""
 };
 
 const struct title_type titles[4][25] = {
@@ -357,254 +357,254 @@ const struct title_type titles[4][25] = {
 };
 
 const char *item_types[] = {
-	"UNDEFINED",
-	"LIGHT",
-	"SCROLL",
-	"WAND",
-	"STAFF",
-	"WEAPON",
-	"FIRE WEAPON",
-	"MISSILE",
-	"TREASURE",
-	"ARMOR",
-	"POTION",
-	"WORN",
-	"OTHER",
-	"TRASH",
-	"TRAP",
-	"CONTAINER",
-	"NOTE",
-	"LIQUID CONTAINER",
-	"KEY",
-	"FOOD",
-	"MONEY",
-	"PEN",
-	"BOAT",
-	"\n"
+  "UNDEFINED",
+  "LIGHT",
+  "SCROLL",
+  "WAND",
+  "STAFF",
+  "WEAPON",
+  "FIRE WEAPON",
+  "MISSILE",
+  "TREASURE",
+  "ARMOR",
+  "POTION",
+  "WORN",
+  "OTHER",
+  "TRASH",
+  "TRAP",
+  "CONTAINER",
+  "NOTE",
+  "LIQUID CONTAINER",
+  "KEY",
+  "FOOD",
+  "MONEY",
+  "PEN",
+  "BOAT",
+  "\n"
 };
 
 const char *wear_bits[] = {
-	"TAKE",
-	"FINGER",
-	"NECK",
-	"BODY",
-	"HEAD",
-	"LEGS",
-	"FEET",
-	"HANDS",
-	"ARMS",
-	"SHIELD",
-	"ABOUT",
-	"WAISTE",
-	"WRIST",
-	"WIELD",
-	"HOLD",
-	"THROW",
-	"LIGHT-SOURCE",
-	"\n"
+  "TAKE",
+  "FINGER",
+  "NECK",
+  "BODY",
+  "HEAD",
+  "LEGS",
+  "FEET",
+  "HANDS",
+  "ARMS",
+  "SHIELD",
+  "ABOUT",
+  "WAISTE",
+  "WRIST",
+  "WIELD",
+  "HOLD",
+  "THROW",
+  "LIGHT-SOURCE",
+  "\n"
 };
 
 const char *extra_bits[] = {
-	"GLOW",
-	"HUM",
-	"DARK",
-	"LOCK",
-	"EVIL",
-	"INVISIBLE",
-	"MAGIC",
-	"NODROP",
-	"BLESS",
-	"ANTI-GOOD",
-	"ANTI-EVIL",
-	"ANTI-NEUTRAL",
-	"\n"
+  "GLOW",
+  "HUM",
+  "DARK",
+  "LOCK",
+  "EVIL",
+  "INVISIBLE",
+  "MAGIC",
+  "NODROP",
+  "BLESS",
+  "ANTI-GOOD",
+  "ANTI-EVIL",
+  "ANTI-NEUTRAL",
+  "\n"
 };
 
 const char *room_bits[] = {
-	"DARK",
-	"DEATH",
-	"NO_MOB",
-	"INDOORS",
-	"LAWFULL",
-	"NEUTRAL",
-	"CHAOTOC",
-	"NO_MAGIC",
-	"TUNNEL",
-	"PRIVATE",
-	"\n"
+  "DARK",
+  "DEATH",
+  "NO_MOB",
+  "INDOORS",
+  "LAWFULL",
+  "NEUTRAL",
+  "CHAOTOC",
+  "NO_MAGIC",
+  "TUNNEL",
+  "PRIVATE",
+  "\n"
 };
 
 const char *exit_bits[] = {
-	"IS-DOOR",
-	"CLOSED",
-	"LOCKED",
-	"\n"
+  "IS-DOOR",
+  "CLOSED",
+  "LOCKED",
+  "\n"
 };
 
 const char *sector_types[] = {
-	"Inside",
-	"City",
-	"Field",
-	"Forest",
-	"Hills",
-	"Mountains",
-	"Water Swim",
-	"Water NoSwim",
-	"\n"
+  "Inside",
+  "City",
+  "Field",
+  "Forest",
+  "Hills",
+  "Mountains",
+  "Water Swim",
+  "Water NoSwim",
+  "\n"
 };
 
 const char *equipment_types[] = {
-	"Special",
-	"Worn on right finger",
-	"Worn on left finger",
-	"First worn around Neck",
-	"Second worn around Neck",
-	"Worn on body",
-	"Worn on head",
-	"Worn on legs",
-	"Worn on feet",
-	"Worn on hands",
-	"Worn on arms",
-	"Worn as shield",
-	"Worn about body",
-	"Worn around waiste",
-	"Worn around right wrist",
-	"Worn around left wrist",
-	"Wielded",
-	"Held",
-	"\n"
+  "Special",
+  "Worn on right finger",
+  "Worn on left finger",
+  "First worn around Neck",
+  "Second worn around Neck",
+  "Worn on body",
+  "Worn on head",
+  "Worn on legs",
+  "Worn on feet",
+  "Worn on hands",
+  "Worn on arms",
+  "Worn as shield",
+  "Worn about body",
+  "Worn around waiste",
+  "Worn around right wrist",
+  "Worn around left wrist",
+  "Wielded",
+  "Held",
+  "\n"
 };
-	
-const char *affected_bits[] = 
-{	"BLIND",
-	"INVISIBLE",
-	"DETECT-EVIL",
-	"DETECT-INVISIBLE",
-	"DETECT-MAGIC",
-	"SENCE-LIFE",
-	"HOLD",
-	"SANCTUARY",
-	"GROUP",
-	"UNUSED",
-	"CURSE",
-	"FLAMING-HANDS",
-	"POISON",
-	"PROTECT-EVIL",
-	"PARALYSIS",
-	"MORDENS-SWORD",
-	"FLAMING-SWORD",
-	"SLEEP",
-	"DODGE",
-	"SNEAK",
-	"HIDE",
-	"FEAR",
-	"CHARM",
-	"FOLLOW",
-	"SAVED_OBJECTS",
-	"\n"
+
+const char *affected_bits[] =
+{ "BLIND",
+  "INVISIBLE",
+  "DETECT-EVIL",
+  "DETECT-INVISIBLE",
+  "DETECT-MAGIC",
+  "SENCE-LIFE",
+  "HOLD",
+  "SANCTUARY",
+  "GROUP",
+  "UNUSED",
+  "CURSE",
+  "FLAMING-HANDS",
+  "POISON",
+  "PROTECT-EVIL",
+  "PARALYSIS",
+  "MORDENS-SWORD",
+  "FLAMING-SWORD",
+  "SLEEP",
+  "DODGE",
+  "SNEAK",
+  "HIDE",
+  "FEAR",
+  "CHARM",
+  "FOLLOW",
+  "SAVED_OBJECTS",
+  "\n"
 };
 
 const char *apply_types[] = {
-	"NONE",
-	"STR",
-	"DEX",
-	"INT",
-	"WIS",
-	"CON",
-	"SEX",
-	"CLASS",
-	"LEVEL",
-	"AGE",
-	"CHAR_WEIGHT",
-	"CHAR_HEIGHT",
-	"MANA",
-	"HIT",
-	"MOVE",
-	"GOLD",
-	"EXP",
-	"ARMOR",
-	"HITROLL",
-	"DAMROLL",
-	"SAVING_PARA",
-	"SAVING_ROD",
-	"SAVING_PETRI",
-	"SAVING_BREATH",
-	"SAVING_SPELL",
-	"\n"
+  "NONE",
+  "STR",
+  "DEX",
+  "INT",
+  "WIS",
+  "CON",
+  "SEX",
+  "CLASS",
+  "LEVEL",
+  "AGE",
+  "CHAR_WEIGHT",
+  "CHAR_HEIGHT",
+  "MANA",
+  "HIT",
+  "MOVE",
+  "GOLD",
+  "EXP",
+  "ARMOR",
+  "HITROLL",
+  "DAMROLL",
+  "SAVING_PARA",
+  "SAVING_ROD",
+  "SAVING_PETRI",
+  "SAVING_BREATH",
+  "SAVING_SPELL",
+  "\n"
 };
 
 const char *pc_class_types[] = {
-	"UNDEFINED",
-	"Magic User",
-	"Cleric",
-	"Thief",
-	"Warrior",
-	"\n"
+  "UNDEFINED",
+  "Magic User",
+  "Cleric",
+  "Thief",
+  "Warrior",
+  "\n"
 };
 
 const char *npc_class_types[] = {
-	"Normal",
-	"Undead",
-	"\n"
+  "Normal",
+  "Undead",
+  "\n"
 };
 
 const char *action_bits[] = {
-	"SPEC",
-	"SENTINEL",
-	"SCAVENGER",
-	"ISNPC",
-	"NICE-THIEF",
-	"AGGRESSIVE",
-	"STAY-ZONE",
-	"WIMPY",
-	"\n"
+  "SPEC",
+  "SENTINEL",
+  "SCAVENGER",
+  "ISNPC",
+  "NICE-THIEF",
+  "AGGRESSIVE",
+  "STAY-ZONE",
+  "WIMPY",
+  "\n"
 };
 
 
 const char *player_bits[] = {
-	"BRIEF",
-	"NOSHOUT",
-	"COMPACT",
-	"DONTSET",
-	"NOTELL",
-	"NOEMOTE",
-	"",
-	"FREEZE",
-	"\n"
+  "BRIEF",
+  "NOSHOUT",
+  "COMPACT",
+  "DONTSET",
+  "NOTELL",
+  "NOEMOTE",
+  "",
+  "FREEZE",
+  "\n"
 };
 
 
 const char *position_types[] = {
-	"Dead",
-	"Mortally wounded",
-	"Incapasitated",
-	"Stunned",
-	"Sleeping",
-	"Resting",
-	"Sitting",
-	"Fighting",
-	"Standing",
-	"\n"
+  "Dead",
+  "Mortally wounded",
+  "Incapasitated",
+  "Stunned",
+  "Sleeping",
+  "Resting",
+  "Sitting",
+  "Fighting",
+  "Standing",
+  "\n"
 };
 
-const char *connected_types[]	=	{
-	"Playing",
-	"Get name",
-	"Confirm name",
-	"Read Password",
-	"Get new password",
-	"Confirm new password",
-	"Get sex",
-	"Read messages of today",
-	"Read Menu",
-	"Get extra description",
-	"Get class",
-	"\n"
+const char *connected_types[] = {
+  "Playing",
+  "Get name",
+  "Confirm name",
+  "Read Password",
+  "Get new password",
+  "Confirm new password",
+  "Get sex",
+  "Read messages of today",
+  "Read Menu",
+  "Get extra description",
+  "Get class",
+  "\n"
 };
 
 /* [class], [level] (all) */
 const int thaco[4][25] = {
-	 { 100,20,20,20,19,19,19,18,18,18,17,17,17,16,16,16,15,15,15,14,14,14,13,13,13},
+   { 100,20,20,20,19,19,19,18,18,18,17,17,17,16,16,16,15,15,15,14,14,14,13,13,13},
    { 100,20,20,20,18,18,18,16,16,16,14,14,14,12,12,12,10,10,10, 8, 8, 8, 6, 6, 6},
    { 100,20,20,19,19,18,18,17,17,16,16,15,15,14,13,13,12,12,11,11,10,10, 9, 9, 8},
    { 100,20,19,18,17,16,15,14,13,12,11,10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 1, 1, 1, 1}
@@ -612,215 +612,214 @@ const int thaco[4][25] = {
 
 /* [ch] strength apply (all) */
 const struct str_app_type str_app[31] = {
-	{ -5,-4,   0,  0 },  /* 0  */
-	{ -5,-4,   3,  1 },  /* 1  */
-	{ -3,-2,   3,  2 },
-	{ -3,-1,  10,  3 },  /* 3  */
-	{ -2,-1,  25,  4 },
-	{ -2,-1,  55,  5 },  /* 5  */
-	{ -1, 0,  80,  6 },
-	{ -1, 0,  90,  7 },
-	{  0, 0, 100,  8 },
-	{  0, 0, 100,  9 },
-	{  0, 0, 115, 10 }, /* 10  */
-	{  0, 0, 115, 11 },
-	{  0, 0, 140, 12 },
-	{  0, 0, 140, 13 },
-	{  0, 0, 170, 14 },
-	{  0, 0, 170, 15 }, /* 15  */
-	{  0, 1, 195, 16 },
-	{  1, 1, 220, 18 },
-	{  1, 2, 255, 20 }, /* 18  */
-	{  3, 7, 640, 40 },
-	{  3, 8, 700, 40 }, /* 20  */
-	{  4, 9, 810, 40 },
-	{  4,10, 970, 40 },
-	{  5,11,1130, 40 },
-	{  6,12,1440, 40 },
-	{  7,14,1750, 40 }, /* 25            */
-	{  1, 3, 280, 22 }, /* 18/01-50      */
-	{  2, 3, 305, 24 }, /* 18/51-75      */
-	{  2, 4, 330, 26 }, /* 18/76-90      */
-	{  2, 5, 380, 28 }, /* 18/91-99      */
-	{  3, 6, 480, 30 }  /* 18/100   (30) */
+  { -5,-4,   0,  0 },  /* 0  */
+  { -5,-4,   3,  1 },  /* 1  */
+  { -3,-2,   3,  2 },
+  { -3,-1,  10,  3 },  /* 3  */
+  { -2,-1,  25,  4 },
+  { -2,-1,  55,  5 },  /* 5  */
+  { -1, 0,  80,  6 },
+  { -1, 0,  90,  7 },
+  {  0, 0, 100,  8 },
+  {  0, 0, 100,  9 },
+  {  0, 0, 115, 10 }, /* 10  */
+  {  0, 0, 115, 11 },
+  {  0, 0, 140, 12 },
+  {  0, 0, 140, 13 },
+  {  0, 0, 170, 14 },
+  {  0, 0, 170, 15 }, /* 15  */
+  {  0, 1, 195, 16 },
+  {  1, 1, 220, 18 },
+  {  1, 2, 255, 20 }, /* 18  */
+  {  3, 7, 640, 40 },
+  {  3, 8, 700, 40 }, /* 20  */
+  {  4, 9, 810, 40 },
+  {  4,10, 970, 40 },
+  {  5,11,1130, 40 },
+  {  6,12,1440, 40 },
+  {  7,14,1750, 40 }, /* 25            */
+  {  1, 3, 280, 22 }, /* 18/01-50      */
+  {  2, 3, 305, 24 }, /* 18/51-75      */
+  {  2, 4, 330, 26 }, /* 18/76-90      */
+  {  2, 5, 380, 28 }, /* 18/91-99      */
+  {  3, 6, 480, 30 }  /* 18/100   (30) */
 };
 
 /* [dex] skill apply (thieves only) */
 const struct dex_skill_type dex_app_skill[26] = {
-	{-99,-99,-90,-99,-60},   /* 0 */
-	{-90,-90,-60,-90,-50},   /* 1 */
-	{-80,-80,-40,-80,-45},
-	{-70,-70,-30,-70,-40},
-	{-60,-60,-30,-60,-35},
-	{-50,-50,-20,-50,-30},   /* 5 */
-	{-40,-40,-20,-40,-25},
-	{-30,-30,-15,-30,-20},
-	{-20,-20,-15,-20,-15},
-	{-15,-10,-10,-20,-10},
-	{-10, -5,-10,-15, -5},   /* 10 */
-	{ -5,  0, -5,-10,  0},
-	{  0,  0,  0, -5,  0},
-	{  0,  0,  0,  0,  0},
-	{  0,  0,  0,  0,  0},
-	{  0,  0,  0,  0,  0},   /* 15 */
-	{  0,  5,  0,  0,  0},
-	{  5, 10,  0,  5,  5},
-	{ 10, 15,  5, 10, 10},
-	{ 15, 20, 10, 15, 15},
-	{ 15, 20, 10, 15, 15},   /* 20 */
-	{ 20, 25, 10, 15, 20},
-	{ 20, 25, 15, 20, 20},
-	{ 25, 25, 15, 20, 20},
-	{ 25, 30, 15, 25, 25},
-	{ 25, 30, 15, 25, 25}    /* 25 */
+  {-99,-99,-90,-99,-60},   /* 0 */
+  {-90,-90,-60,-90,-50},   /* 1 */
+  {-80,-80,-40,-80,-45},
+  {-70,-70,-30,-70,-40},
+  {-60,-60,-30,-60,-35},
+  {-50,-50,-20,-50,-30},   /* 5 */
+  {-40,-40,-20,-40,-25},
+  {-30,-30,-15,-30,-20},
+  {-20,-20,-15,-20,-15},
+  {-15,-10,-10,-20,-10},
+  {-10, -5,-10,-15, -5},   /* 10 */
+  { -5,  0, -5,-10,  0},
+  {  0,  0,  0, -5,  0},
+  {  0,  0,  0,  0,  0},
+  {  0,  0,  0,  0,  0},
+  {  0,  0,  0,  0,  0},   /* 15 */
+  {  0,  5,  0,  0,  0},
+  {  5, 10,  0,  5,  5},
+  { 10, 15,  5, 10, 10},
+  { 15, 20, 10, 15, 15},
+  { 15, 20, 10, 15, 15},   /* 20 */
+  { 20, 25, 10, 15, 20},
+  { 20, 25, 15, 20, 20},
+  { 25, 25, 15, 20, 20},
+  { 25, 30, 15, 25, 25},
+  { 25, 30, 15, 25, 25}    /* 25 */
 };
 
 /* [level] backstab multiplyer (thieves only) */
 const byte backstab_mult[25] = {
-	1,   /* 0 */
-	2,   /* 1 */
-	2,
-	2,
-	2,
-	3,   /* 5 */
-	3,
-	3,
-	3,
-	4,
-	4,   /* 10 */
-	4,
-	4,
-	4,
-	5,
-	5,   /* 15 */
-	5,
-	5,
-	5,
-	5,
-	5,   /* 20 */
-	5,
-	5,
-	5,
-	5    /* 25 */
+  1,   /* 0 */
+  2,   /* 1 */
+  2,
+  2,
+  2,
+  3,   /* 5 */
+  3,
+  3,
+  3,
+  4,
+  4,   /* 10 */
+  4,
+  4,
+  4,
+  5,
+  5,   /* 15 */
+  5,
+  5,
+  5,
+  5,
+  5,   /* 20 */
+  5,
+  5,
+  5,
+  5    /* 25 */
 };
 
 /* [dex] apply (all) */
 struct dex_app_type dex_app[26] = {
-	{-7,-7, 6},   /* 0 */
-	{-6,-6, 5},   /* 1 */
-	{-4,-4, 5},
-	{-3,-3, 4},
-	{-2,-2, 3},
-	{-1,-1, 2},   /* 5 */
-	{ 0, 0, 1},
-	{ 0, 0, 0},
-	{ 0, 0, 0},
-	{ 0, 0, 0},
-	{ 0, 0, 0},   /* 10 */
-	{ 0, 0, 0},
-	{ 0, 0, 0},
-	{ 0, 0, 0},
-	{ 0, 0, 0},
-	{ 0, 0,-1},   /* 15 */
-	{ 1, 1,-2},
-	{ 2, 2,-3},
-	{ 2, 2,-4},
-	{ 3, 3,-4},
-	{ 3, 3,-4},   /* 20 */
-	{ 4, 4,-5},
-	{ 4, 4,-5},
-	{ 4, 4,-5},
-	{ 5, 5,-6},
-	{ 5, 5,-6}    /* 25 */
+  {-7,-7, 6},   /* 0 */
+  {-6,-6, 5},   /* 1 */
+  {-4,-4, 5},
+  {-3,-3, 4},
+  {-2,-2, 3},
+  {-1,-1, 2},   /* 5 */
+  { 0, 0, 1},
+  { 0, 0, 0},
+  { 0, 0, 0},
+  { 0, 0, 0},
+  { 0, 0, 0},   /* 10 */
+  { 0, 0, 0},
+  { 0, 0, 0},
+  { 0, 0, 0},
+  { 0, 0, 0},
+  { 0, 0,-1},   /* 15 */
+  { 1, 1,-2},
+  { 2, 2,-3},
+  { 2, 2,-4},
+  { 3, 3,-4},
+  { 3, 3,-4},   /* 20 */
+  { 4, 4,-5},
+  { 4, 4,-5},
+  { 4, 4,-5},
+  { 5, 5,-6},
+  { 5, 5,-6}    /* 25 */
 };
 
 /* [con] apply (all) */
 struct con_app_type con_app[26] = {
-	{-4,20},   /* 0 */
-	{-3,25},   /* 1 */
-	{-2,30},
-	{-2,35},
-	{-1,40},
-	{-1,45},   /* 5 */
-	{-1,50},
-	{ 0,55},
-	{ 0,60},
-	{ 0,65},
-	{ 0,70},   /* 10 */
-	{ 0,75},
-	{ 0,80},
-	{ 0,85},
-	{ 0,88},
-	{ 1,90},   /* 15 */
-	{ 2,95},
-	{ 2,97},
-	{ 3,99},
-	{ 3,99},
-	{ 4,99},   /* 20 */
-	{ 5,99},
-	{ 5,99},
-	{ 5,99},
-	{ 6,99},
-	{ 7,100}   /* 25 */
+  {-4,20},   /* 0 */
+  {-3,25},   /* 1 */
+  {-2,30},
+  {-2,35},
+  {-1,40},
+  {-1,45},   /* 5 */
+  {-1,50},
+  { 0,55},
+  { 0,60},
+  { 0,65},
+  { 0,70},   /* 10 */
+  { 0,75},
+  { 0,80},
+  { 0,85},
+  { 0,88},
+  { 1,90},   /* 15 */
+  { 2,95},
+  { 2,97},
+  { 3,99},
+  { 3,99},
+  { 4,99},   /* 20 */
+  { 5,99},
+  { 5,99},
+  { 5,99},
+  { 6,99},
+  { 7,100}   /* 25 */
 };
 
 /* [int] apply (all) */
 struct int_app_type int_app[26] = {
-	3,
-	5,    /* 1 */
-	7,
-	8,
-	9,
-	10,   /* 5 */
-	11,
-	12,
-	13,
-	15,
-	17,   /* 10 */
-	19,
-	22,
-	25,
-	30,
-	35,   /* 15 */
-	40,
-	45,
-	50,
-	53,
-	55,   /* 20 */
-	56,
-	60,
-	70,
-	80,
-	99    /* 25 */
+  3,
+  5,    /* 1 */
+  7,
+  8,
+  9,
+  10,   /* 5 */
+  11,
+  12,
+  13,
+  15,
+  17,   /* 10 */
+  19,
+  22,
+  25,
+  30,
+  35,   /* 15 */
+  40,
+  45,
+  50,
+  53,
+  55,   /* 20 */
+  56,
+  60,
+  70,
+  80,
+  99    /* 25 */
 };
 
 /* [wis] apply (all) */
 struct wis_app_type wis_app[26] = {
-	0,   /* 0 */
-	0,   /* 1 */
-	0,
-	0,
-	0,
-	0,   /* 5 */
-	0,
-	0,
-	0,
-	0,
-	0,   /* 10 */
-	0,
-	2,
-	2,
-	3,
-	3,   /* 15 */
-	3,
-	4,
-	5,   /* 18 */
-	6,
-	6,   /* 20 */
-	6,
-	6,
-	6,
-	6,
-	6   /* 25 */
+  0,   /* 0 */
+  0,   /* 1 */
+  0,
+  0,
+  0,
+  0,   /* 5 */
+  0,
+  0,
+  0,
+  0,
+  0,   /* 10 */
+  0,
+  2,
+  2,
+  3,
+  3,   /* 15 */
+  3,
+  4,
+  5,   /* 18 */
+  6,
+  6,   /* 20 */
+  6,
+  6,
+  6,
+  6,
+  6   /* 25 */
 };
-

@@ -17,8 +17,7 @@ int is_abbrev(char *arg1, char *arg2);
 
 struct command_info
 {
-	void (*command_pointer) (struct char_data *ch, char *argument, int cmd);
-	byte minimum_position;
-	byte minimum_level;
+  void (*command_pointer) (struct char_data *ch, char *argument, int cmd);
+  byte minimum_position;
+  byte minimum_level;
 };
-

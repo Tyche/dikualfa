@@ -10,8 +10,7 @@ int move_limit(struct char_data *ch);
 
 struct title_type
 {
-	char *title_m;
-	char *title_f;
-	int exp;
+  char *title_m;
+  char *title_f;
+  int exp;
 };
-
