@@ -427,8 +427,9 @@ void boot_the_shops ()
   int count;
   FILE *shop_f;
 
-  if (!(shop_f = fopen (SHOP_FILE, "r"))) {
+  if (!(shop_f = fopen (SHOP_FILE, "rb"))) {
     perror ("Error in boot shop\n");
+    WIN32CLEANUP
     exit (0);
   }
 
@@ -444,6 +445,7 @@ void boot_the_shops ()
           (struct shop_data *) realloc (shop_index, (number_of_shops + 1) *
             sizeof (struct shop_data)))) {
         perror ("Error in boot shop\n");
+        WIN32CLEANUP
         exit (0);
       }
 
