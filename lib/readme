@@ -55,4 +55,3 @@ typos           - Messages left by players with the 'typo' command. Same format
                   as the 'bug' command.
 
 wizlist         - For the 'wizlist' command.
-
