@@ -14,6 +14,7 @@
 #include "db.h"
 #include "spells.h"
 #include "limits.h"
+#include "prototypes.h"
 
 /*   external vars  */
 
@@ -309,6 +310,7 @@ int guild (struct char_data *ch, int cmd, char *arg)
     }
     break;
   }
+  return FALSE;
 }
 
 
@@ -361,6 +363,7 @@ int dump (struct char_data *ch, int cmd, char *arg)
     else
       GET_GOLD (ch) += value;
   }
+  return TRUE;
 }
 
 int mayor (struct char_data *ch, int cmd, char *arg)
