@@ -47,7 +47,7 @@ int dice (int number, int size)
 
 
 /* Create a duplicate of a string */
-char *strdup (char *source)
+char *str_dup (char *source)
 {
   char *new;
 

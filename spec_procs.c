@@ -28,7 +28,7 @@ extern struct time_info_data time_info;
 
 void hit (struct char_data *ch, struct char_data *victim, int type);
 void gain_exp (struct char_data *ch, int gain);
-char *strdup (char *source);
+char *str_dup (char *source);
 
 void cast_burning_hands (byte level, struct char_data *ch, char *arg,
   int type, struct char_data *victim, struct obj_data *tar_obj);
@@ -1087,13 +1087,13 @@ int pet_shops (struct char_data *ch, int cmd, char *arg)
     if (*pet_name) {
       sprintf (buf, "%s %s", pet->player.name, pet_name);
       free (pet->player.name);
-      pet->player.name = strdup (buf);
+      pet->player.name = str_dup (buf);
 
       sprintf (buf,
         "%sA small sign on a chain around the neck says 'My Name is %s'\n\r",
         pet->player.description, pet_name);
       free (pet->player.description);
-      pet->player.description = strdup (buf);
+      pet->player.description = str_dup (buf);
     }
 
     char_to_room (pet, ch->in_room);

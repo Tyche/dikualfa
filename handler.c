@@ -1140,7 +1140,7 @@ struct obj_data *create_money (int amount)
   struct extra_descr_data *new_descr;
   char buf[80];
 
-  char *strdup (char *str);
+  char *str_dup (char *str);
 
   if (amount <= 0) {
     log ("ERROR: Try to create negative money.");
@@ -1152,34 +1152,34 @@ struct obj_data *create_money (int amount)
   clear_object (obj);
 
   if (amount == 1) {
-    obj->name = strdup ("coin gold");
-    obj->short_description = strdup ("a gold coin");
-    obj->description = strdup ("One miserable gold coin.");
+    obj->name = str_dup ("coin gold");
+    obj->short_description = str_dup ("a gold coin");
+    obj->description = str_dup ("One miserable gold coin.");
 
-    new_descr->keyword = strdup ("coin gold");
-    new_descr->description = strdup ("One miserable gold coin.");
+    new_descr->keyword = str_dup ("coin gold");
+    new_descr->description = str_dup ("One miserable gold coin.");
   } else {
-    obj->name = strdup ("coins gold");
-    obj->short_description = strdup ("gold coins");
-    obj->description = strdup ("A pile of gold coins.");
+    obj->name = str_dup ("coins gold");
+    obj->short_description = str_dup ("gold coins");
+    obj->description = str_dup ("A pile of gold coins.");
 
-    new_descr->keyword = strdup ("coins gold");
+    new_descr->keyword = str_dup ("coins gold");
     if (amount < 10) {
       sprintf (buf, "There is %d coins.", amount);
-      new_descr->description = strdup (buf);
+      new_descr->description = str_dup (buf);
     } else if (amount < 100) {
       sprintf (buf, "There is about %d coins", 10 * (amount / 10));
-      new_descr->description = strdup (buf);
+      new_descr->description = str_dup (buf);
     } else if (amount < 1000) {
       sprintf (buf, "It looks like something round %d coins",
         100 * (amount / 100));
-      new_descr->description = strdup (buf);
+      new_descr->description = str_dup (buf);
     } else if (amount < 100000) {
       sprintf (buf, "You guess there is %d coins",
         1000 * ((amount / 1000) + number (0, (amount / 1000))));
-      new_descr->description = strdup (buf);
+      new_descr->description = str_dup (buf);
     } else
-      new_descr->description = strdup ("There is A LOT of coins");
+      new_descr->description = str_dup ("There is A LOT of coins");
   }
 
   new_descr->next = 0;

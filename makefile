@@ -1,5 +1,5 @@
 CC = gcc 
-CFLAGS =
+CFLAGS = -g -O2 -Wall -W -fno-builtin-log
 HEADERFILES = structs.h utils.h comm.h interpreter.h db.h
 
 dmserver : comm.o act.comm.o act.informative.o act.movement.o act.obj1.o \
@@ -10,7 +10,7 @@ dmserver : comm.o act.comm.o act.informative.o act.movement.o act.obj1.o \
 	board.o mar_fiz_maz.o magic.o
 	
 comm.o : comm.c structs.h utils.h comm.h interpreter.h handler.h db.h
-	$(CC) -c -g $(CFLAGS) comm.c
+	$(CC) -c $(CFLAGS) comm.c
 	
 act.comm.o : act.comm.c structs.h utils.h comm.h interpreter.h handler.h \
 	db.h spells.h

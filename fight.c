@@ -195,7 +195,7 @@ void make_corpse (struct char_data *ch)
   char buf[MAX_STRING_LENGTH];
   int i;
 
-  char *strdup (char *source);
+  char *str_dup (char *source);
   struct obj_data *create_money (int amount);
 
   CREATE (corpse, struct obj_data, 1);
@@ -204,15 +204,15 @@ void make_corpse (struct char_data *ch)
 
   corpse->item_number = NOWHERE;
   corpse->in_room = NOWHERE;
-  corpse->name = strdup ("corpse");
+  corpse->name = str_dup ("corpse");
 
   sprintf (buf, "Corpse of %s is lying here.",
     (IS_NPC (ch) ? ch->player.short_descr : GET_NAME (ch)));
-  corpse->description = strdup (buf);
+  corpse->description = str_dup (buf);
 
   sprintf (buf, "Corpse of %s",
     (IS_NPC (ch) ? ch->player.short_descr : GET_NAME (ch)));
-  corpse->short_description = strdup (buf);
+  corpse->short_description = str_dup (buf);
 
   corpse->contains = ch->carrying;
   if ((GET_GOLD (ch) > 0) && (IS_NPC (ch) || (ch->desc))) {
