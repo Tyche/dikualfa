@@ -12,6 +12,7 @@
 #include "comm.h"
 #include "handler.h"
 #include "limits.h"
+#include "prototypes.h"
 
 #define NEW_ZONE_SYSTEM
 
@@ -80,7 +81,6 @@ void load_messages (void);
 void weather_and_time (int mode);
 void assign_command_pointers (void);
 void assign_spell_pointers (void);
-void log (char *str);
 int dice (int number, int size);
 int number (int from, int to);
 void boot_social_messages (void);
@@ -341,7 +341,7 @@ void update_time (void)
 
   fprintf (f1, "#\n");
 
-  fprintf (f1, "%d\n", current_time);
+  fprintf (f1, "%ld\n", current_time);
   fprintf (f1, "%d\n", time_info.hours);
   fprintf (f1, "%d\n", time_info.day);
   fprintf (f1, "%d\n", time_info.month);
@@ -404,7 +404,7 @@ void build_player_index (void)
 struct index_data *generate_indices (FILE * fl, int *top)
 {
   int i = 0;
-  struct index_data *index;
+  struct index_data *index = NULL;
   long pos;
   char buf[82];
 
@@ -910,14 +910,14 @@ struct char_data *read_mobile (int nr, int type)
 
   /* *** Numeric data *** */
 
-  fscanf (mob_f, "%d ", &tmp);
+  fscanf (mob_f, "%ld ", &tmp);
   mob->specials.act = tmp;
   SET_BIT (mob->specials.act, ACT_ISNPC);
 
-  fscanf (mob_f, " %d ", &tmp);
+  fscanf (mob_f, " %ld ", &tmp);
   mob->specials.affected_by = tmp;
 
-  fscanf (mob_f, " %d ", &tmp);
+  fscanf (mob_f, " %ld ", &tmp);
   mob->specials.alignment = tmp;
 
   fscanf (mob_f, " %c \n", &letter);
@@ -930,20 +930,20 @@ struct char_data *read_mobile (int nr, int type)
     mob->abilities.dex = 11;
     mob->abilities.con = 11;
 
-    fscanf (mob_f, " %D ", &tmp);
+    fscanf (mob_f, " %ld ", &tmp);
     GET_LEVEL (mob) = tmp;
 
-    fscanf (mob_f, " %D ", &tmp);
+    fscanf (mob_f, " %ld ", &tmp);
     mob->points.hitroll = 20 - tmp;
 
-    fscanf (mob_f, " %D ", &tmp);
+    fscanf (mob_f, " %ld ", &tmp);
     mob->points.armor = 10 * tmp;
 
-    fscanf (mob_f, " %Dd%D+%D ", &tmp, &tmp2, &tmp3);
+    fscanf (mob_f, " %ldd%ld+%ld ", &tmp, &tmp2, &tmp3);
     mob->points.max_hit = dice (tmp, tmp2) + tmp3;
     mob->points.hit = mob->points.max_hit;
 
-    fscanf (mob_f, " %Dd%D+%D \n", &tmp, &tmp2, &tmp3);
+    fscanf (mob_f, " %ldd%ld+%ld \n", &tmp, &tmp2, &tmp3);
     mob->points.damroll = tmp3;
     mob->specials.damnodice = tmp;
     mob->specials.damsizedice = tmp2;
@@ -954,19 +954,19 @@ struct char_data *read_mobile (int nr, int type)
     mob->points.move = 50;
     mob->points.max_move = 50;
 
-    fscanf (mob_f, " %D ", &tmp);
+    fscanf (mob_f, " %ld ", &tmp);
     mob->points.gold = tmp;
 
-    fscanf (mob_f, " %D \n", &tmp);
+    fscanf (mob_f, " %ld \n", &tmp);
     GET_EXP (mob) = tmp;
 
-    fscanf (mob_f, " %D ", &tmp);
+    fscanf (mob_f, " %ld ", &tmp);
     mob->specials.position = tmp;
 
-    fscanf (mob_f, " %D ", &tmp);
+    fscanf (mob_f, " %ld ", &tmp);
     mob->specials.default_pos = tmp;
 
-    fscanf (mob_f, " %D \n", &tmp);
+    fscanf (mob_f, " %ld \n", &tmp);
     mob->player.sex = tmp;
 
     mob->player.class = 0;
@@ -985,78 +985,78 @@ struct char_data *read_mobile (int nr, int type)
 
   } else {                      /* The old monsters are down below here */
 
-    fscanf (mob_f, " %D ", &tmp);
+    fscanf (mob_f, " %ld ", &tmp);
     mob->abilities.str = tmp;
 
-    fscanf (mob_f, " %D ", &tmp);
+    fscanf (mob_f, " %ld ", &tmp);
     mob->abilities.intel = tmp;
 
-    fscanf (mob_f, " %D ", &tmp);
+    fscanf (mob_f, " %ld ", &tmp);
     mob->abilities.wis = tmp;
 
-    fscanf (mob_f, " %D ", &tmp);
+    fscanf (mob_f, " %ld ", &tmp);
     mob->abilities.dex = tmp;
 
-    fscanf (mob_f, " %D \n", &tmp);
+    fscanf (mob_f, " %ld \n", &tmp);
     mob->abilities.con = tmp;
 
-    fscanf (mob_f, " %D ", &tmp);
-    fscanf (mob_f, " %D ", &tmp2);
+    fscanf (mob_f, " %ld ", &tmp);
+    fscanf (mob_f, " %ld ", &tmp2);
 
     mob->points.max_hit = number (tmp, tmp2);
     mob->points.hit = mob->points.max_hit;
 
-    fscanf (mob_f, " %D ", &tmp);
+    fscanf (mob_f, " %ld ", &tmp);
     mob->points.armor = 10 * tmp;
 
-    fscanf (mob_f, " %D ", &tmp);
+    fscanf (mob_f, " %ld ", &tmp);
     mob->points.mana = tmp;
     mob->points.max_mana = tmp;
 
-    fscanf (mob_f, " %D ", &tmp);
+    fscanf (mob_f, " %ld ", &tmp);
     mob->points.move = tmp;
     mob->points.max_move = tmp;
 
-    fscanf (mob_f, " %D ", &tmp);
+    fscanf (mob_f, " %ld ", &tmp);
     mob->points.gold = tmp;
 
-    fscanf (mob_f, " %D \n", &tmp);
+    fscanf (mob_f, " %ld \n", &tmp);
     GET_EXP (mob) = tmp;
 
-    fscanf (mob_f, " %D ", &tmp);
+    fscanf (mob_f, " %ld ", &tmp);
     mob->specials.position = tmp;
 
-    fscanf (mob_f, " %D ", &tmp);
+    fscanf (mob_f, " %ld ", &tmp);
     mob->specials.default_pos = tmp;
 
-    fscanf (mob_f, " %D ", &tmp);
+    fscanf (mob_f, " %ld ", &tmp);
     mob->player.sex = tmp;
 
-    fscanf (mob_f, " %D ", &tmp);
+    fscanf (mob_f, " %ld ", &tmp);
     mob->player.class = tmp;
 
-    fscanf (mob_f, " %D ", &tmp);
+    fscanf (mob_f, " %ld ", &tmp);
     GET_LEVEL (mob) = tmp;
 
-    fscanf (mob_f, " %D ", &tmp);
+    fscanf (mob_f, " %ld ", &tmp);
     mob->player.time.birth = time (0);
     mob->player.time.played = 0;
     mob->player.time.logon = time (0);
 
-    fscanf (mob_f, " %D ", &tmp);
+    fscanf (mob_f, " %ld ", &tmp);
     mob->player.weight = tmp;
 
-    fscanf (mob_f, " %D \n", &tmp);
+    fscanf (mob_f, " %ld \n", &tmp);
     mob->player.height = tmp;
 
     for (i = 0; i < 3; i++) {
-      fscanf (mob_f, " %D ", &tmp);
+      fscanf (mob_f, " %ld ", &tmp);
       GET_COND (mob, i) = tmp;
     }
     fscanf (mob_f, " \n ");
 
     for (i = 0; i < 5; i++) {
-      fscanf (mob_f, " %D ", &tmp);
+      fscanf (mob_f, " %ld ", &tmp);
       mob->specials.apply_saving_throw[i] = tmp;
     }
 
@@ -1261,8 +1261,8 @@ void reset_zone (int zone)
 {
   int cmd_no, last_cmd = 1;
   char buf[256];
-  struct char_data *mob;
   struct obj_data *obj, *obj_to;
+  struct char_data *mob = NULL;
 
   for (cmd_no = 0;; cmd_no++) {
     if (ZCMD.command == 'S')
@@ -1374,8 +1374,8 @@ void reset_zone (int zone)
 {
   int cmd_no, last_cmd = 1;
   char buf[256];
-  struct char_data *mob;
   struct obj_data *obj, *obj_to;
+  struct char_data *mob = NULL;
 
   for (cmd_no = 0;; cmd_no++) {
     if (ZCMD.command == 'S')
