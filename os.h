@@ -1,4 +1,4 @@
-/*! \file osapi.h
+/*! \file os.h
   The intent of this header file is to put operating system and compiler
   specific portability changes in one place.
 
@@ -6,7 +6,7 @@
  \date 01/12/2005
  \version 0.3
  \remarks
-  This source code copyright (C) 2004 by Jon A. Lambert
+  This source code copyright (C) 2004,2005 by Jon A. Lambert
   All rights reserved.
 
   Released under the same terms of DikuMud
@@ -26,6 +26,7 @@
 #include <sys/types.h>
 #include <limits.h>
 #include <fcntl.h>
+#include <assert.h>
 
 #ifdef WIN32                    /* Windows portability */
 #define ARG_MAX (16384 - 256)
