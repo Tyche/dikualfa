@@ -42,6 +42,8 @@ RELEASE=dist
 
 TARGETS= dmserver list delplay insert_any repairgo \
 	syntax_checker update sign
+OTARGETS=  list.o delplay.o insert_any.o repairgo.o syntax_checker.o \
+	update.o sign.o	
 
 all: $(TARGETS)
 
@@ -70,7 +72,7 @@ sign : sign.o
 	$(CC) $(CFLAGS) -o sign sign.o
 
 clean:
-	-rm -f *.d $(OFILES) $(TARGETS)
+	-rm -f *.d $(OFILES) $(TARGETS) $(OTARGETS) 
 
 dist: 
 	ln -s ./ diku-alpha
