@@ -82,9 +82,7 @@ char * fgets_win (char *buf, int n, FILE * fp);
 #include <sys/resource.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
-#if defined __CYGWIN__
 #include <crypt.h>
-#endif
 #define GETERROR  errno
 #define INVALID_SOCKET -1       /* 0 on Windows */
 #define WIN32STARTUP
