@@ -29,12 +29,14 @@
 #include <assert.h>
 
 #ifdef WIN32                    /* Windows portability */
+
 #define ARG_MAX (16384 - 256)
 #define FD_SETSIZE 1024
 #define NOFILE FD_SETSIZE
 #include <winsock2.h>
 #include <sys/stat.h>
 #include <process.h>
+#include <dir.h>
 #define EWOULDBLOCK       WSAEWOULDBLOCK
 #undef EINTR
 #undef EMFILE
@@ -50,15 +52,21 @@
     }
 #define WIN32CLEANUP WSACleanup();
 #define close(X) closesocket(X)
+#define index(s, c) strchr((s), (c))
+#define bcopy(s, d, n)   memcpy((d), (s), (n))
+#define bzero(s, n)      memset((s), 0, (n))
+#define getdtablesize() FD_SETSIZE
+#define RAND rand
+#define SRAND srand
+#define crypt(s, r) (s)
 #ifndef __LCC__                 /* LCC complains prototype is a redefine - yet none exists */
 void gettimeofday (struct timeval *tp, struct timezone *tzp);
 #endif
-#define index(s, c) strchr((s), (c))
-#define bcopy(s, d, n)   memcpy((d), (s), (n))
-#define getdtablesize() FD_SETSIZE
-#define RAND rand
+#define FGETS fgets_win
+char * fgets_win (char *buf, int n, FILE * fp);
 
 #else /* Unix portability - some a consequence of above */
+
 #include <sys/time.h>           /* Redhat BSD need this */
 #include <unistd.h>
 #include <sys/socket.h>
@@ -78,6 +86,9 @@ void gettimeofday (struct timeval *tp, struct timezone *tzp);
 #define WIN32STARTUP
 #define WIN32CLEANUP
 #define RAND random
+#define SRAND srandom
+#define FGETS fgets
+
 #endif
 
 #if defined _POSIX_ARG_MAX
