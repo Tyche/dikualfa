@@ -24,7 +24,7 @@ void del (char *filename, int name)
 
   if (!(fl = fopen (filename, "r+"))) {
     perror ("list");
-    exit ();
+    exit (1);
   }
 
   puts ("Searching for player:");
@@ -33,7 +33,7 @@ void del (char *filename, int name)
     fread (&player, sizeof (player), 1, fl);
     if (feof (fl)) {
       fprintf (stderr, "delplay: could not locate %d.\n", name);
-      exit ();
+      exit (1);
     }
 
     if (num == name) {
@@ -41,7 +41,7 @@ void del (char *filename, int name)
       scanf ("%s", confirm);
       if (str_cmp ("Yes", confirm)) {
         printf ("Aborted delete.\n");
-        exit ();
+        exit (1);
       } else {
         break;
       }
@@ -58,19 +58,24 @@ void del (char *filename, int name)
   end = ftell (fl);
   fclose (fl);
 
-  if (truncate (filename, end - sizeof (player)))
+  if (truncate (filename, end - sizeof (player))) {
     perror ("truncate");
+    exit (1);
+  }
 }
 
 
-main (int argc, char **argv)
+int main (int argc, char **argv)
 {
   if (argc != 3)
     puts ("Usage: delplay <DikuMUD player filename> <Player Number>");
   else {
-    if (atoi (argv[2]) < 1)
+    if (atoi (argv[2]) < 1) {
       puts ("Illegal player number, must be >= 1");
-    else
+      return 1;
+    } else {
       del (argv[1], atoi (argv[2]));
+    }
   }
+  return 0;
 }
