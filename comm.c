@@ -15,6 +15,7 @@
 #include "interpreter.h"
 #include "handler.h"
 #include "db.h"
+#include "prototypes.h"
 
 #define DFLT_PORT 4000          /* default port */
 #define MAX_NAME_LENGTH 15
@@ -22,8 +23,6 @@
 #define OPT_USEC 250000         /* time delay corresponding to 4 passes/sec */
 
 
-
-extern int errno;               /* Why isn't this done in errno.h on alfa??? */
 
 /* externs */
 
@@ -48,10 +47,15 @@ int no_specials = 0;            /* Suppress ass. of special routines */
 int maxdesc, avail_descs;
 int tics = 0;                   /* for extern checkpointing */
 
+sigset_t mask = SIGUSR1 | SIGUSR2 | SIGINT | SIGPIPE | SIGALRM | SIGTERM |
+    SIGURG | SIGXCPU | SIGHUP | SIGVTALRM;
+sigset_t currmask = 0;
+sigset_t zeromask = 0;
+
 int get_from_q (struct txt_q *queue, char *dest);
 /* write_to_q is in comm.h for the macro */
-int run_the_game (int port);
-int game_loop (int s);
+void run_the_game (int port);
+void game_loop (int s);
 int init_socket (int port);
 int new_connection (int s);
 int new_descriptor (int s);
@@ -163,7 +167,7 @@ int main (int argc, char **argv)
 
 
 /* Init sockets, run game, and cleanup sockets */
-int run_the_game (int port)
+void run_the_game (int port)
 {
   int s;
   PROFILE (extern etext ();
@@ -214,7 +218,7 @@ int run_the_game (int port)
 
 
 /* Accept new connects, relay commands, and call 'heartbeat-functs' */
-int game_loop (int s)
+void game_loop (int s)
 {
   int tmp_room, old_len;
   fd_set input_set, output_set, exc_set;
@@ -222,7 +226,7 @@ int game_loop (int s)
   static struct timeval opt_time;
   char comm[MAX_INPUT_LENGTH];
   struct descriptor_data *t, *point, *next_point;
-  int pulse = 0, mask;
+  int pulse = 0;
 
   null_time.tv_sec = 0;
   null_time.tv_usec = 0;
@@ -233,11 +237,6 @@ int game_loop (int s)
 
   maxdesc = s;
   avail_descs = getdtablesize () - 2;   /* !! Change if more needed !! */
-
-  mask = sigmask (SIGUSR1) | sigmask (SIGUSR2) | sigmask (SIGINT) |
-    sigmask (SIGPIPE) | sigmask (SIGALRM) | sigmask (SIGTERM) |
-    sigmask (SIGURG) | sigmask (SIGXCPU) | sigmask (SIGHUP) |
-    sigmask (SIGVTALRM);
 
   /* Main loop */
   while (!shutdown_server) {
@@ -263,12 +262,12 @@ int game_loop (int s)
       last_time.tv_sec++;
     }
 
-    sigsetmask (mask);
+    sigprocmask (SIG_SETMASK, &mask, &currmask);
 
     if (select (maxdesc + 1, &input_set, &output_set, &exc_set, &null_time)
       < 0) {
       perror ("Select poll");
-      return (-1);
+      exit (1);
     }
 
     if (select (0, (fd_set *) 0, (fd_set *) 0, (fd_set *) 0, &timeout) < 0) {
@@ -276,7 +275,7 @@ int game_loop (int s)
       exit (1);
     }
 
-    sigsetmask (0);
+    sigprocmask (SIG_SETMASK, &zeromask, &currmask);
 
     /* Respond to whatever might be happening */
 
@@ -726,7 +725,7 @@ int process_input (struct descriptor_data *t)
           MAX_STRING_LENGTH - (begin + sofar) - 1)) > 0)
       sofar += thisround;
     else if (thisround < 0)
-      if (errno != EWOULDBLOCK) {
+      if (GETERROR != EWOULDBLOCK) {
         perror ("Read1 - ERROR");
         return (-1);
       } else
@@ -912,10 +911,7 @@ void coma (int s)
 
   log ("Entering comatose state.");
 
-  sigsetmask (sigmask (SIGUSR1) | sigmask (SIGUSR2) | sigmask (SIGINT) |
-    sigmask (SIGPIPE) | sigmask (SIGALRM) | sigmask (SIGTERM) |
-    sigmask (SIGURG) | sigmask (SIGXCPU) | sigmask (SIGHUP) |
-    sigmask (SIGVTALRM));
+  sigprocmask (SIG_SETMASK, &mask, &currmask);
 
   while (descriptor_list)
     close_socket (descriptor_list);
@@ -930,7 +926,7 @@ void coma (int s)
     if (FD_ISSET (s, &input_set)) {
       if (load () < 6) {
         log ("Leaving coma with visitor.");
-        sigsetmask (0);
+        sigprocmask (SIG_SETMASK, &zeromask, &currmask);
         return;
       }
       if ((conn = new_connection (s)) >= 0) {
@@ -949,7 +945,7 @@ void coma (int s)
   while (load () >= 6);
 
   log ("Leaving coma.");
-  sigsetmask (0);
+  sigprocmask (SIG_SETMASK, &zeromask, &currmask);
 }
 
 
@@ -1046,7 +1042,7 @@ void send_to_room_except_two
 void act (char *str, int hide_invisible, struct char_data *ch,
   struct obj_data *obj, void *vict_obj, int type)
 {
-  register char *strp, *point, *i;
+  register char *strp, *point, *i = NULL;
   struct char_data *to;
   char buf[MAX_STRING_LENGTH];
 
