@@ -13,6 +13,7 @@
 #include "interpreter.h"
 #include "utils.h"
 #include "spells.h"
+#include "prototypes.h"
 
 #define OBJ_SAVE_FILE "pcobjs.obj"
 #define OBJ_FILE_FREE "\0\0\0"
