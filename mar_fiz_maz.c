@@ -30,7 +30,7 @@ extern struct index_data *obj_index;
 *  Special procedures for Marauder                                    *
 ******************************************************************** */
 
-int mar_gate(struct char_data *ch, int cmd, char *arg)
+int mar_gate (struct char_data *ch, int cmd, char *arg)
 {
   int i, j;
   struct descriptor_data *desc;
@@ -38,17 +38,18 @@ int mar_gate(struct char_data *ch, int cmd, char *arg)
   bool punished;
 
   for (desc = descriptor_list; desc; desc = desc->next) {
-    if ((desc->connected == CON_PLYNG) && !IS_NPC(desc->character) &&
-        (desc->character) && (world[desc->character->in_room].number < 8000)) {
+    if ((desc->connected == CON_PLYNG) && !IS_NPC (desc->character) &&
+      (desc->character) && (world[desc->character->in_room].number < 8000)) {
       punished = FALSE;
 
-      for(i=0; i<MAX_WEAR; i++) {
+      for (i = 0; i < MAX_WEAR; i++) {
         if ((desc->character->equipment[i]) &&
-          ((j=obj_index[desc->character->equipment[i]->item_number].virtual)>=8500) &&
-           (j<8999) ) {
-          obj=unequip_char(desc->character, i);
-          GET_GOLD(desc->character) -= obj->obj_flags.cost;
-          extract_obj(obj); /* Destroy it */
+          ((j =
+              obj_index[desc->character->equipment[i]->item_number].
+              virtual) >= 8500) && (j < 8999)) {
+          obj = unequip_char (desc->character, i);
+          GET_GOLD (desc->character) -= obj->obj_flags.cost;
+          extract_obj (obj);    /* Destroy it */
           punished = TRUE;
 
         }
@@ -56,25 +57,25 @@ int mar_gate(struct char_data *ch, int cmd, char *arg)
 
       for (obj = desc->character->carrying; obj; obj = tmp_obj) {
         tmp_obj = obj->next_content;
-        if (((j=obj_index[obj->item_number].virtual)>=8000) &&
-           (j<8999) ) {
-          obj_from_char(obj);
-          GET_GOLD(desc->character) -= obj->obj_flags.cost;
-          extract_obj(obj); /* Destroy it */
+        if (((j = obj_index[obj->item_number].virtual) >= 8000) && (j < 8999)) {
+          obj_from_char (obj);
+          GET_GOLD (desc->character) -= obj->obj_flags.cost;
+          extract_obj (obj);    /* Destroy it */
           punished = TRUE;
         }
       }
 
       if (punished) {
-        send_to_char("You have been punished by the Gods!\n\r", desc->character);
-        GET_GOLD(desc->character) = MAX(0, GET_GOLD(desc->character));
-        GET_MOVE(desc->character) = MIN(GET_MOVE(desc->character), 10);
-        GET_MANA(desc->character) = 0;
+        send_to_char ("You have been punished by the Gods!\n\r",
+          desc->character);
+        GET_GOLD (desc->character) = MAX (0, GET_GOLD (desc->character));
+        GET_MOVE (desc->character) = MIN (GET_MOVE (desc->character), 10);
+        GET_MANA (desc->character) = 0;
       }
 
-    } /* if a playing player */
-
-  }  /* for */
+    }
+    /* if a playing player */
+  }                             /* for */
 
   return FALSE;
 }

@@ -6,7 +6,7 @@
 #define MAX_BUF_LENGTH              240
 
 #define TYPE_UNDEFINED               -1
-#define SPELL_RESERVED_DBC            0  /* SKILL NUMBER ZERO */
+#define SPELL_RESERVED_DBC            0 /* SKILL NUMBER ZERO */
 #define SPELL_ARMOR                   1 /* Reserved Skill[] DO NOT CHANGE */
 #define SPELL_TELEPORT                2 /* Reserved Skill[] DO NOT CHANGE */
 #define SPELL_BLESS                   3 /* Reserved Skill[] DO NOT CHANGE */
@@ -82,11 +82,11 @@
 #define TYPE_BLUDGEON                101
 #define TYPE_PIERCE                  102
 #define TYPE_SLASH                   103
-#define TYPE_WHIP                    104 /* EXAMPLE */
-#define TYPE_CLAW                    105  /* NO MESSAGES WRITTEN YET! */
-#define TYPE_BITE                    106  /* NO MESSAGES WRITTEN YET! */
-#define TYPE_STING                   107  /* NO MESSAGES WRITTEN YET! */
-#define TYPE_CRUSH                   108  /* NO MESSAGES WRITTEN YET! */
+#define TYPE_WHIP                    104        /* EXAMPLE */
+#define TYPE_CLAW                    105        /* NO MESSAGES WRITTEN YET! */
+#define TYPE_BITE                    106        /* NO MESSAGES WRITTEN YET! */
+#define TYPE_STING                   107        /* NO MESSAGES WRITTEN YET! */
+#define TYPE_CRUSH                   108        /* NO MESSAGES WRITTEN YET! */
 
 
 
@@ -114,24 +114,23 @@
 #define TAR_CHAR_WORLD    4
 #define TAR_FIGHT_SELF    8
 #define TAR_FIGHT_VICT   16
-#define TAR_SELF_ONLY    32 /* Only a check, use with ei. TAR_CHAR_ROOM */
-#define TAR_SELF_NONO    64 /* Only a check, use with ei. TAR_CHAR_ROOM */
+#define TAR_SELF_ONLY    32     /* Only a check, use with ei. TAR_CHAR_ROOM */
+#define TAR_SELF_NONO    64     /* Only a check, use with ei. TAR_CHAR_ROOM */
 #define TAR_OBJ_INV     128
 #define TAR_OBJ_ROOM    256
 #define TAR_OBJ_WORLD   512
 #define TAR_OBJ_EQUIP  1024
 
-struct spell_info_type
-{
-  void (*spell_pointer) (byte level, struct char_data *ch, char *arg, int type,
-                         struct char_data *tar_ch, struct obj_data *tar_obj);
-  byte minimum_position;  /* Position for caster             */
-  ubyte min_usesmana;     /* Amount of mana used by a spell  */
-  byte beats;             /* Heartbeats until ready for next */
+struct spell_info_type {
+  void (*spell_pointer) (byte level, struct char_data * ch, char *arg,
+    int type, struct char_data * tar_ch, struct obj_data * tar_obj);
+  byte minimum_position;        /* Position for caster             */
+  ubyte min_usesmana;           /* Amount of mana used by a spell  */
+  byte beats;                   /* Heartbeats until ready for next */
 
-  byte min_level_cleric;  /* Level required for cleric       */
-  byte min_level_magic;   /* Level required for magic user   */
-  sh_int targets;         /* See below for use with TAR_XXX  */
+  byte min_level_cleric;        /* Level required for cleric       */
+  byte min_level_magic;         /* Level required for magic user   */
+  sh_int targets;               /* See below for use with TAR_XXX  */
 };
 
 /* Possible Targets:
@@ -162,4 +161,3 @@ struct attack_hit_type {
   char *singular;
   char *plural;
 };
-

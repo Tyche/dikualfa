@@ -49,7 +49,7 @@
     }
 #define WIN32CLEANUP WSACleanup();
 #define close(X) closesocket(X)
-#ifndef __LCC__            /* LCC complains prototype is a redefine - yet none exists */
+#ifndef __LCC__                 /* LCC complains prototype is a redefine - yet none exists */
 void gettimeofday (struct timeval *tp, struct timezone *tzp);
 #endif
 #define index(s, c) strchr((s), (c))
@@ -57,7 +57,7 @@ void gettimeofday (struct timeval *tp, struct timezone *tzp);
 #define getdtablesize() FD_SETSIZE
 #define RAND rand
 
-#else                           /* Unix portability - some a consequence of above */
+#else /* Unix portability - some a consequence of above */
 #include <sys/time.h>           /* Redhat BSD need this */
 #include <unistd.h>
 #include <sys/socket.h>

@@ -38,34 +38,33 @@ struct head_block {
   char the_mean_byte;
   long date;
   char to[NAMESIZE], from[NAMESIZE];
-        char msg[HEADBLOCKSIZE];
-        long offset;
+  char msg[HEADBLOCKSIZE];
+  long offset;
 };
 
 
 struct dblock {
-        char the_mean_byte;
-        char msg[DATABLOCKSIZE];
-        long offset;
+  char the_mean_byte;
+  char msg[DATABLOCKSIZE];
+  long offset;
 };
 
 
 struct free_list_struct {
-        long zero_offset;
-        struct free_list_struct *next;
+  long zero_offset;
+  struct free_list_struct *next;
 };
 
 
 struct mail_offset_struct {
-        long mail_header_offset;
-        char from[NAMESIZE];
-        struct mail_offset_struct *my_next_mail;
+  long mail_header_offset;
+  char from[NAMESIZE];
+  struct mail_offset_struct *my_next_mail;
 };
 
 
 struct mail_index_struct {
-        char to[NAMESIZE];
-        struct mail_offset_struct *my_first_mail;
-        struct mail_index_struct *next;
+  char to[NAMESIZE];
+  struct mail_offset_struct *my_first_mail;
+  struct mail_index_struct *next;
 };
-

@@ -4,12 +4,11 @@
 ************************************************************************* */
 
 /* Public Procedures */
-int mana_limit(struct char_data *ch);
-int hit_limit(struct char_data *ch);
-int move_limit(struct char_data *ch);
+int mana_limit (struct char_data *ch);
+int hit_limit (struct char_data *ch);
+int move_limit (struct char_data *ch);
 
-struct title_type
-{
+struct title_type {
   char *title_m;
   char *title_f;
   int exp;
