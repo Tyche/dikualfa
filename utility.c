@@ -11,17 +11,19 @@
 
 extern struct time_data time_info;
 
-
+#if !defined MIN
 int MIN (int a, int b)
 {
   return a < b ? a : b;
 }
+#endif
 
-
+#if !defined MIN
 int MAX (int a, int b)
 {
   return a > b ? a : b;
 }
+#endif
 
 /* creates a random number in interval [from;to] */
 int number (int from, int to)
