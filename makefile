@@ -4,7 +4,7 @@ CFLAGS = -g -O2 -pipe -Wall -W -Wno-parentheses -Wno-unused -fno-builtin-log
 LIBS= -lcrypt
 
 HEADERS = comm.h db.h handler.h interpreter.h limits.h maildef.h \
-	os.h spells.h structs.h utils.h
+	os.h spells.h structs.h utils.h prototypes.h 
 	
 CFILES= comm.c act.comm.c act.informative.c act.movement.c act.obj1.c \
 	act.obj2.c act.offensive.c act.other.c act.social.c act.wizard.c \
@@ -35,9 +35,9 @@ PDATA= $(patsubst %,lib/%,$(DATA))
 
 # Files in the standard distribution
 DISTFILES= $(CFILES) $(HEADERS) $(PDOCS) $(PDATA) $(UTILITIES) \
-	nightrun opstart readme \
-	makefile # makefile.bor makefile.dgm makefile.vc6 makefile.lcc 
-PDIST= $(patsubst %,diku-alpha/%,$(DISTFILES))
+	$(OTHERSTUFF) nightrun opstart readme \
+	makefile makefile.bor makefile.dgm makefile.vc6 makefile.lcc 
+PDIST= $(patsubst %,diku-alfa/%,$(DISTFILES))
 RELEASE=dist
 
 TARGETS= dmserver list delplay insert_any repairgo \
@@ -75,9 +75,9 @@ clean:
 	-rm -f *.d $(OFILES) $(TARGETS) $(OTARGETS) 
 
 dist: 
-	ln -s ./ diku-alpha
-	tar czvf diku-alpha-$(RELEASE).tar.gz $(PDIST) 
-	rm diku-alpha
+	ln -s ./ diku-alfa
+	tar czvf diku-alfa-$(RELEASE).tar.gz $(PDIST) 
+	rm diku-alfa
 
 # pull in dependency info for *existing* .o files
 OBJDEPENDS := $(OFILES) delplay.o list.o 
