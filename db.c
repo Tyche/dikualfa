@@ -57,6 +57,8 @@ struct weather_data weather_info;       /* the infomation about the weather */
 
 bool wizlock = FALSE;           /* is the game wizlocked           */
 
+/* structure for the update queue     */
+struct reset_q_type reset_q;
 
 /* local procedures */
 void boot_zones (void);
@@ -114,16 +116,18 @@ void boot_db (void)
   file_to_string (WIZLIST_FILE, wizlist);
 
   log ("Opening mobile, object and help files.");
-  if (!(mob_f = fopen (MOB_FILE, "r"))) {
+  if (!(mob_f = fopen (MOB_FILE, "rb"))) {
     perror ("boot");
+    WIN32CLEANUP
     exit (0);
   }
 
-  if (!(obj_f = fopen (OBJ_FILE, "r"))) {
+  if (!(obj_f = fopen (OBJ_FILE, "rb"))) {
     perror ("boot");
+    WIN32CLEANUP
     exit (0);
   }
-  if (!(help_fl = fopen (HELP_KWRD_FILE, "r")))
+  if (!(help_fl = fopen (HELP_KWRD_FILE, "rb")))
     log ("   Could not open help file.");
   else
     help_index = build_help_index (help_fl, &top_of_helpt);
@@ -206,7 +210,7 @@ void reset_time (void)
   long diff_time;
   long diff_hours;
 
-  if (!(f1 = fopen(TIME_FILE, "r")))
+  if (!(f1 = fopen(TIME_FILE, "rb")))
   {
     perror("reset time");
     exit(0);
@@ -331,8 +335,9 @@ void update_time (void)
   return;
 
 
-  if (!(f1 = fopen (TIME_FILE, "w"))) {
+  if (!(f1 = fopen (TIME_FILE, "wb"))) {
     perror ("update time");
+    WIN32CLEANUP
     exit (0);
   }
 
@@ -361,6 +366,7 @@ void build_player_index (void)
 
   if (!(fl = fopen (PLAYER_FILE, "rb+"))) {
     perror ("build player index");
+    WIN32CLEANUP
     exit (0);
   }
 
@@ -376,6 +382,7 @@ void build_player_index (void)
             realloc (player_table, (++nr + 1) *
               sizeof (struct player_index_element)))) {
           perror ("generate index");
+          WIN32CLEANUP
           exit (0);
         }
       }
@@ -411,7 +418,7 @@ struct index_data *generate_indices (FILE * fl, int *top)
   rewind (fl);
 
   for (;;) {
-    if (fgets (buf, 81, fl)) {
+    if (FGETS (buf, 81, fl)) {
       if (*buf == '#') {
         /* allocate new cell */
 
@@ -422,6 +429,7 @@ struct index_data *generate_indices (FILE * fl, int *top)
             (struct index_data *) realloc (index,
               (i + 1) * sizeof (struct index_data)))) {
           perror ("load indices");
+          WIN32CLEANUP
           exit (0);
         }
         sscanf (buf, "#%d", &index[i].virtual);
@@ -433,6 +441,7 @@ struct index_data *generate_indices (FILE * fl, int *top)
         break;
     } else {
       perror ("generate indices");
+      WIN32CLEANUP
       exit (0);
     }
   }
@@ -455,9 +464,10 @@ void boot_world (void)
   character_list = 0;
   object_list = 0;
 
-  if (!(fl = fopen (WORLD_FILE, "r"))) {
+  if (!(fl = fopen (WORLD_FILE, "rb"))) {
     perror ("fopen");
     log ("boot_world: could not open world file.");
+    WIN32CLEANUP
     exit (0);
   }
 
@@ -478,11 +488,13 @@ void boot_world (void)
 
         if (world[room_nr].number <= (zone ? zone_table[zone - 1].top : -1)) {
           fprintf (stderr, "Room nr %d is below zone %d.\n", room_nr, zone);
+          WIN32CLEANUP
           exit (0);
         }
         while (world[room_nr].number > zone_table[zone].top)
           if (++zone > top_of_zone_table) {
             fprintf (stderr, "Room %d is outside of any zone.\n", virtual_nr);
+            WIN32CLEANUP
             exit (0);
           }
         world[room_nr].zone = zone;
@@ -540,6 +552,7 @@ void allocate_room (int new_top)
     if (!(new_world = (struct room_data *)
         realloc (world, (new_top + 1) * sizeof (struct room_data)))) {
       perror ("alloc_room");
+      WIN32CLEANUP
       exit (0);
     }
   } else
@@ -699,8 +712,9 @@ void boot_zones (void)
   int zon = 0, cmd_no = 0, ch, expand, tmp;
   char *check, buf[81];
 
-  if (!(fl = fopen (ZONE_FILE, "r"))) {
+  if (!(fl = fopen (ZONE_FILE, "rb"))) {
     perror ("boot_zones");
+    WIN32CLEANUP
     exit (0);
   }
 
@@ -719,6 +733,7 @@ void boot_zones (void)
       if (!(zone_table = (struct zone_data *) realloc (zone_table,
           (zon + 1) * sizeof (struct zone_data)))) {
       perror ("boot_zones realloc");
+      WIN32CLEANUP
       exit (0);
     }
 
@@ -740,6 +755,7 @@ void boot_zones (void)
             (struct reset_com *) realloc (zone_table[zon].cmd,
               (cmd_no + 1) * sizeof (struct reset_com)))) {
           perror ("reset command load");
+          WIN32CLEANUP
           exit (0);
         }
 
@@ -753,7 +769,7 @@ void boot_zones (void)
 
       if (zone_table[zon].cmd[cmd_no].command == '*') {
         expand = 0;
-        fgets (buf, 80, fl);    /* skip command */
+        FGETS (buf, 80, fl);    /* skip command */
         continue;
       }
 
@@ -770,7 +786,7 @@ void boot_zones (void)
         zone_table[zon].cmd[cmd_no].command == 'D')
         fscanf (fl, " %d", &zone_table[zon].cmd[cmd_no].arg3);
 
-      fgets (buf, 80, fl);      /* read comment */
+      FGETS (buf, 80, fl);      /* read comment */
 
       cmd_no++;
     }
@@ -792,8 +808,9 @@ void boot_zones (void)
   int zon = 0, cmd_no = 0, ch, expand;
   char *check, buf[81];
 
-  if (!(fl = fopen (ZONE_FILE, "r"))) {
+  if (!(fl = fopen (ZONE_FILE, "rb"))) {
     perror ("boot_zones");
+    WIN32CLEANUP
     exit (0);
   }
 
@@ -812,6 +829,7 @@ void boot_zones (void)
       if (!(zone_table = (struct zone_data *) realloc (zone_table,
           (zon + 1) * sizeof (struct zone_data)))) {
       perror ("boot_zones realloc");
+      WIN32CLEANUP
       exit (0);
     }
 
@@ -833,6 +851,7 @@ void boot_zones (void)
             (struct reset_com *) realloc (zone_table[zon].cmd,
               (cmd_no + 1) * sizeof (struct reset_com)))) {
           perror ("reset command load");
+          WIN32CLEANUP
           exit (0);
         }
 
@@ -846,7 +865,7 @@ void boot_zones (void)
 
       if (zone_table[zon].cmd[cmd_no].command == '*') {
         expand = 0;
-        fgets (buf, 80, fl);    /* skip command */
+        FGETS (buf, 80, fl);    /* skip command */
         continue;
       }
 
@@ -860,7 +879,7 @@ void boot_zones (void)
         zone_table[zon].cmd[cmd_no].command == 'D')
         fscanf (fl, " %d", &zone_table[zon].cmd[cmd_no].arg3);
 
-      fgets (buf, 80, fl);      /* read comment */
+      FGETS (buf, 80, fl);      /* read comment */
 
       cmd_no++;
     }
@@ -1352,6 +1371,7 @@ void reset_zone (int zone)
         sprintf (buf, "Undefd cmd in reset table; zone %d cmd %d.\n\r",
           zone, cmd_no);
         log (buf);
+        WIN32CLEANUP
         exit (0);
         break;
     } else
@@ -1457,6 +1477,7 @@ void reset_zone (int zone)
         sprintf (buf, "Undefd cmd in reset table; zone %d cmd %d.\n\r",
           zone, cmd_no);
         log (buf);
+        WIN32CLEANUP
         exit (0);
         break;
     } else
@@ -1502,8 +1523,9 @@ int load_char (char *name, struct char_file_u *char_element)
 
   if ((player_i = find_name (name)) >= 0) {
 
-    if (!(fl = fopen (PLAYER_FILE, "r"))) {
+    if (!(fl = fopen (PLAYER_FILE, "rb"))) {
       perror ("Opening player file for reading. (db.c, load_char)");
+      WIN32CLEANUP
       exit (0);
     }
 
@@ -1720,6 +1742,7 @@ int create_entry (char *name)
       realloc (player_table, sizeof (struct player_index_element) *
         (++top_of_p_table + 1)))) {
     perror ("create entry");
+    WIN32CLEANUP
     exit (1);
   }
 
@@ -1750,10 +1773,10 @@ void save_char (struct char_data *ch, sh_int load_room)
     return;
 
   if (expand = (ch->desc->pos > top_of_p_file)) {
-    strcpy (mode, "a+");
+    strcpy (mode, "a+b");
     top_of_p_file++;
   } else
-    strcpy (mode, "r+");
+    strcpy (mode, "r+b");
 
   char_to_store (ch, &st);
   st.load_room = load_room;
@@ -1762,6 +1785,7 @@ void save_char (struct char_data *ch, sh_int load_room)
 
   if (!(fl = fopen (PLAYER_FILE, mode))) {
     perror ("save char");
+    WIN32CLEANUP
     exit (1);
   }
 
@@ -1806,13 +1830,15 @@ char *fread_string (FILE * fl)
   bzero (buf, MAX_STRING_LENGTH);
 
   do {
-    if (!fgets (tmp, MAX_STRING_LENGTH, fl)) {
+    if (!FGETS (tmp, MAX_STRING_LENGTH, fl)) {
       perror ("fread_str");
+      WIN32CLEANUP
       exit (0);
     }
 
     if (strlen (tmp) + strlen (buf) > MAX_STRING_LENGTH) {
       log ("fread_string: string too large (db.c)");
+      WIN32CLEANUP
       exit (0);
     } else
       strcat (buf, tmp);
@@ -1912,14 +1938,14 @@ int file_to_string (char *name, char *buf)
 
   *buf = '\0';
 
-  if (!(fl = fopen (name, "r"))) {
+  if (!(fl = fopen (name, "rb"))) {
     perror ("file-to-string");
     *buf = '\0';
     return (-1);
   }
 
   do {
-    fgets (tmp, 99, fl);
+    FGETS (tmp, 99, fl);
 
     if (!feof (fl)) {
       if (strlen (buf) + strlen (tmp) + 2 > MAX_STRING_LENGTH) {
