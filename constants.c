@@ -3,6 +3,7 @@
 *  Usage: For constants used by the game.                                 *
 *  Copyright (C) 1990, 1991 - see 'license.doc' for complete information. *
 ************************************************************************* */
+#include "os.h"
 
 #include "structs.h"
 #include "limits.h"
