@@ -12,6 +12,7 @@
 #include "handler.h"
 #include "interpreter.h"
 #include "db.h"
+#include "prototypes.h"
 
 /* uses */
 
