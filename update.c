@@ -66,23 +66,25 @@ struct char_file_old_u {
 
 void do_it (FILE * src, FILE * trg);
 
-main (int argc, char **argv)
+int main (int argc, char **argv)
 {
   FILE *src, *trg;
 
   if (argc != 3) {
     fprintf (stderr, "Usage: %s source target\n", argv[0]);
     exit (0);
-  } else if (!(src = fopen (argv[1], "rb")))
+  } else if (!(src = fopen (argv[1], "rb"))) {
     fprintf (stderr, "%s: Could not open.\n", argv[1]);
-  else if (!(trg = fopen (argv[2], "wb")))
+    exit (1);
+  } else if (!(trg = fopen (argv[2], "wb"))) {
     fprintf (stderr, "%s: Could not open.\n", argv[2]);
-  else
+    exit (1);
+  } else {
     do_it (src, trg);
-
+  }
   fclose (src);
   fclose (trg);
-
+  return 0;
 }
 
 
