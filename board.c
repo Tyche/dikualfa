@@ -3,7 +3,9 @@
 #include "utils.h"
 #include "structs.h"
 #include "comm.h"
-
+#include "interpreter.h"
+#include "handler.h"
+#include "prototypes.h"
 
 #define MAX_MSGS 50             /* Max number of messages.          */
 #define SAVE_FILE "board.messages"      /* Name of file for saving messages */
@@ -128,7 +130,7 @@ int board_remove_msg (struct char_data *ch, char *arg)
     send_to_char ("Due to misuse of the REMOVE command, only 10th level\n\r",
       ch);
     send_to_char ("and above can remove messages.\n\r", ch);
-    return;
+    return (0);
   }
 
   one_argument (arg, number);
