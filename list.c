@@ -20,12 +20,13 @@
 
 void list (char *filename);
 
-main (int argc, char **argv)
+int main (int argc, char **argv)
 {
   if (argc != 2)
     fprintf (stderr, "Usage: %s <DikuMUD playerfile-name>\n", argv[0]);
   else
     list (argv[1]);
+  return 0;
 }
 
 
@@ -73,8 +74,8 @@ void list (char *filename)
 
   fclose (fl);
 
-  printf ("\nGrand total time played is %d seconds\n", played);
+  printf ("\nGrand total time played is %ld seconds\n", played);
   printf ("   (First started on Sat Feb  2 19:20:55 1991)\n\n");
-  printf ("   Equals %d hours\n", (played / SECS_PER_REAL_HOUR));
-  printf ("   Equals %d days\n", (played / SECS_PER_REAL_DAY));
+  printf ("   Equals %ld hours\n", (played / SECS_PER_REAL_HOUR));
+  printf ("   Equals %ld days\n", (played / SECS_PER_REAL_DAY));
 }
