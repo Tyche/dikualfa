@@ -14,6 +14,7 @@
 #include "db.h"
 #include "spells.h"
 #include "limits.h"
+#include "prototypes.h"
 
 /*   external vars  */
 
@@ -42,7 +43,7 @@ int move_gain (struct char_data *ch);
 
 
 
-do_emote (struct char_data *ch, char *argument, int cmd)
+void do_emote (struct char_data *ch, char *argument, int cmd)
 {
   int i;
   static char buf[MAX_STRING_LENGTH];
@@ -560,7 +561,7 @@ void do_stat (struct char_data *ch, char *argument, int cmd)
       for (j2 = j->contains; j2; j2 = j2->next_content) {
         strcat (buf, fname (j2->name));
         strcat (buf, "\n\r");
-        found == TRUE;
+        found = TRUE;
       }
       if (!found)
         strcpy (buf, "Contains : Nothing\n\r");
@@ -635,7 +636,7 @@ void do_stat (struct char_data *ch, char *argument, int cmd)
       strcat (buf, buf2);
       send_to_char (buf, ch);
 
-      sprintf (buf, "Birth : [%ld]secs, Logon[%ld]secs, Played[%ld]secs\n\r",
+      sprintf (buf, "Birth : [%ld]secs, Logon[%ld]secs, Played[%d]secs\n\r",
         k->player.time.birth, k->player.time.logon, k->player.time.played);
 
       send_to_char (buf, ch);
@@ -1412,7 +1413,7 @@ void do_restore (struct char_data *ch, char *argument, int cmd)
 
 
 
-do_noshout (struct char_data *ch, char *argument, int cmd)
+void do_noshout (struct char_data *ch, char *argument, int cmd)
 {
   struct char_data *vict;
   struct obj_data *dummy;
