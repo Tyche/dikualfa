@@ -12,6 +12,7 @@
 #include "handler.h"
 #include "db.h"
 #include "comm.h"
+#include "prototypes.h"
 
 #define REBOOT_AT    10         /* 0-23, time of optional reboot if -e lib/reboot */
 
@@ -536,21 +537,18 @@ void check_reboot (void)
           log ("Reboot is nonempty.");
 
           /* the script can't handle the signals */
-          sigsetmask (sigmask (SIGUSR1) | sigmask (SIGUSR2) |
-            sigmask (SIGINT) | sigmask (SIGPIPE) | sigmask (SIGALRM) |
-            sigmask (SIGTERM) | sigmask (SIGURG) | sigmask (SIGXCPU) |
-            sigmask (SIGHUP) | sigmask (SIGVTALRM));
+          sigprocmask (SIG_SETMASK, &mask, &currmask);
 
           if (system ("./reboot")) {
             log ("Reboot script terminated abnormally");
             send_to_all ("The reboot was cancelled.\n\r");
             system ("mv ./reboot reboot.FAILED");
             fclose (boot);
-            sigsetmask (0);
+            sigprocmask (SIG_SETMASK, &zeromask, &currmask);
             return;
           } else
             system ("mv ./reboot reboot.SUCCEEDED");
-          sigsetmask (0);
+          sigprocmask (SIG_SETMASK, &zeromask, &currmask);
         }
 
         send_to_all ("Automatic reboot. Come back in a little while.\n\r");
