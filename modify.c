@@ -524,7 +524,11 @@ void check_reboot (void)
   char dummy;
   FILE *boot;
 
+#ifdef __FreeBSD__
+  extern int shutdown_server, greboot;
+#else
   extern int shutdown_server, reboot;
+#endif
 
   tc = time (0);
   t_info = localtime (&tc);
@@ -553,7 +557,11 @@ void check_reboot (void)
         }
 
         send_to_all ("Automatic reboot. Come back in a little while.\n\r");
+#ifdef __FreeBSD__
+        shutdown_server = greboot = 1;
+#else
         shutdown_server = reboot = 1;
+#endif
       } else if (t_info->tm_min > 40)
         send_to_all ("ATTENTION: DikuMUD will reboot in 10 minutes.\n\r");
       else if (t_info->tm_min > 30)

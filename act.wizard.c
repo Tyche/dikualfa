@@ -790,7 +790,11 @@ void do_shutdow (struct char_data *ch, char *argument, int cmd)
 
 void do_shutdown (struct char_data *ch, char *argument, int cmd)
 {
+#ifdef __FreeBSD__
+  extern int shutdown_server, greboot;
+#else
   extern int shutdown_server, reboot;
+#endif
   char buf[100], arg[MAX_INPUT_LENGTH];
 
   if (IS_NPC (ch))
@@ -807,7 +811,11 @@ void do_shutdown (struct char_data *ch, char *argument, int cmd)
     sprintf (buf, "Reboot by %s.", GET_NAME (ch));
     send_to_all (buf);
     log (buf);
+#ifdef __FreeBSD__
+    shutdown_server = greboot = 1;
+#else
     shutdown_server = reboot = 1;
+#endif
   } else
     send_to_char ("Go shut down someone your own size.\n\r", ch);
 }
