@@ -6,12 +6,14 @@
 
 #include "os.h"
 
+#include "structs.h"
 #include "utils.h"
+#include "prototypes.h"
 
-int checkpointing (void);
-int shutdown_request (void);
-int logsig (void);
-int hupsig (void);
+void checkpointing (int);
+void shutdown_request (int);
+void logsig (int);
+void hupsig (int);
 
 void signal_setup (void)
 {
@@ -40,7 +42,7 @@ void signal_setup (void)
 
 
 
-int checkpointing (void)
+void checkpointing (int sig)
 {
   extern int tics;
 
@@ -54,7 +56,7 @@ int checkpointing (void)
 
 
 
-int shutdown_request (void)
+void shutdown_request (int sig)
 {
   extern int shutdown_server;
 
@@ -65,7 +67,7 @@ int shutdown_request (void)
 
 
 /* kick out players etc */
-int hupsig (void)
+void hupsig (int sig)
 {
   extern int shutdown_server;
 
@@ -75,7 +77,7 @@ int hupsig (void)
 
 
 
-int logsig (void)
+void logsig (int sig)
 {
   log ("Signal received. Ignoring.");
 }
