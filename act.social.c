@@ -67,9 +67,10 @@ char *fread_action (FILE * fl)
   char buf[MAX_STRING_LENGTH], *rslt;
 
   for (;;) {
-    fgets (buf, MAX_STRING_LENGTH, fl);
+    FGETS (buf, MAX_STRING_LENGTH, fl);
     if (feof (fl)) {
       log ("Fread_action - unexpected EOF.");
+      WIN32CLEANUP
       exit (0);
     }
 
@@ -92,8 +93,9 @@ void boot_social_messages (void)
   FILE *fl;
   int tmp, hide, min_pos;
 
-  if (!(fl = fopen (SOCMESS_FILE, "r"))) {
+  if (!(fl = fopen (SOCMESS_FILE, "rb"))) {
     perror ("boot_social_messages");
+    WIN32CLEANUP
     exit (0);
   }
 
@@ -112,6 +114,7 @@ void boot_social_messages (void)
         realloc (soc_mess_list, sizeof (struct social_messg) *
           (++list_top + 1)))) {
       perror ("boot_social_messages. realloc");
+      WIN32CLEANUP
       exit (1);
     }
 
@@ -238,7 +241,7 @@ void do_insult (struct char_data *ch, char *argument, int cmd)
         sprintf (buf, "You insult %s.\n\r", GET_NAME (victim));
         send_to_char (buf, ch);
 
-        switch (random () % 3) {
+        switch (RAND () % 3) {
         case 0:{
             if (GET_SEX (ch) == SEX_MALE) {
               if (GET_SEX (victim) == SEX_MALE)
@@ -287,8 +290,9 @@ void boot_pose_messages (void)
   int tmp;
   int class;
 
-  if (!(fl = fopen (POSEMESS_FILE, "r"))) {
+  if (!(fl = fopen (POSEMESS_FILE, "rb"))) {
     perror ("boot_pose_messages");
+    WIN32CLEANUP
     exit (0);
   }
 
