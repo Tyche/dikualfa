@@ -10,6 +10,8 @@
 #include "utils.h"
 #include "spells.h"
 #include "comm.h"
+#include "handler.h"
+#include "prototypes.h"
 
 #define READ_TITLE(ch) \
    ( GET_SEX(ch) == SEX_MALE ? \
