@@ -25,12 +25,12 @@ int main (int argc, char **argv)
   if (!strcmp (argv[1], "-")) {
     fl = stdin;
     puts ("Input text (terminate with ^D)");
-  } else if (!(fl = fopen (argv[1], "r"))) {
+  } else if (!(fl = fopen (argv[1], "rb"))) {
     perror (argv[1]);
     exit (1);
   }
   for (;;) {
-    fgets (buf, 81, fl);
+    FGETS (buf, 81, fl);
     if (feof (fl))
       break;
     strcat (buf, "\r");
@@ -44,7 +44,9 @@ int main (int argc, char **argv)
     fputs ("Illegal port #\n", stderr);
     exit (1);
   }
+  WIN32STARTUP
   watch (port, txt);
+  WIN32CLEANUP
   return 0;
 }
 
@@ -63,6 +65,7 @@ void watch (int port, char *text)
     FD_SET (mother, &input_set);
     if (select (64, &input_set, 0, 0, 0) < 0) {
       perror ("select");
+      WIN32CLEANUP
       exit (1);
     }
     if (FD_ISSET (mother, &input_set))
@@ -80,7 +83,11 @@ void wave (int sock, char *text)
     return;
 
   write_to_descriptor (s, text);
+#if defined WIN32
+  Sleep (6000);
+#else
   sleep (6);
+#endif
   close (s);
 }
 
@@ -155,7 +162,7 @@ int init_socket (int port)
 
   ld.l_onoff = 1;
   ld.l_linger = 1000;
-  if (setsockopt (s, SOL_SOCKET, SO_LINGER, &ld, sizeof (ld)) < 0) {
+  if (setsockopt (s, SOL_SOCKET, SO_LINGER, (char *) &ld, sizeof (ld)) < 0) {
     perror ("setsockopt LINGER");
     exit (1);
   }
@@ -179,7 +186,7 @@ int write_to_descriptor (int desc, char *txt)
   sofar = 0;
 
   do {
-    thisround = write (desc, txt + sofar, total - sofar);
+    thisround = send (desc, txt + sofar, total - sofar, 0);
     if (thisround < 0) {
       perror ("Write to socket");
       return (-1);
@@ -196,7 +203,13 @@ int write_to_descriptor (int desc, char *txt)
 
 void nonblock (int s)
 {
+#ifdef WIN32
+  unsigned long flags = 1;
+
+  if (ioctlsocket (s, FIONBIO, &flags)) {
+#else
   if (fcntl (s, F_SETFL, FNDELAY) == -1) {
+#endif
     perror ("Noblock");
     exit (1);
   }
