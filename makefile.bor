@@ -29,7 +29,7 @@ CFLAGS= $(OPTIM) $(DEFS)
 LFLAGS = -Tpe -ap -c -Gn $(DEBUG_LFLAGS) 
 
 HEADERS = comm.h db.h handler.h interpreter.h limits.h maildef.h \
-	os.h spells.h structs.h utils.h
+	os.h spells.h structs.h utils.h prototypes.h
 	
 CFILES= comm.c act.comm.c act.informative.c act.movement.c act.obj1.c \
 	act.obj2.c act.offensive.c act.other.c act.social.c act.wizard.c \
@@ -66,7 +66,7 @@ DATA= actions help_table news readme tinyworld.wld board.messages info \
 
 # Files in the standard distribution
 DISTFILES= $(CFILES) $(HEADERS) $(DOCS) $(DATA) $(UTILITIES) \
-	nightrun opstart readme \
+	$(OTHERSTUFF) nightrun opstart readme \
 	makefile # makefile.bor makefile.dgm makefile.vc6 makefile.lcc 
 
 !ifndef RELEASE
@@ -109,7 +109,7 @@ clean:
 
 dist: 
 	cd ..
-	$(WINZIP) -pr diku-alpha-$(RELEASE).zip $(DISTFILES) 
+	$(WINZIP) -pr diku-alfa-$(RELEASE).zip $(DISTFILES) 
 
 .c.obj:
 	$(CC) $(CFLAGS) $(INCDIRS) -c $<
