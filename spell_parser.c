@@ -13,6 +13,7 @@
 #include "interpreter.h"
 #include "spells.h"
 #include "handler.h"
+#include "prototypes.h"
 
 #define MANA_MU 1
 #define MANA_CL 1
@@ -46,98 +47,6 @@ extern char *spell_wear_off_msg[];
 /* Extern procedures */
 
 char *str_dup (char *str);
-
-/* Extern procedures */
-void cast_armor (byte level, struct char_data *ch, char *arg, int si,
-  struct char_data *tar_ch, struct obj_data *tar_obj);
-void cast_teleport (byte level, struct char_data *ch, char *arg, int si,
-  struct char_data *tar_ch, struct obj_data *tar_obj);
-void cast_bless (byte level, struct char_data *ch, char *arg, int si,
-  struct char_data *tar_ch, struct obj_data *tar_obj);
-void cast_blindness (byte level, struct char_data *ch, char *arg, int si,
-  struct char_data *tar_ch, struct obj_data *tar_obj);
-void cast_burning_hands (byte level, struct char_data *ch, char *arg, int si,
-  struct char_data *tar_ch, struct obj_data *tar_obj);
-void cast_call_lightning (byte level, struct char_data *ch, char *arg, int si,
-  struct char_data *tar_ch, struct obj_data *tar_obj);
-void cast_charm_person (byte level, struct char_data *ch, char *arg, int si,
-  struct char_data *tar_ch, struct obj_data *tar_obj);
-void cast_chill_touch (byte level, struct char_data *ch, char *arg, int si,
-  struct char_data *tar_ch, struct obj_data *tar_obj);
-void cast_shocking_grasp (byte level, struct char_data *ch, char *arg, int si,
-  struct char_data *tar_ch, struct obj_data *tar_obj);
-void cast_clone (byte level, struct char_data *ch, char *arg, int si,
-  struct char_data *tar_ch, struct obj_data *tar_obj);
-void cast_colour_spray (byte level, struct char_data *ch, char *arg, int si,
-  struct char_data *tar_ch, struct obj_data *tar_obj);
-void cast_control_weather (byte level, struct char_data *ch, char *arg,
-  int si, struct char_data *tar_ch, struct obj_data *tar_obj);
-void cast_create_food (byte level, struct char_data *ch, char *arg, int si,
-  struct char_data *tar_ch, struct obj_data *tar_obj);
-void cast_create_water (byte level, struct char_data *ch, char *arg, int si,
-  struct char_data *tar_ch, struct obj_data *tar_obj);
-void cast_cure_blind (byte level, struct char_data *ch, char *arg, int si,
-  struct char_data *tar_ch, struct obj_data *tar_obj);
-void cast_cure_critic (byte level, struct char_data *ch, char *arg, int si,
-  struct char_data *tar_ch, struct obj_data *tar_obj);
-void cast_cure_light (byte level, struct char_data *ch, char *arg, int si,
-  struct char_data *tar_ch, struct obj_data *tar_obj);
-void cast_curse (byte level, struct char_data *ch, char *arg, int si,
-  struct char_data *tar_ch, struct obj_data *tar_obj);
-void cast_detect_evil (byte level, struct char_data *ch, char *arg, int si,
-  struct char_data *tar_ch, struct obj_data *tar_obj);
-void cast_detect_invisibility (byte level, struct char_data *ch, char *arg,
-  int si, struct char_data *tar_ch, struct obj_data *tar_obj);
-void cast_detect_magic (byte level, struct char_data *ch, char *arg, int si,
-  struct char_data *tar_ch, struct obj_data *tar_obj);
-void cast_detect_poison (byte level, struct char_data *ch, char *arg, int si,
-  struct char_data *tar_ch, struct obj_data *tar_obj);
-void cast_dispel_evil (byte level, struct char_data *ch, char *arg, int si,
-  struct char_data *tar_ch, struct obj_data *tar_obj);
-void cast_earthquake (byte level, struct char_data *ch, char *arg, int si,
-  struct char_data *tar_ch, struct obj_data *tar_obj);
-void cast_enchant_weapon (byte level, struct char_data *ch, char *arg, int si,
-  struct char_data *tar_ch, struct obj_data *tar_obj);
-void cast_energy_drain (byte level, struct char_data *ch, char *arg, int si,
-  struct char_data *tar_ch, struct obj_data *tar_obj);
-void cast_fireball (byte level, struct char_data *ch, char *arg, int si,
-  struct char_data *tar_ch, struct obj_data *tar_obj);
-void cast_harm (byte level, struct char_data *ch, char *arg, int si,
-  struct char_data *tar_ch, struct obj_data *tar_obj);
-void cast_heal (byte level, struct char_data *ch, char *arg, int si,
-  struct char_data *tar_ch, struct obj_data *tar_obj);
-void cast_invisibility (byte level, struct char_data *ch, char *arg, int si,
-  struct char_data *tar_ch, struct obj_data *tar_obj);
-void cast_lightning_bolt (byte level, struct char_data *ch, char *arg, int si,
-  struct char_data *tar_ch, struct obj_data *tar_obj);
-void cast_locate_object (byte level, struct char_data *ch, char *arg, int si,
-  struct char_data *tar_ch, struct obj_data *tar_obj);
-void cast_magic_missile (byte level, struct char_data *ch, char *arg, int si,
-  struct char_data *tar_ch, struct obj_data *tar_obj);
-void cast_poison (byte level, struct char_data *ch, char *arg, int si,
-  struct char_data *tar_ch, struct obj_data *tar_obj);
-void cast_protection_from_evil (byte level, struct char_data *ch, char *arg,
-  int si, struct char_data *tar_ch, struct obj_data *tar_obj);
-void cast_remove_curse (byte level, struct char_data *ch, char *arg, int si,
-  struct char_data *tar_ch, struct obj_data *tar_obj);
-void cast_sanctuary (byte level, struct char_data *ch, char *arg, int si,
-  struct char_data *tar_ch, struct obj_data *tar_obj);
-void cast_sleep (byte level, struct char_data *ch, char *arg, int si,
-  struct char_data *tar_ch, struct obj_data *tar_obj);
-void cast_strength (byte level, struct char_data *ch, char *arg, int si,
-  struct char_data *tar_ch, struct obj_data *tar_obj);
-void cast_summon (byte level, struct char_data *ch, char *arg, int si,
-  struct char_data *tar_ch, struct obj_data *tar_obj);
-void cast_ventriloquate (byte level, struct char_data *ch, char *arg, int si,
-  struct char_data *tar_ch, struct obj_data *tar_obj);
-void cast_word_of_recall (byte level, struct char_data *ch, char *arg, int si,
-  struct char_data *tar_ch, struct obj_data *tar_obj);
-void cast_remove_poison (byte level, struct char_data *ch, char *arg, int si,
-  struct char_data *tar_ch, struct obj_data *tar_obj);
-void cast_sense_life (byte level, struct char_data *ch, char *arg, int si,
-  struct char_data *tar_ch, struct obj_data *tar_obj);
-void cast_identify (byte level, struct char_data *ch, char *arg, int si,
-  struct char_data *tar_ch, struct obj_data *tar_obj);
 
 
 
@@ -467,7 +376,7 @@ void add_follower (struct char_data *ch, struct char_data *leader)
 
 
 
-say_spell (struct char_data *ch, int si)
+void say_spell (struct char_data *ch, int si)
 {
   char buf[MAX_STRING_LENGTH], splwd[MAX_BUF_LENGTH];
   char buf2[MAX_STRING_LENGTH];
