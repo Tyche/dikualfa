@@ -95,7 +95,7 @@ struct index_data *generate_indices (FILE * fl, int *top)
   rewind (fl);
 
   for (;;) {
-    if (fgets (buf, 81, fl)) {
+    if (FGETS (buf, 81, fl)) {
       if (*buf == '#') {
         /* allocate new cell */
 
@@ -283,7 +283,7 @@ void check_zones (FILE * fl)
 
       if (cmd_type == '*') {
         expand = 0;
-        fgets (buf, 80, fl);    /* skip command */
+        FGETS (buf, 80, fl);    /* skip command */
         line_no++;
         continue;
       }
@@ -333,7 +333,7 @@ void check_zones (FILE * fl)
       }
 
 
-      fgets (buf, 80, fl);      /* read comment */
+      FGETS (buf, 80, fl);      /* read comment */
       line_no++;
     }
   }
@@ -646,7 +646,7 @@ char *fread_string (FILE * fl)
   bzero (buf, MAX_STRING_LENGTH);
 
   do {
-    if (!fgets (tmp, MAX_STRING_LENGTH, fl)) {
+    if (!FGETS (tmp, MAX_STRING_LENGTH, fl)) {
       printf ("fread_str");
       exit (1);
     }
@@ -689,25 +689,25 @@ int main (int argc, char *argv[])
   strcpy (name, argv[1]);
   strcat (name, ".wld");
 
-  if (!(wld_f = fopen (name, "r"))) {
+  if (!(wld_f = fopen (name, "rb"))) {
     printf ("Could not open world file.\n\r");
     exit (1);
   }
   strcpy (name, argv[1]);
   strcat (name, ".mob");
-  if (!(mob_f = fopen (name, "r"))) {
+  if (!(mob_f = fopen (name, "rb"))) {
     printf ("Could not open mobile file.\n\r");
     exit (1);
   }
   strcpy (name, argv[1]);
   strcat (name, ".obj");
-  if (!(obj_f = fopen (name, "r"))) {
+  if (!(obj_f = fopen (name, "rb"))) {
     printf ("Could not open object file.\n\r");
     exit (1);
   }
   strcpy (name, argv[1]);
   strcat (name, ".zon");
-  if (!(zon_f = fopen (name, "r"))) {
+  if (!(zon_f = fopen (name, "rb"))) {
     printf ("Could not open zone file.\n\r");
     exit (1);
   }
