@@ -126,10 +126,12 @@ void update_file (FILE * fl, int pos, struct obj_file_u *st)
 {
   if (fseek (fl, sizeof (struct obj_file_u) * (pos), 0)) {
     perror ("Seeking in file update (update_file, reception.c)");
+    WIN32CLEANUP
     exit (1);
   }
   if (fwrite (st, sizeof (struct obj_file_u), 1, fl) < 1) {
     perror ("Error updating file (update_file, reception.c).");
+    WIN32CLEANUP
     exit (1);
   }
 
@@ -137,6 +139,7 @@ void update_file (FILE * fl, int pos, struct obj_file_u *st)
   /* Something with update mode and reads after writes         */
   if (fseek (fl, sizeof (struct obj_file_u) * (pos + 1), 0)) {
     perror ("Seeking in file update (update_file, reception.c)");
+    WIN32CLEANUP
     exit (1);
   }
 
@@ -191,6 +194,7 @@ void load_char_objs (struct char_data *ch)
   /* r+b is for Binary Reading/Writing */
   if (!(fl = fopen (OBJ_SAVE_FILE, "r+b"))) {
     perror ("Opening object file for Loading PC's objects");
+    WIN32CLEANUP
     exit (1);
   }
 
@@ -220,11 +224,13 @@ void load_char_objs (struct char_data *ch)
 
     if (fseek (fl, sizeof (struct obj_file_u) * (pos - 1), 0)) {
       perror ("seeking in PC objects file.");
+      WIN32CLEANUP
       exit (1);
     }
     strcpy (st.owner, OBJ_FILE_FREE);
     if (fwrite (&st, sizeof (struct obj_file_u), 1, fl) < 1) {
       log ("Error updating name to be set as unused.");
+      WIN32CLEANUP
       exit (1);
     }
 
@@ -345,12 +351,14 @@ void save_obj (struct char_data *ch, struct obj_cost *cost)
 
   if (!(fl = fopen (OBJ_SAVE_FILE, "a+b"))) {
     perror ("saving PC's objects");
+    WIN32CLEANUP
     exit (1);
   }
 
 
   if (fseek (fl, 0, 0)) {       /* Move to beginning of file */
     perror ("seeking to start of PC objects file.");
+    WIN32CLEANUP
     exit (1);
   }
 
@@ -366,6 +374,7 @@ void save_obj (struct char_data *ch, struct obj_cost *cost)
   else {
     if (!found) {
       perror ("Really strange...\n\r");
+      WIN32CLEANUP
       exit (1);
     }
 
@@ -394,15 +403,17 @@ void update_obj_file (void)
   int find_name (char *name);
   extern struct player_index_element *player_table;
 
-  if (!(char_file = fopen (PLAYER_FILE, "r+"))) {
+  if (!(char_file = fopen (PLAYER_FILE, "r+b"))) {
     perror
       ("   Opening player file for reading. (reception.c, update_obj_file)");
+    WIN32CLEANUP
     exit (1);
   }
 
   /* r+b is for Binary Reading/Writing */
   if (!(fl = fopen (OBJ_SAVE_FILE, "r+b"))) {
     perror ("   Opening object file for updating");
+    WIN32CLEANUP
     exit (1);
   }
 
@@ -490,6 +501,7 @@ int receptionist (struct char_data *ch, int cmd, char *arg)
 
   if (!recep) {
     log ("Ingen receptionist.\n\r");
+    WIN32CLEANUP
     exit (1);
   }
 
