@@ -304,7 +304,7 @@ void do_idea (struct char_data *ch, char *argument, int cmd)
     return;
   }
 
-  if (!(fl = fopen (IDEA_FILE, "a"))) {
+  if (!(fl = fopen (IDEA_FILE, "ab"))) {
     perror ("do_idea");
     send_to_char ("Could not open the idea-file.\n\r", ch);
     return;
@@ -340,7 +340,7 @@ void do_typo (struct char_data *ch, char *argument, int cmd)
     return;
   }
 
-  if (!(fl = fopen (TYPO_FILE, "a"))) {
+  if (!(fl = fopen (TYPO_FILE, "ab"))) {
     perror ("do_typo");
     send_to_char ("Could not open the typo-file.\n\r", ch);
     return;
@@ -375,7 +375,7 @@ void do_bug (struct char_data *ch, char *argument, int cmd)
     return;
   }
 
-  if (!(fl = fopen (BUG_FILE, "a"))) {
+  if (!(fl = fopen (BUG_FILE, "ab"))) {
     perror ("do_bug");
     send_to_char ("Could not open the bug-file.\n\r", ch);
     return;
