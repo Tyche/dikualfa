@@ -44,6 +44,7 @@ extern char *fread_string (FILE * fl);
 extern int real_object (int virtual);
 extern int real_mobile (int virtual);
 extern void update_time (void);
+extern void free_obj (struct obj_data *obj);
 
 #define REAL 0
 #define VIRTUAL 1
