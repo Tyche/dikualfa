@@ -1,6 +1,7 @@
 # DikuMUD makefile 
 CC = gcc 
 CFLAGS = -g -O2 -pipe -Wall -W -Wno-parentheses -Wno-unused -fno-builtin-log
+LIBS= -lcrypt
 
 HEADERS = comm.h db.h handler.h interpreter.h limits.h maildef.h \
 	os.h spells.h structs.h utils.h
@@ -10,15 +11,14 @@ CFILES= comm.c act.comm.c act.informative.c act.movement.c act.obj1.c \
 	handler.c db.c interpreter.c utility.c spec_assign.c shop.c \
 	limits.c mobact.c fight.c modify.c weather.c spells1.c spells2.c \
 	spell_parser.c reception.c constants.c spec_procs.c signals.c \
-	board.c mar_fiz_maz.c magic.c
+	board.c mar_fiz_maz.c magic.c changes.c
+# .o versions of above
+OFILES= $(CFILES:.c=.o)
 
-OTHERSTUFF= changes.c mail.c 
+OTHERSTUFF= mail.c 
 
 UTILITIES= insert_any.c repairgo.c list.c syntax_checker.c \
 	sign.c update.c delplay.c
-
-# .o versions of above
-OFILES= $(CFILES:.c=.o)
 
 # documentation
 DOCS= actions.doc defs.doc license.doc running.doc time.doc combat.doc \
@@ -27,23 +27,26 @@ DOCS= actions.doc defs.doc license.doc running.doc time.doc combat.doc \
 	dbsup.doc levels.doc readme spells.doc
 PDOCS= $(patsubst %,doc/%,$(DOCS))	
 
+# data - zones, help, mobs, objects, rooms, etc.
 DATA= actions help_table news readme tinyworld.wld board.messages info \
 	pcobjs.obj tinyworld.mob tinyworld.zon credits messages players \
 	tinyworld.obj wizlist help motd poses tinyworld.shp
-PDATA= $(patsubst %,doc/%,$(DATA))	
+PDATA= $(patsubst %,lib/%,$(DATA))	
 
 # Files in the standard distribution
 DISTFILES= $(CFILES) $(HEADERS) $(PDOCS) $(PDATA) $(UTILITIES) \
 	nightrun opstart readme \
-	makefile makefile.bor makefile.dgm makefile.vc6 makefile.lcc 
-
+	makefile # makefile.bor makefile.dgm makefile.vc6 makefile.lcc 
 PDIST= $(patsubst %,diku-alpha/%,$(DISTFILES))
-
 RELEASE=dist
 
+TARGETS= dmserver list delplay insert_any repairgo \
+	syntax_checker update sign
+
+all: $(TARGETS)
 
 dmserver : $(OFILES)
-	$(CC) $(CFLAGS) -o dmserver $(OFILES)
+	$(CC) $(CFLAGS) -o dmserver $(OFILES) $(LIBS)
 
 list : list.o
 	$(CC) $(CFLAGS) -o list list.o
@@ -67,7 +70,7 @@ sign : sign.o
 	$(CC) $(CFLAGS) -o sign sign.o
 
 clean:
-	-rm -f *.o *.d dmserver list delplay
+	-rm -f *.d $(OFILES) $(TARGETS)
 
 dist: 
 	ln -s ./ diku-alpha
