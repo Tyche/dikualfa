@@ -11,6 +11,8 @@
 #include "comm.h"
 #include "db.h"
 #include "handler.h"
+#include "interpreter.h"
+#include "prototypes.h"
 
 extern struct room_data *world;
 extern struct obj_data *object_list;
