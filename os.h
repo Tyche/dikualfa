@@ -36,7 +36,11 @@
 #include <winsock2.h>
 #include <sys/stat.h>
 #include <process.h>
+#if defined __LCC__ || defined _MSC_VER
+#include <direct.h>
+#else
 #include <dir.h>
+#endif
 #define EWOULDBLOCK       WSAEWOULDBLOCK
 #undef EINTR
 #undef EMFILE
@@ -59,7 +63,7 @@
 #define RAND rand
 #define SRAND srand
 #define crypt(s, r) (s)
-#ifndef __LCC__                 /* LCC complains prototype is a redefine - yet none exists */
+#ifndef __LCC__     /* simply does not like our prototype ? */
 void gettimeofday (struct timeval *tp, struct timezone *tzp);
 #endif
 #define FGETS fgets_win
