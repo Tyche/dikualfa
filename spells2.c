@@ -13,6 +13,7 @@
 #include "interpreter.h"
 #include "spells.h"
 #include "handler.h"
+#include "prototypes.h"
 
 
 /* Global data */
