@@ -10,6 +10,8 @@
 #include "structs.h"
 #include "db.h"
 #include "comm.h"
+#include "handler.h"
+#include "prototypes.h"
 
 extern struct char_data *character_list;
 extern struct index_data *mob_index;
