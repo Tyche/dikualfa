@@ -92,6 +92,7 @@ void string_add (struct descriptor_data *d, char *str)
       if (!(*d->str = (char *) realloc (*d->str, strlen (*d->str) +
             strlen (str) + 3))) {
         perror ("string_add");
+        WIN32CLEANUP
         exit (1);
       }
       strcat (*d->str, str);
@@ -384,7 +385,7 @@ struct help_index_element *build_help_index (FILE * fl, int *num)
 
   for (;;) {
     pos = ftell (fl);
-    fgets (buf, 81, fl);
+    FGETS (buf, 81, fl);
     *(buf + strlen (buf) - 1) = '\0';
     scan = buf;
     for (;;) {
@@ -406,7 +407,7 @@ struct help_index_element *build_help_index (FILE * fl, int *num)
     }
     /* skip the text */
     do
-      fgets (buf, 81, fl);
+      FGETS (buf, 81, fl);
     while (*buf != '#');
     if (*(buf + 1) == '~')
       break;
@@ -529,7 +530,7 @@ void check_reboot (void)
   t_info = localtime (&tc);
 
   if ((t_info->tm_hour + 1) == REBOOT_AT && t_info->tm_min > 30)
-    if (boot = fopen ("./reboot", "r")) {
+    if (boot = fopen ("./reboot", "rb")) {
       if (t_info->tm_min > 50) {
         log ("Reboot exists.");
         fread (&dummy, sizeof (dummy), 1, boot);
@@ -537,18 +538,18 @@ void check_reboot (void)
           log ("Reboot is nonempty.");
 
           /* the script can't handle the signals */
-          sigprocmask (SIG_SETMASK, &mask, &currmask);
+          block_signals();
 
           if (system ("./reboot")) {
             log ("Reboot script terminated abnormally");
             send_to_all ("The reboot was cancelled.\n\r");
             system ("mv ./reboot reboot.FAILED");
             fclose (boot);
-            sigprocmask (SIG_SETMASK, &zeromask, &currmask);
+            restore_signals();
             return;
           } else
             system ("mv ./reboot reboot.SUCCEEDED");
-          sigprocmask (SIG_SETMASK, &zeromask, &currmask);
+          restore_signals();
         }
 
         send_to_all ("Automatic reboot. Come back in a little while.\n\r");
@@ -571,7 +572,7 @@ void check_reboot (void)
 
 
 
-int workhours ()
+int workhours (void)
 {
   long tc;
   struct tm *t_info;
@@ -611,7 +612,7 @@ int load (void)
   static int p_point = -1;
   extern int slow_death;
 
-  if (!(fl = fopen ("/tmp/.sysline", "r"))) {
+  if (!(fl = fopen ("/tmp/.sysline", "rb"))) {
     perror ("sysline. (dying)");
     slow_death = 1;
     return (-1);
@@ -649,13 +650,13 @@ char *nogames (void)
   static char text[200];
   FILE *fl;
 
-  if (fl = fopen ("lib/nogames", "r")) {
+  if (fl = fopen ("lib/nogames", "rb")) {
     log ("/usr/games/nogames exists");
-    fgets (text, 200, fl);
+    FGETS (text, 200, fl);
     return (text);
     fclose (fl);
-  } else
-    return (0);
+  }
+  return (0);
 }
 
 
@@ -674,10 +675,15 @@ void coma (void)
     close_socket (descriptor_list);
 
   do {
+#if defined WIN32
+    Sleep (300000);
+#else
     sleep (300);
+#endif
     tics = 1;
     if (workhours ()) {
       log ("Working hours collision during coma. Exit.");
+      WIN32CLEANUP
       exit (0);
     }
   }
