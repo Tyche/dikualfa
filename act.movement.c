@@ -13,6 +13,7 @@
 #include "handler.h"
 #include "db.h"
 #include "spells.h"
+#include "prototypes.h"
 
 /*   external vars  */
 
