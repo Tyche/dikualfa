@@ -1320,7 +1320,7 @@ void do_advance (struct char_data *ch, char *argument, int cmd)
     "l slightly\n\rdifferent.", FALSE, ch, 0, victim, TO_VICT);
 
   sprintf (buf, "%s advances %s to level %d.", GET_NAME (ch),
-    GET_NAME (victim), newlevel);
+    GET_NAME (victim), newlevel);  /* newlevel can be uninitialized */
   log (buf);
 
   if (GET_LEVEL (victim) == 0) {
