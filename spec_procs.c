@@ -1316,6 +1316,7 @@ int chalice (struct char_data *ch, int cmd, char *arg)
     return (0);
     break;
   }
+  return (0);
 }
 
 int kings_hall (struct char_data *ch, int cmd, char *arg)
