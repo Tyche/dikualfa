@@ -15,6 +15,7 @@
 #include "db.h"
 #include "spells.h"
 #include "limits.h"
+#include "prototypes.h"
 
 /*   external vars  */
 
