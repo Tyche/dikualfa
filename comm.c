@@ -143,7 +143,11 @@ int main (int argc, char **argv)
   sprintf (buf, "Running game on port %d.", port);
   log (buf);
 
+#ifdef _MSC_VER
+  if (_chdir (dir) < 0) {
+#else
   if (chdir (dir) < 0) {
+#endif
     perror ("chdir");
     exit (0);
   }
