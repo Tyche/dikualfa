@@ -12,6 +12,7 @@
 #include "db.h"
 #include "interpreter.h"
 #include "utils.h"
+#include "prototypes.h"
 
 #define SHOP_FILE "tinyworld.shp"
 #define MAX_TRADE 5
