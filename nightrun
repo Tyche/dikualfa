@@ -22,7 +22,7 @@ while 1
  @ counter = ($counter + 1)
 
  echo "************* DIKUMUD REBOOT -- Run nr $counter *********" >> syslog
- dmserver >>& syslog
+ ./dmserver >>& syslog
  set tmp=$status
 
  if (($tmp == 0) || ($counter == $max)) then
