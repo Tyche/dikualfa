@@ -294,6 +294,7 @@ void affect_remove (struct char_data *ch, struct affected_type *af)
     if (hjp->next != af) {
       log
         ("FATAL : Could not locate affected_type in ch->affected. (handler.c, affect_remove)");
+      WIN32CLEANUP
       exit (1);
     }
     hjp->next = af->next;       /* skip the af element */
@@ -367,6 +368,7 @@ void char_from_room (struct char_data *ch)
 
   if (ch->in_room == NOWHERE) {
     log ("NOWHERE extracting char from room (handler.c, char_from_room)");
+    WIN32CLEANUP
     exit (1);
   }
 
@@ -912,6 +914,7 @@ void extract_char (struct char_data *ch)
     /* leaves nothing ! */
 
     log ("NOWHERE, extracting char.");
+    WIN32CLEANUP
     exit (1);
   }
 
@@ -1146,6 +1149,7 @@ struct obj_data *create_money (int amount)
 
   if (amount <= 0) {
     log ("ERROR: Try to create negative money.");
+    WIN32CLEANUP
     exit (1);
   }
 
