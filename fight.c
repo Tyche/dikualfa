@@ -12,7 +12,9 @@
 #include "handler.h"
 #include "interpreter.h"
 #include "db.h"
+#include "limits.h"
 #include "spells.h"
+#include "prototypes.h"
 
 /* Structures */
 
