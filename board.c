@@ -1,6 +1,4 @@
-#include <string.h>
-#include <stdio.h>
-#include <ctype.h>
+#include "os.h"
 
 #include "utils.h"
 #include "structs.h"

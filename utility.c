@@ -4,12 +4,9 @@
 *  Copyright (C) 1990, 1991 - see 'license.doc' for complete information. *
 ************************************************************************* */
 
-#include <stdio.h>
-#include <string.h>
-#include <assert.h>
+#include "os.h"
 
 #include "structs.h"
-#include <time.h>
 #include "utils.h"
 
 extern struct time_data time_info;

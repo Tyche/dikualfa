@@ -5,9 +5,7 @@
 ************************************************************************* */
 /* This won't work */
 
-#include <string.h>
-#include <ctype.h>
-#include <stdio.h>
+#include "os.h"
 #include "structs.h"
 #include "comm.h"
 #include "interpreter.h"

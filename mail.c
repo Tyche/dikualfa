@@ -11,9 +11,8 @@
  * Email : nv89-ogu@nada.kth.se  *
  *********************************/
 
+#include "os.h"
 #include "maildef.h"
-#include <stdio.h>
-#include <time.h>
 #ifndef SEEK_SET
 #define SEEK_SET 0
 #define SEEK_CUR 1

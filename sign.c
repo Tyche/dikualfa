@@ -1,16 +1,6 @@
 /* Present a message on a port */
 
-#include <errno.h>
-#include <stdio.h>
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <sys/wait.h>
-#include <netinet/in.h>
-#include <netdb.h>
-#include <sys/time.h>
-#include <fcntl.h>
-#include <ctype.h>
-#include <string.h>
+#include "os.h"
 
 void watch (int port, char *text);
 void wave (int sock, char *text);

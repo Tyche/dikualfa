@@ -4,10 +4,7 @@
 *  Copyright (C) 1990, 1991 - see 'license.doc' for complete information. *
 ************************************************************************* */
 
-#include <string.h>
-#include <stdio.h>
-#include <ctype.h>
-#include <assert.h>
+#include "os.h"
 
 #include "structs.h"
 #include "utils.h"

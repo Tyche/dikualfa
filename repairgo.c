@@ -1,6 +1,4 @@
-#include <stdio.h>
-#include <time.h>
-#include <string.h>
+#include "os.h"
 
 #include "structs.h"
 

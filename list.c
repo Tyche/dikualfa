@@ -1,5 +1,4 @@
-#include <stdio.h>
-#include <time.h>
+#include "os.h"
 
 #include "structs.h"
 
