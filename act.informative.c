@@ -14,6 +14,8 @@
 #include "db.h"
 #include "spells.h"
 #include "limits.h"
+#include "prototypes.h"
+
 
 /* extern variables */
 
@@ -857,7 +859,7 @@ void do_weather (struct char_data *ch, char *argument, int cmd)
 {
   extern struct weather_data weather_info;
   static char buf[100];
-  char static *sky_look[4] = {
+  static char *sky_look[4] = {
     "cloudless",
     "cloudy",
     "rainy",
@@ -938,7 +940,7 @@ void do_help (struct char_data *ch, char *argument, int cmd)
 
 
 
-do_wizhelp (struct char_data * ch, char *argument, int cmd)
+void do_wizhelp (struct char_data * ch, char *argument, int cmd)
 {
   char buf[MAX_STRING_LENGTH];
   int no, i;
