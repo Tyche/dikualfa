@@ -20,10 +20,10 @@ int msg_num;
 void board_write_msg (struct char_data *ch, char *arg);
 int board_display_msg (struct char_data *ch, char *arg);
 int board_remove_msg (struct char_data *ch, char *arg);
-void board_save_board ();
-void board_load_board ();
-void board_reset_board ();
-void error_log ();
+void board_save_board (void);
+void board_load_board (void);
+void board_reset_board (void);
+void error_log (char *str);
 void board_fix_long_desc (int num, char *headers[MAX_MSGS]);
 int board_show_board (struct char_data *ch, char *arg);
 
@@ -165,7 +165,7 @@ int board_remove_msg (struct char_data *ch, char *arg)
   return (1);
 }
 
-void board_save_board ()
+void board_save_board (void)
 {
   FILE *the_file;
   int ind, len;
@@ -192,7 +192,7 @@ void board_save_board ()
   return;
 }
 
-void board_load_board ()
+void board_load_board (void)
 {
   FILE *the_file;
   int ind, len = 0;
@@ -200,7 +200,7 @@ void board_load_board ()
   board_reset_board ();
   the_file = fopen (SAVE_FILE, "rb");
   if (!the_file) {
-    error_log ("Can't open message file. Board will be empty.\n\r", 0);
+    error_log ("Can't open message file. Board will be empty.\n\r");
     return;
   }
   fread (&msg_num, sizeof (int), 1, the_file);
@@ -235,7 +235,7 @@ void board_load_board ()
   return;
 }
 
-void board_reset_board ()
+void board_reset_board (void)
 {
   int ind;
   for (ind = 0; ind < MAX_MSGS; ind++) {
