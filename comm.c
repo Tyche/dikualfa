@@ -47,11 +47,6 @@ int no_specials = 0;            /* Suppress ass. of special routines */
 int maxdesc, avail_descs;
 int tics = 0;                   /* for extern checkpointing */
 
-sigset_t mask = SIGUSR1 | SIGUSR2 | SIGINT | SIGPIPE | SIGALRM | SIGTERM |
-    SIGURG | SIGXCPU | SIGHUP | SIGVTALRM;
-sigset_t currmask = 0;
-sigset_t zeromask = 0;
-
 int get_from_q (struct txt_q *queue, char *dest);
 /* write_to_q is in comm.h for the macro */
 void run_the_game (int port);
@@ -67,6 +62,8 @@ struct timeval timediff (struct timeval *a, struct timeval *b);
 void flush_queues (struct descriptor_data *d);
 void nonblock (int s);
 void parse_name (struct descriptor_data *desc, char *arg);
+int load (void);
+void coma (int s);
 
 
 /* extern fcnts */
@@ -85,6 +82,7 @@ void show_string (struct descriptor_data *d, char *input);
 void gr (int s);
 
 void check_reboot (void);
+
 
 /* *********************************************************************
 *  main game loop and related stuff              *
@@ -153,8 +151,10 @@ int main (int argc, char **argv)
   sprintf (buf, "Using %s as data directory.", dir);
   log (buf);
 
-  srandom (time (0));
+  SRAND (time (0));
+  WIN32STARTUP
   run_the_game (port);
+  WIN32CLEANUP
   return (0);
 }
 
@@ -172,10 +172,6 @@ void run_the_game (int port)
   PROFILE (extern etext ();
     )
 
-  void signal_setup (void);
-  int load (void);
-  void coma (void);
-
   PROFILE (monstartup ((int) 2, etext);
     )
 
@@ -189,7 +185,7 @@ void run_the_game (int port)
 
   if (lawful && load () >= 6) {
     log ("System load too high at startup.");
-    coma ();
+    coma (s);
   }
 
   boot_db ();
@@ -205,6 +201,7 @@ void run_the_game (int port)
 
     if (reboot) {
     log ("Rebooting.");
+    WIN32CLEANUP
     exit (52);                  /* what's so great about HHGTTG, anyhow? */
   }
 
@@ -220,7 +217,7 @@ void run_the_game (int port)
 void game_loop (int s)
 {
   int tmp_room, old_len;
-  fd_set input_set, output_set, exc_set;
+  fd_set input_set, output_set, exc_set, dummy_set;
   struct timeval last_time, now, timespent, timeout, null_time;
   static struct timeval opt_time;
   char comm[MAX_INPUT_LENGTH];
@@ -234,7 +231,11 @@ void game_loop (int s)
   opt_time.tv_sec = 0;
   gettimeofday (&last_time, NULL);
 
+#ifdef WIN32
+  maxdesc = 1;
+#else
   maxdesc = s;
+#endif
   avail_descs = getdtablesize () - 2;   /* !! Change if more needed !! */
 
   /* Main loop */
@@ -244,6 +245,9 @@ void game_loop (int s)
     FD_ZERO (&output_set);
     FD_ZERO (&exc_set);
     FD_SET (s, &input_set);
+#ifdef WIN32
+    FD_SET (s, &dummy_set);
+#endif
     for (point = descriptor_list; point; point = point->next) {
       FD_SET (point->descriptor, &input_set);
       FD_SET (point->descriptor, &exc_set);
@@ -261,20 +265,26 @@ void game_loop (int s)
       last_time.tv_sec++;
     }
 
-    sigprocmask (SIG_SETMASK, &mask, &currmask);
+    block_signals();
 
     if (select (maxdesc + 1, &input_set, &output_set, &exc_set, &null_time)
       < 0) {
       perror ("Select poll");
+      WIN32CLEANUP
       exit (1);
     }
 
+#ifdef WIN32   /* windows select demands a valid fd_set */
+    if (select (0, (fd_set *) 0, (fd_set *) 0, &dummy_set, &timeout) < 0) {
+#else
     if (select (0, (fd_set *) 0, (fd_set *) 0, (fd_set *) 0, &timeout) < 0) {
+#endif
       perror ("Select sleep");
+      WIN32CLEANUP
       exit (1);
     }
 
-    sigprocmask (SIG_SETMASK, &zeromask, &currmask);
+    restore_signals();
 
     /* Respond to whatever might be happening */
 
@@ -511,6 +521,7 @@ int init_socket (int port)
   hp = gethostbyname (hostname);
   if (hp == NULL) {
     perror ("gethostbyname");
+    WIN32CLEANUP
     exit (1);
   }
   sa.sin_family = hp->h_addrtype;
@@ -518,23 +529,27 @@ int init_socket (int port)
   s = socket (AF_INET, SOCK_STREAM, 0);
   if (s == INVALID_SOCKET) {
     perror ("Init-socket");
+    WIN32CLEANUP
     exit (1);
   }
   if (setsockopt (s, SOL_SOCKET, SO_REUSEADDR,
       (char *) &opt, sizeof (opt)) < 0) {
     perror ("setsockopt REUSEADDR");
+    WIN32CLEANUP
     exit (1);
   }
 
   ld.l_onoff = 1;
   ld.l_linger = 1000;
-  if (setsockopt (s, SOL_SOCKET, SO_LINGER, &ld, sizeof (ld)) < 0) {
+  if (setsockopt (s, SOL_SOCKET, SO_LINGER, (char *) &ld, sizeof (ld)) < 0) {
     perror ("setsockopt LINGER");
+    WIN32CLEANUP
     exit (1);
   }
-  if (bind (s, (struct sockaddr *) &sa, (socklen_t) sizeof (sa)) < 0) {
+  if (bind (s, (struct sockaddr *) &sa, sizeof (sa)) < 0) {
     perror ("bind");
     close (s);
+    WIN32CLEANUP
     exit (1);
   }
   listen (s, 3);
@@ -554,12 +569,10 @@ int new_connection (int s)
   char buf[100];
 
   i = sizeof (isa);
-  getsockname (s, (struct sockaddr *) &isa, (socklen_t *) & i);
+  getsockname (s, (struct sockaddr *) &isa, & i);
 
 
-  if ((t =
-      accept (s, (struct sockaddr *) &isa,
-        (socklen_t *) & i)) == INVALID_SOCKET) {
+  if ((t = accept (s, (struct sockaddr *) &isa, &i)) == INVALID_SOCKET) {
     perror ("Accept");
     return (-1);
   }
@@ -602,12 +615,21 @@ int new_descriptor (int s)
     return (0);
   }
 
+#ifdef WIN32
+  if ((maxdesc + 1) >= avail_descs) {
+#else
   if ((desc + 1) >= avail_descs) {
+#endif
     write_to_descriptor (desc, "Sorry.. The game is full...\n\r");
     close (desc);
     return (0);
+#ifdef WIN32
+  } else
+    maxdesc++;
+#else
   } else if (desc > maxdesc)
     maxdesc = desc;
+#endif
 
   CREATE (newd, struct descriptor_data, 1);
 
@@ -693,7 +715,7 @@ int write_to_descriptor (int desc, char *txt)
   sofar = 0;
 
   do {
-    thisround = write (desc, txt + sofar, total - sofar);
+    thisround = send (desc, txt + sofar, total - sofar, 0);
     if (thisround < 0) {
       perror ("Write to socket");
       return (-1);
@@ -720,8 +742,8 @@ int process_input (struct descriptor_data *t)
 
   /* Read in some stuff */
   do {
-    if ((thisround = read (t->descriptor, t->buf + begin + sofar,
-          MAX_STRING_LENGTH - (begin + sofar) - 1)) > 0)
+    if ((thisround = recv (t->descriptor, t->buf + begin + sofar,
+          MAX_STRING_LENGTH - (begin + sofar) - 1, 0)) > 0)
       sofar += thisround;
     else if (thisround < 0)
       if (GETERROR != EWOULDBLOCK) {
@@ -824,7 +846,10 @@ void close_socket (struct descriptor_data *d)
 
   close (d->descriptor);
   flush_queues (d);
+
+#ifndef WIN32
   if (d->descriptor == maxdesc)
+#endif
     --maxdesc;
 
   /* Forget snooping */
@@ -876,8 +901,15 @@ void close_socket (struct descriptor_data *d)
 
 void nonblock (int s)
 {
+#ifdef WIN32
+  unsigned long flags = 1;
+
+  if (ioctlsocket (s, FIONBIO, &flags)) {
+#else
   if (fcntl (s, F_SETFL, FNDELAY) == -1) {
+#endif
     perror ("Noblock");
+    WIN32CLEANUP
     exit (1);
   }
 }
@@ -910,7 +942,7 @@ void coma (int s)
 
   log ("Entering comatose state.");
 
-  sigprocmask (SIG_SETMASK, &mask, &currmask);
+  block_signals();
 
   while (descriptor_list)
     close_socket (descriptor_list);
@@ -920,17 +952,22 @@ void coma (int s)
     FD_SET (s, &input_set);
     if (select (64, &input_set, 0, 0, &timeout) < 0) {
       perror ("coma select");
+      WIN32CLEANUP
       exit (1);
     }
     if (FD_ISSET (s, &input_set)) {
       if (load () < 6) {
         log ("Leaving coma with visitor.");
-        sigprocmask (SIG_SETMASK, &zeromask, &currmask);
+        restore_signals();
         return;
       }
       if ((conn = new_connection (s)) >= 0) {
         write_to_descriptor (conn, COMA_SIGN);
+#if defined WIN32
+        Sleep (2000);
+#else
         sleep (2);
+#endif
         close (conn);
       }
     }
@@ -938,13 +975,14 @@ void coma (int s)
     tics = 1;
     if (workhours ()) {
       log ("Working hours collision during coma. Exit.");
+      WIN32CLEANUP
       exit (0);
     }
   }
   while (load () >= 6);
 
   log ("Leaving coma.");
-  sigprocmask (SIG_SETMASK, &zeromask, &currmask);
+  restore_signals();
 }
 
 
@@ -1136,3 +1174,5 @@ void act (char *str, int hide_invisible, struct char_data *ch,
       return;
   }
 }
+
+
