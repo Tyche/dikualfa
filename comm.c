@@ -7,18 +7,7 @@
 *  violating our copyright.
 ************************************************************************* */
 
-#include <errno.h>
-#include <stdio.h>
-#include <ctype.h>
-#include <sys/types.h>
-#include <sys/socket.h>
-#include <sys/wait.h>
-#include <netinet/in.h>
-#include <netdb.h>
-#include <string.h>
-#include <sys/time.h>
-#include <fcntl.h>
-#include <signal.h>
+#include "os.h"
 
 #include "structs.h"
 #include "utils.h"
@@ -52,7 +41,7 @@ struct descriptor_data *descriptor_list, *next_to_process;
 
 int lawful = 0;   /* work like the game regulator */
 int slow_death = 0;  /* Shut her down, Martha, she's sucking mud */
-int shutdown = 0;    /* clean shutdown */
+int shutdown_server = 0;    /* clean shutdown */
 int reboot = 0;      /* reboot the game after a shutdown */
 int no_specials = 0; /* Suppress ass. of special routines */
 
@@ -246,7 +235,7 @@ int game_loop(int s)
 
   opt_time.tv_usec = OPT_USEC;  /* Init time values */
   opt_time.tv_sec = 0;
-  gettimeofday(&last_time, (struct timeval *) 0);
+  gettimeofday(&last_time, NULL);
 
   maxdesc = s;
   avail_descs = getdtablesize() - 2; /* !! Change if more needed !! */
@@ -257,7 +246,7 @@ int game_loop(int s)
     sigmask(SIGVTALRM);
 
   /* Main loop */
-  while (!shutdown)
+  while (!shutdown_server)
   {
     /* Check what's happening out there */
     FD_ZERO(&input_set);
@@ -272,7 +261,7 @@ int game_loop(int s)
     }
 
     /* check out the time */
-    gettimeofday(&now, (struct timeval *) 0);
+    gettimeofday(&now, NULL);
     timespent = timediff(&now, &last_time);
     timeout = timediff(&opt_time, &timespent);
     last_time.tv_sec = now.tv_sec + timeout.tv_sec;
@@ -556,7 +545,7 @@ int init_socket(int port)
   sa.sin_family = hp->h_addrtype;
   sa.sin_port = htons(port);
   s = socket(AF_INET, SOCK_STREAM, 0);
-  if (s < 0)
+  if (s == INVALID_SOCKET)
   {
     perror("Init-socket");
     exit(1);
@@ -575,7 +564,7 @@ int init_socket(int port)
     perror("setsockopt LINGER");
     exit(1);
   }
-  if (bind(s, &sa, sizeof(sa), 0) < 0)
+  if (bind(s, (struct sockaddr*) &sa, (socklen_t)sizeof(sa)) < 0)
   {
     perror("bind");
     close(s);
@@ -598,10 +587,10 @@ int new_connection(int s)
   char buf[100];
 
   i = sizeof(isa);
-  getsockname(s, &isa, &i);
+  getsockname(s, (struct sockaddr*)&isa, (socklen_t*)&i);
 
 
-  if ((t = accept(s, &isa, &i)) < 0)
+  if ((t = accept(s, (struct sockaddr*)&isa, (socklen_t*)&i)) == INVALID_SOCKET)
   {
     perror("Accept");
     return(-1);
@@ -964,12 +953,12 @@ void nonblock(int s)
 
 
 #define COMA_SIGN \
-"\n\r\
-DikuMUD is currently inactive due to excessive load on the host machine.\n\r\
-Please try again later.\n\r\n
-\n\r\
-   Sadly,\n\r\
-\n\r\
+"\n\r \
+DikuMUD is currently inactive due to excessive load on the host machine.\n\r \
+Please try again later.\n\r \
+\n\r \
+   Sadly,\n\r \
+\n\r \
     the DikuMUD system operators\n\r\n\r"
 
 
