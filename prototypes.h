@@ -37,6 +37,11 @@ extern void update_pos (struct char_data *victim);
 extern void night_watchman (void);
 extern void page_string (struct descriptor_data *d, char *str, int keep_internal);
 
+/* signals.c */
+void signal_setup (void);
+void block_signals(void);
+void restore_signals(void);
+
 /* spec_assign.c */
 extern void assign_mobiles (void);
 extern void assign_objects (void);
@@ -55,6 +60,12 @@ extern void log (char *str);
 extern int dice (int number, int size);
 extern void sprinttype (int type, char *names[], char *result);
 extern void sprintbit (long vektor, char *names[], char *result);
+#if !defined MIN
+extern int MIN (int a, int b);
+#endif
+#if !defined MAX
+extern int MAX (int a, int b);
+#endif
 
 /* weather.c */
 extern void weather_and_time (int mode);
