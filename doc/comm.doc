@@ -136,4 +136,3 @@ act("$n gives you $p.", FALSE, ch, obj, vict, TO_VICT);
 act("$n puts $p in $s $O.", TRUE, ch, obj1, obj2, TO_ROOM);
 
 (eg: Jones puts a small sword in his sack.)
-

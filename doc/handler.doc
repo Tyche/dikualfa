@@ -77,4 +77,3 @@ struct obj_data *find_object_in_list_vis(struct char_data *ch, char *name,
 
 /*search the entire world for an object, and return a pointer  */
 struct obj_data *find_obj_vis(struct char_data *ch, char *name)
-

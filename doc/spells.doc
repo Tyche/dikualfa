@@ -83,4 +83,3 @@ bool affected_by_spell( struct char_data *ch, byte skill )
 This procedure will check if a character is affected by a spell (the
 SPELL_XXX constants are used). Returns FALSE if not, otherwise TRUE.
 
-

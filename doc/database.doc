@@ -387,4 +387,3 @@ be referenced from within the code itself, the function real_mobile
 (this is only of use when writing special routines). These functions are
 automatically called from read_object/read_mobile, depending on their 'type'
 parameter (see db.doc).
-

@@ -44,4 +44,3 @@ i mode 'mode' skal vaere 0,1 eller 2. Mode 1 og 2 giver en
 liste for hvert spillers equipment/inventory (men ikke 
 indholdets indhold!) Programmet tager hoejde for usynlighed etc.
 
-

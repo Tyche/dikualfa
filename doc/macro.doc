@@ -70,4 +70,3 @@ Returns str.
 int OUTSIDE(ch)
 
 Returns TRUE if ch is in an outdoor room.
-
