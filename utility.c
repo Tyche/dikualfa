@@ -18,7 +18,7 @@ int MIN (int a, int b)
 }
 #endif
 
-#if !defined MIN
+#if !defined MAX
 int MAX (int a, int b)
 {
   return a > b ? a : b;
@@ -28,7 +28,7 @@ int MAX (int a, int b)
 /* creates a random number in interval [from;to] */
 int number (int from, int to)
 {
-  return ((random () % (to - from + 1)) + from);
+  return ((RAND () % (to - from + 1)) + from);
 }
 
 
@@ -42,7 +42,7 @@ int dice (int number, int size)
   assert (size >= 1);
 
   for (r = 1; r <= number; r++)
-    sum += ((random () % size) + 1);
+    sum += ((RAND () % size) + 1);
   return (sum);
 }
 
@@ -202,3 +202,5 @@ struct time_info_data age (struct char_data *ch)
 
   return player_age;
 }
+
+
