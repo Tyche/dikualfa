@@ -3,18 +3,18 @@
 *  Usage: Procedures interpreting user command                            *
 ************************************************************************* */
 
-void command_interpreter (struct char_data *ch, char *argument);
-int search_block (char *arg, char **list, bool exact);
-int old_search_block (char *argument, int begin, int length, char **list,
+extern void command_interpreter (struct char_data *ch, char *argument);
+extern int search_block (char *arg, char **list, bool exact);
+extern int old_search_block (char *argument, int begin, int length, char **list,
   int mode);
-char lower (char c);
-void argument_interpreter (char *argument, char *first_arg, char *second_arg);
-char *one_argument (char *argument, char *first_arg);
-int fill_word (char *argument);
-void half_chop (char *string, char *arg1, char *arg2);
-void nanny (struct descriptor_data *d, char *arg);
-int is_abbrev (char *arg1, char *arg2);
-int is_number (char *str);
+extern char lower (char c);
+extern void argument_interpreter (char *argument, char *first_arg, char *second_arg);
+extern char *one_argument (char *argument, char *first_arg);
+extern int fill_word (char *argument);
+extern void half_chop (char *string, char *arg1, char *arg2);
+extern void nanny (struct descriptor_data *d, char *arg);
+extern int is_abbrev (char *arg1, char *arg2);
+extern int is_number (char *str);
 
 
 struct command_info {
