@@ -11,11 +11,11 @@ CFILES= comm.c act.comm.c act.informative.c act.movement.c act.obj1.c \
 	handler.c db.c interpreter.c utility.c spec_assign.c shop.c \
 	limits.c mobact.c fight.c modify.c weather.c spells1.c spells2.c \
 	spell_parser.c reception.c constants.c spec_procs.c signals.c \
-	board.c mar_fiz_maz.c magic.c changes.c
+	board.c mar_fiz_maz.c magic.c changes.c 
 # .o versions of above
 OFILES= $(CFILES:.c=.o)
 
-OTHERSTUFF= mail.c 
+OTHERSTUFF= mail.c os.c
 
 UTILITIES= insert_any.c repairgo.c list.c syntax_checker.c \
 	sign.c update.c delplay.c
