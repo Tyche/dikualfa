@@ -77,7 +77,6 @@ void zone_update (void);
 void affect_update (void);      /* In spells.c */
 void point_update (void);       /* In limits.c */
 void free_char (struct char_data *ch);
-void log (char *str);
 void mobile_activity (void);
 void string_add (struct descriptor_data *d, char *str);
 void perform_violence (void);
