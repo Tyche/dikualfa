@@ -210,7 +210,7 @@ void show_char_to_char (struct char_data *i, struct char_data *ch, int mode)
         strcat (buffer, GET_TITLE (i));
       } else {
         strcpy (buffer, i->player.short_descr);
-        CAP (buffer);
+        CAP (buffer);   /* This code has no effect */
       }
 
       if (IS_AFFECTED (i, AFF_INVISIBLE))
@@ -912,7 +912,7 @@ void do_help (struct char_data *ch, char *argument, int cmd)
         fseek (help_fl, help_index[mid].pos, 0);
         *buffer = '\0';
         for (;;) {
-          fgets (buf, 80, help_fl);
+          FGETS (buf, 80, help_fl);
           if (*buf == '#')
             break;
           strcat (buffer, buf);
