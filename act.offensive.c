@@ -180,7 +180,7 @@ void do_order (struct char_data *ch, char *argument, int cmd)
             /* make it easyer to use charmn */
             stop_follower (victim);
             if (IS_NPC (victim))
-              hit (victim, ch);
+              hit (victim, ch, 0);
           } else {
             act ("$n has an indifferent look.", FALSE, victim, 0, 0, TO_ROOM);
           }
@@ -205,7 +205,7 @@ void do_order (struct char_data *ch, char *argument, int cmd)
                 /* make it easyer to use charmn */
                 stop_follower (victim);
                 if (IS_NPC (victim))
-                  hit (victim, ch);
+                  hit (victim, ch, 0);
               } else {
                 act ("$n has an indifferent look.", FALSE, victim, 0, 0,
                   TO_ROOM);
