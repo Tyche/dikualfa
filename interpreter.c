@@ -12,6 +12,7 @@
 #include "db.h"
 #include "utils.h"
 #include "limits.h"
+#include "handler.h"
 #include "prototypes.h"
 
 #define COMMANDO(number,min_pos,pointer,min_level) {      \
