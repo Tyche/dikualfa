@@ -67,7 +67,7 @@ DATA= actions help_table news readme tinyworld.wld board.messages info \
 # Files in the standard distribution
 DISTFILES= $(CFILES) $(HEADERS) $(DOCS) $(DATA) $(UTILITIES) \
 	$(OTHERSTUFF) nightrun opstart readme INSTALL_NOTES \
-	makefile # makefile.bor makefile.dgm makefile.vc6 makefile.lcc 
+	makefile makefile.bor makefile.dgm makefile.vc6 makefile.lcc 
 
 !ifndef RELEASE
 RELEASE=dist
