@@ -4,7 +4,8 @@ same and maybe even the bugs.  Hopfully I didn't introduce any new ones.
 This release was compiled and tested on the following platforms:
 
 * Microsoft Windows XP Service Pack 2 
-  CYGWIN_NT-5.1 1.5.12(0.116/4/2) using gcc 3.3.3 (cygwin special)
+  CYGWIN_NT-5.1 1.5.18(0.132/4/2) using gcc 3.4.4 (cygming special)
+  CYGWIN_NT-5.1 1.5.12(0.116/4/2) using gcc 3.3.3 (cygming special)
   Borland C++ 5.5.1 for Win32 (free compiler release)
   Borland C++ 5.3 for Win32 (Builder v3.0)
   Digital Mars C/C++ Compiler Version 8.40.2n
