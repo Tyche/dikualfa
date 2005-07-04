@@ -8,6 +8,7 @@ This release was compiled and tested on the following platforms:
   Borland C++ 5.5.1 for Win32 (free compiler release)
   Borland C++ 5.3 for Win32 (Builder v3.0)
   Digital Mars C/C++ Compiler Version 8.40.2n
+  Microsoft Visual C/C++ v7.1 (Visual C++ Toolkit 2003)
   Microsoft Visual C/C++ v6.0
   Logiciels/Informatique lcc-win32 version 3.8 
 
@@ -48,11 +49,14 @@ Installation
     is in your path, then type 'make -f makefile.dgm'.
 
   * For Windows using Microsoft Visual C - ensure your Visual C bin directory
-    is in your path and your INCLUDE and LIBS environment variables are setup.
-    The vcvars32.bat file included with Visual C++ will do this.
-    Then type 'nmake -f makefile.vc6'
+    is in your path and your INCLUDE and LIBS environment variables are setup
+    correctly.
+    - With Visual C++ 6.0 you may need to run the vcvars32.bat file.
+    - With Visual C++ Toolkit 2003 and Platform SDK you may need to use both the
+      setenv.cmd and vsvars32.bat
+    Then type 'nmake -f makefile.vc'
     - To link with debugging information type 'set DEBUG=1' and then use
-      'nmake -f makefile.vc6'
+      'nmake -f makefile.vc'
 
   * For Windows using LCC - ensure the LCC bin directory is in your path, 
     then type 'make -f makefile.lcc'.  

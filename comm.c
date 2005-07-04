@@ -41,7 +41,7 @@ struct descriptor_data *descriptor_list, *next_to_process;
 int lawful = 0;                 /* work like the game regulator */
 int slow_death = 0;             /* Shut her down, Martha, she's sucking mud */
 int shutdown_server = 0;        /* clean shutdown */
-#if defined __FreeBSD__ 
+#if defined __FreeBSD__
 int greboot = 0;                /* reboot the game after a shutdown */
 #else
 int reboot = 0;                 /* reboot the game after a shutdown */
@@ -207,7 +207,7 @@ void run_the_game (int port)
   PROFILE (monitor (0);
     )
 
-#if defined __FreeBSD__ 
+#if defined __FreeBSD__
     if (greboot) {
 #else
     if (reboot) {
@@ -258,6 +258,7 @@ void game_loop (int s)
     FD_ZERO (&exc_set);
     FD_SET (s, &input_set);
 #ifdef WIN32
+    FD_ZERO (&dummy_set);
     FD_SET (s, &dummy_set);
 #endif
     for (point = descriptor_list; point; point = point->next) {
@@ -287,9 +288,9 @@ void game_loop (int s)
     }
 
 #ifdef WIN32   /* windows select demands a valid fd_set */
-    if (select (0, (fd_set *) 0, (fd_set *) 0, &dummy_set, &timeout) < 0) {
+    if (select (0, (fd_set *) 0, (fd_set *) 0, &dummy_set, &timeout) == SOCKET_ERROR) {
 #else
-    if (select (0, (fd_set *) 0, (fd_set *) 0, (fd_set *) 0, &timeout) < 0) {
+    if (select (0, (fd_set *) 0, (fd_set *) 0, (fd_set *) 0, &timeout) == SOCKET_ERROR) {
 #endif
       perror ("Select sleep");
       WIN32CLEANUP
