@@ -108,7 +108,6 @@ clean:
 	-@del *.tds *.map $(OFILES) $(TARGETS) $(OTARGETS) 2>NUL
 
 dist: 
-	cd ..
 	$(WINZIP) -pr diku-alfa-$(RELEASE).zip $(DISTFILES) 
 
 .c.obj:
