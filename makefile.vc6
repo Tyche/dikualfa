@@ -11,7 +11,7 @@ DEBUG_CFLAGS = /MTd /ZI /Od /FD /GZ /D " DEBUG"
 DEBUG_LFLAGS = /DEBUG /PDBTYPE:SEPT 
 LIBS= libcmtd.lib kernel32.lib ws2_32.lib 
 !else
-DEBUG_CFLAGS = /MT /Ot /Oy /Ob1 /Gs /Gf /Gy /D "NDEBUG" 
+DEBUG_CFLAGS = /MT /Ot /Oy /Ob1 /Gs /Gy /D "NDEBUG" 
 DEBUG_LFLAGS = 
 LIBS= libcmt.lib kernel32.lib ws2_32.lib 
 !endif
