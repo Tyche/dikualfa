@@ -54,20 +54,20 @@ int tics = 0;                   /* for extern checkpointing */
 int get_from_q (struct txt_q *queue, char *dest);
 /* write_to_q is in comm.h for the macro */
 void run_the_game (int port);
-void game_loop (int s);
+void game_loop (SOCKET s);
 int init_socket (int port);
-int new_connection (int s);
-int new_descriptor (int s);
+int new_connection (SOCKET s);
+int new_descriptor (SOCKET s);
 int process_output (struct descriptor_data *t);
 int process_input (struct descriptor_data *t);
 void close_sockets (int s);
 void close_socket (struct descriptor_data *d);
 struct timeval timediff (struct timeval *a, struct timeval *b);
 void flush_queues (struct descriptor_data *d);
-void nonblock (int s);
+void nonblock (SOCKET s);
 void parse_name (struct descriptor_data *desc, char *arg);
 int load (void);
-void coma (int s);
+void coma (SOCKET s);
 
 
 /* extern fcnts */
@@ -83,7 +83,7 @@ void string_add (struct descriptor_data *d, char *str);
 void perform_violence (void);
 void stop_fighting (struct char_data *ch);
 void show_string (struct descriptor_data *d, char *input);
-void gr (int s);
+void gr (SOCKET s);
 
 void check_reboot (void);
 
@@ -226,7 +226,7 @@ void run_the_game (int port)
 
 
 /* Accept new connects, relay commands, and call 'heartbeat-functs' */
-void game_loop (int s)
+void game_loop (SOCKET s)
 {
   int tmp_room, old_len;
   fd_set input_set, output_set, exc_set, dummy_set;
@@ -573,7 +573,7 @@ int init_socket (int port)
 
 
 
-int new_connection (int s)
+int new_connection (SOCKET s)
 {
   struct sockaddr_in isa;
   /* struct sockaddr peer; */
@@ -610,7 +610,7 @@ int new_connection (int s)
 
 
 
-int new_descriptor (int s)
+int new_descriptor (SOCKET s)
 {
   int desc;
   struct descriptor_data *newd;
@@ -912,7 +912,7 @@ void close_socket (struct descriptor_data *d)
 
 
 
-void nonblock (int s)
+void nonblock (SOCKET s)
 {
 #ifdef WIN32
   unsigned long flags = 1;
@@ -941,7 +941,7 @@ Please try again later.\n\r \
 
 
 /* sleep while the load is too high */
-void coma (int s)
+void coma (SOCKET s)
 {
   fd_set input_set;
   static struct timeval timeout = {

@@ -31,34 +31,34 @@ void hit (struct char_data *ch, struct char_data *victim, int type);
 void gain_exp (struct char_data *ch, int gain);
 char *str_dup (char *source);
 
-void cast_burning_hands (byte level, struct char_data *ch, char *arg,
+void cast_burning_hands (int level, struct char_data *ch, char *arg,
   int type, struct char_data *victim, struct obj_data *tar_obj);
-void cast_chill_touch (byte level, struct char_data *ch, char *arg, int type,
+void cast_chill_touch (int level, struct char_data *ch, char *arg, int type,
   struct char_data *victim, struct obj_data *tar_obj);
-void cast_colour_spray (byte level, struct char_data *ch, char *arg, int type,
+void cast_colour_spray (int level, struct char_data *ch, char *arg, int type,
   struct char_data *victim, struct obj_data *tar_obj);
-void cast_energy_drain (byte level, struct char_data *ch, char *arg, int type,
+void cast_energy_drain (int level, struct char_data *ch, char *arg, int type,
   struct char_data *victim, struct obj_data *tar_obj);
-void cast_fireball (byte level, struct char_data *ch, char *arg, int type,
+void cast_fireball (int level, struct char_data *ch, char *arg, int type,
   struct char_data *victim, struct obj_data *tar_obj);
-void cast_magic_missile (byte level, struct char_data *ch, char *arg,
+void cast_magic_missile (int level, struct char_data *ch, char *arg,
   int type, struct char_data *victim, struct obj_data *tar_obj);
-void cast_blindness (byte level, struct char_data *ch, char *arg, int type,
+void cast_blindness (int level, struct char_data *ch, char *arg, int type,
   struct char_data *tar_ch, struct obj_data *tar_obj);
-void cast_curse (byte level, struct char_data *ch, char *arg, int type,
+void cast_curse (int level, struct char_data *ch, char *arg, int type,
   struct char_data *tar_ch, struct obj_data *tar_obj);
-void cast_sleep (byte level, struct char_data *ch, char *arg, int type,
+void cast_sleep (int level, struct char_data *ch, char *arg, int type,
   struct char_data *tar_ch, struct obj_data *tar_obj);
 /* Dragon breath .. */
-void cast_fire_breath (byte level, struct char_data *ch, char *arg, int type,
+void cast_fire_breath (int level, struct char_data *ch, char *arg, int type,
   struct char_data *tar_ch, struct obj_data *tar_obj);
-void cast_frost_breath (byte level, struct char_data *ch, char *arg, int type,
+void cast_frost_breath (int level, struct char_data *ch, char *arg, int type,
   struct char_data *tar_ch, struct obj_data *tar_obj);
-void cast_acid_breath (byte level, struct char_data *ch, char *arg, int type,
+void cast_acid_breath (int level, struct char_data *ch, char *arg, int type,
   struct char_data *tar_ch, struct obj_data *tar_obj);
-void cast_gas_breath (byte level, struct char_data *ch, char *arg, int type,
+void cast_gas_breath (int level, struct char_data *ch, char *arg, int type,
   struct char_data *tar_ch, struct obj_data *tar_obj);
-void cast_lightning_breath (byte level, struct char_data *ch, char *arg,
+void cast_lightning_breath (int level, struct char_data *ch, char *arg,
   int type, struct char_data *tar_ch, struct obj_data *tar_obj);
 
 
@@ -648,7 +648,7 @@ void npc_steal (struct char_data *ch, struct char_data *victim)
 
 int snake (struct char_data *ch, int cmd, char *arg)
 {
-  void cast_poison (byte level, struct char_data *ch, char *arg, int type,
+  void cast_poison (int level, struct char_data *ch, char *arg, int type,
     struct char_data *tar_ch, struct obj_data *tar_obj);
 
   if (cmd)

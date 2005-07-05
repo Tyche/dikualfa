@@ -793,7 +793,7 @@ void hit (struct char_data *ch, struct char_data *victim, int type)
   /* The lower AC, the better                      */
 
   if (!IS_NPC (ch))
-    calc_thaco = thaco[GET_CLASS (ch) - 1][GET_LEVEL (ch)];
+    calc_thaco = thaco[GET_CLASS (ch) - 1][(int)GET_LEVEL (ch)];
   else
     /* THAC0 for monsters is set in the HitRoll */
     calc_thaco = 20;
@@ -842,7 +842,7 @@ void hit (struct char_data *ch, struct char_data *victim, int type)
     dam = MAX (1, dam);         /* Not less than 0 damage */
 
     if (type == SKILL_BACKSTAB) {
-      dam *= backstab_mult[GET_LEVEL (ch)];
+      dam *= backstab_mult[(int)GET_LEVEL (ch)];
       damage (ch, victim, dam, SKILL_BACKSTAB);
     } else
       damage (ch, victim, dam, w_type);

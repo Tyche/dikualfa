@@ -23,32 +23,32 @@ extern struct char_data *character_list;
 
 /* Extern functions */
 
-void spell_burning_hands (byte level, struct char_data *ch,
+void spell_burning_hands (int level, struct char_data *ch,
   struct char_data *victim, struct obj_data *obj);
-void spell_call_lightning (byte level, struct char_data *ch,
+void spell_call_lightning (int level, struct char_data *ch,
   struct char_data *victim, struct obj_data *obj);
-void spell_chill_touch (byte level, struct char_data *ch,
+void spell_chill_touch (int level, struct char_data *ch,
   struct char_data *victim, struct obj_data *obj);
-void spell_shocking_grasp (byte level, struct char_data *ch,
+void spell_shocking_grasp (int level, struct char_data *ch,
   struct char_data *victim, struct obj_data *obj);
-void spell_colour_spray (byte level, struct char_data *ch,
+void spell_colour_spray (int level, struct char_data *ch,
   struct char_data *victim, struct obj_data *obj);
-void spell_earthquake (byte level, struct char_data *ch,
+void spell_earthquake (int level, struct char_data *ch,
   struct char_data *victim, struct obj_data *obj);
-void spell_energy_drain (byte level, struct char_data *ch,
+void spell_energy_drain (int level, struct char_data *ch,
   struct char_data *victim, struct obj_data *obj);
-void spell_fireball (byte level, struct char_data *ch,
+void spell_fireball (int level, struct char_data *ch,
   struct char_data *victim, struct obj_data *obj);
-void spell_harm (byte level, struct char_data *ch,
+void spell_harm (int level, struct char_data *ch,
   struct char_data *victim, struct obj_data *obj);
-void spell_lightning_bolt (byte level, struct char_data *ch,
+void spell_lightning_bolt (int level, struct char_data *ch,
   struct char_data *victim, struct obj_data *obj);
-void spell_magic_missile (byte level, struct char_data *ch,
+void spell_magic_missile (int level, struct char_data *ch,
   struct char_data *victim, struct obj_data *obj);
 
 
 
-void cast_burning_hands (byte level, struct char_data *ch, char *arg,
+void cast_burning_hands (int level, struct char_data *ch, char *arg,
   int type, struct char_data *victim, struct obj_data *tar_obj)
 {
   switch (type) {
@@ -62,7 +62,7 @@ void cast_burning_hands (byte level, struct char_data *ch, char *arg,
 }
 
 
-void cast_call_lightning (byte level, struct char_data *ch, char *arg,
+void cast_call_lightning (int level, struct char_data *ch, char *arg,
   int type, struct char_data *victim, struct obj_data *tar_obj)
 {
   extern struct weather_data weather_info;
@@ -104,7 +104,7 @@ void cast_call_lightning (byte level, struct char_data *ch, char *arg,
 }
 
 
-void cast_chill_touch (byte level, struct char_data *ch, char *arg, int type,
+void cast_chill_touch (int level, struct char_data *ch, char *arg, int type,
   struct char_data *victim, struct obj_data *tar_obj)
 {
   switch (type) {
@@ -118,7 +118,7 @@ void cast_chill_touch (byte level, struct char_data *ch, char *arg, int type,
 }
 
 
-void cast_shocking_grasp (byte level, struct char_data *ch, char *arg,
+void cast_shocking_grasp (int level, struct char_data *ch, char *arg,
   int type, struct char_data *victim, struct obj_data *tar_obj)
 {
   switch (type) {
@@ -132,7 +132,7 @@ void cast_shocking_grasp (byte level, struct char_data *ch, char *arg,
 }
 
 
-void cast_colour_spray (byte level, struct char_data *ch, char *arg, int type,
+void cast_colour_spray (int level, struct char_data *ch, char *arg, int type,
   struct char_data *victim, struct obj_data *tar_obj)
 {
   switch (type) {
@@ -156,7 +156,7 @@ void cast_colour_spray (byte level, struct char_data *ch, char *arg, int type,
 }
 
 
-void cast_earthquake (byte level, struct char_data *ch, char *arg, int type,
+void cast_earthquake (int level, struct char_data *ch, char *arg, int type,
   struct char_data *victim, struct obj_data *tar_obj)
 {
   switch (type) {
@@ -172,7 +172,7 @@ void cast_earthquake (byte level, struct char_data *ch, char *arg, int type,
 }
 
 
-void cast_energy_drain (byte level, struct char_data *ch, char *arg, int type,
+void cast_energy_drain (int level, struct char_data *ch, char *arg, int type,
   struct char_data *victim, struct obj_data *tar_obj)
 {
   switch (type) {
@@ -205,7 +205,7 @@ void cast_energy_drain (byte level, struct char_data *ch, char *arg, int type,
 }
 
 
-void cast_fireball (byte level, struct char_data *ch, char *arg, int type,
+void cast_fireball (int level, struct char_data *ch, char *arg, int type,
   struct char_data *victim, struct obj_data *tar_obj)
 {
   switch (type) {
@@ -230,7 +230,7 @@ void cast_fireball (byte level, struct char_data *ch, char *arg, int type,
 }
 
 
-void cast_harm (byte level, struct char_data *ch, char *arg, int type,
+void cast_harm (int level, struct char_data *ch, char *arg, int type,
   struct char_data *victim, struct obj_data *tar_obj)
 {
   switch (type) {
@@ -254,7 +254,7 @@ void cast_harm (byte level, struct char_data *ch, char *arg, int type,
 }
 
 
-void cast_lightning_bolt (byte level, struct char_data *ch, char *arg,
+void cast_lightning_bolt (int level, struct char_data *ch, char *arg,
   int type, struct char_data *victim, struct obj_data *tar_obj)
 {
   switch (type) {
@@ -279,7 +279,7 @@ void cast_lightning_bolt (byte level, struct char_data *ch, char *arg,
 }
 
 
-void cast_magic_missile (byte level, struct char_data *ch, char *arg,
+void cast_magic_missile (int level, struct char_data *ch, char *arg,
   int type, struct char_data *victim, struct obj_data *tar_obj)
 {
   switch (type) {

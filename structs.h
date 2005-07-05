@@ -666,7 +666,7 @@ struct snoop_data {
 };
 
 struct descriptor_data {
-  int descriptor;               /* file descriptor for socket */
+  SOCKET descriptor;               /* file descriptor for socket */
   char host[50];                /* hostname                   */
   char pwd[12];                 /* password                   */
   int pos;                      /* position in player-file    */

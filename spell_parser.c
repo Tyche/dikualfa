@@ -467,7 +467,7 @@ bool saves_spell (struct char_data *ch, sh_int save_type)
   save = ch->specials.apply_saving_throw[save_type];
 
   if (!IS_NPC (ch)) {
-    save += saving_throws[GET_CLASS (ch) - 1][save_type][GET_LEVEL (ch)];
+    save += saving_throws[GET_CLASS (ch) - 1][save_type][(int)GET_LEVEL (ch)];
     if (GET_LEVEL (ch) > 20)
       return (TRUE);
   }

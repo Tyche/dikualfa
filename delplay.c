@@ -50,7 +50,7 @@ void del (char *filename, int name)
   }
 
   /* read the last player */
-  fseek (fl, -sizeof (player), 2);
+  fseek (fl, -1 * (int)sizeof (player), 2);
   fread (&player, sizeof (player), 1, fl);
   fseek (fl, pos * sizeof (player), 0);
   fwrite (&player, sizeof (player), 1, fl);

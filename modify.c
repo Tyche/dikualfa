@@ -77,7 +77,7 @@ void string_add (struct descriptor_data *d, char *str)
     }
 
   if (!(*d->str)) {
-    if (strlen (str) > d->max_str) {
+    if ((int)strlen (str) > d->max_str) {
       send_to_char ("String too long - Truncated.\n\r", d->character);
       *(str + d->max_str) = '\0';
       terminator = 1;
@@ -85,7 +85,7 @@ void string_add (struct descriptor_data *d, char *str)
     CREATE (*d->str, char, strlen (str) + 3);
     strcpy (*d->str, str);
   } else {
-    if (strlen (str) + strlen (*d->str) > d->max_str) {
+    if ((int)strlen (str) + (int)strlen (*d->str) > d->max_str) {
       send_to_char ("String too long. Last line skipped.\n\r", d->character);
       terminator = 1;
     } else {
@@ -304,7 +304,7 @@ void do_string (struct char_data *ch, char *arg, int cmd)
   }
 
   if (*string) {                /* there was a string in the argument array */
-    if (strlen (string) > length[field - 1]) {
+    if ((int)strlen (string) > length[field - 1]) {
       send_to_char ("String too long - truncated.\n\r", ch);
       *(string + length[field - 1]) = '\0';
     }
@@ -705,7 +705,7 @@ void coma (void)
 
 
 /* emulate the game regulator */
-void gr (int s)
+void gr (SOCKET s)
 {
   char *txt = 0, buf[1024];
   int ld = 0;

@@ -3,11 +3,11 @@
 #include "os.h"
 
 void watch (int port, char *text);
-void wave (int sock, char *text);
-int new_connection (int s);
+void wave (SOCKET sock, char *text);
+int new_connection (SOCKET s);
 int init_socket (int port);
-int write_to_descriptor (int desc, char *txt);
-void nonblock (int s);
+int write_to_descriptor (SOCKET desc, char *txt);
+void nonblock (SOCKET s);
 
 
 
@@ -55,7 +55,7 @@ int main (int argc, char **argv)
 
 void watch (int port, char *text)
 {
-  int mother;
+  SOCKET mother;
   fd_set input_set;
 
   mother = init_socket (port);
@@ -75,7 +75,7 @@ void watch (int port, char *text)
 
 
 
-void wave (int sock, char *text)
+void wave (SOCKET sock, char *text)
 {
   int s;
 
@@ -93,7 +93,7 @@ void wave (int sock, char *text)
 
 
 
-int new_connection (int s)
+int new_connection (SOCKET s)
 {
   struct sockaddr_in isa;
   /* struct sockaddr peer; */
@@ -133,7 +133,7 @@ int new_connection (int s)
 
 int init_socket (int port)
 {
-  int s;
+  SOCKET s;
   char *opt;
   char hostname[1024];
   struct sockaddr_in sa;
@@ -150,7 +150,7 @@ int init_socket (int port)
   sa.sin_family = hp->h_addrtype;
   sa.sin_port = htons (port);
   s = socket (AF_INET, SOCK_STREAM, 0);
-  if (s < 0) {
+  if (s == INVALID_SOCKET) {
     perror ("Init-socket");
     exit (1);
   }
@@ -178,7 +178,7 @@ int init_socket (int port)
 
 
 
-int write_to_descriptor (int desc, char *txt)
+int write_to_descriptor (SOCKET desc, char *txt)
 {
   int sofar, thisround, total;
 
@@ -201,7 +201,7 @@ int write_to_descriptor (int desc, char *txt)
 
 
 
-void nonblock (int s)
+void nonblock (SOCKET s)
 {
 #ifdef WIN32
   unsigned long flags = 1;

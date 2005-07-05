@@ -85,6 +85,8 @@ char * fgets_win (char *buf, int n, FILE * fp);
 #include <crypt.h>
 #define GETERROR  errno
 #define INVALID_SOCKET -1       /* 0 on Windows */
+#define SOCKET_ERROR -1
+#define SOCKET int
 #define WIN32STARTUP
 #define WIN32CLEANUP
 #define RAND random

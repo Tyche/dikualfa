@@ -74,6 +74,9 @@ sign : sign.o
 clean:
 	-rm -f *.d $(OFILES) $(TARGETS) $(OTARGETS) 
 
+splint : 
+	-splint -warnposix -weak *.c > splint.log
+
 dist: 
 	ln -s ./ diku-alfa
 	tar czvf diku-alfa-$(RELEASE).tar.gz $(PDIST) 
@@ -94,7 +97,7 @@ OBJDEPENDS := $(OFILES) delplay.o list.o
 #   sed:    add trailing colons
 %.o: %.c
 	$(CC) -c $(CFLAGS) $*.c -o $*.o 
-	$(CC) -MM $(CFLAGS) $*.c > $*.d
+	@$(CC) -MM $(CFLAGS) $*.c > $*.d
 	@mv -f $*.d $*.d.tmp
 	@sed -e 's|.*:|$*.o:|' < $*.d.tmp > $*.d
 	@sed -e 's/.*://' -e 's/\\$$//' < $*.d.tmp | fmt -1 | \

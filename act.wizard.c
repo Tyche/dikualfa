@@ -762,7 +762,7 @@ void do_stat (struct char_data *ch, char *argument, int cmd)
           sprintf (buf, "Spell : '%s'\n\r", spells[aff->type - 1]);
           send_to_char (buf, ch);
           sprintf (buf, "     Modifies %s by %d points\n\r",
-            apply_types[aff->location], aff->modifier);
+            apply_types[(int)aff->location], aff->modifier);
           send_to_char (buf, ch);
           sprintf (buf, "     Expires in %3d hours, Bits set ",
             aff->duration);
@@ -1286,9 +1286,9 @@ void do_advance (struct char_data *ch, char *argument, int cmd)
     return;
   }
 
-  if (GET_LEVEL (victim) == 0)
+  if (GET_LEVEL (victim) == 0) {
     adv = 1;
-  else if (!*level) {
+  } else if (!*level) {
     send_to_char ("You must supply a level number.\n\r", ch);
     return;
   } else {
@@ -1296,7 +1296,8 @@ void do_advance (struct char_data *ch, char *argument, int cmd)
       send_to_char ("Second argument must be a positive integer.\n\r", ch);
       return;
     }
-    if ((newlevel = atoi (level)) <= GET_LEVEL (victim)) {
+    newlevel = atoi (level);
+    if (newlevel <= GET_LEVEL (victim)) {
       send_to_char ("Can't dimish a players status (yet).\n\r", ch);
       return;
     }
@@ -1328,7 +1329,7 @@ void do_advance (struct char_data *ch, char *argument, int cmd)
     "l slightly\n\rdifferent.", FALSE, ch, 0, victim, TO_VICT);
 
   sprintf (buf, "%s advances %s to level %d.", GET_NAME (ch),
-    GET_NAME (victim), newlevel);  /* newlevel can be uninitialized */
+    GET_NAME (victim), adv + GET_LEVEL (victim));
   log (buf);
 
   if (GET_LEVEL (victim) == 0) {
