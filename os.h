@@ -9,7 +9,6 @@
   This source code copyright (C) 2004,2005 by Jon A. Lambert
   All rights reserved.
 
-  Released under the same terms of DikuMud
 */
 
 #ifndef OS_H

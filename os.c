@@ -9,7 +9,6 @@
   This source code copyright (C) 2005 by Jon A. Lambert
   All rights reserved.
 
-  Released under the same terms of DikuMud
 */
 
 #include "os.h"
@@ -52,13 +51,12 @@ char * fgets_win (char *buf, int n, FILE * fp)
   Not implemented in windows, although all the structural
   support is found in winsock.h
 
-  \remarks
-   This could use the finer granularity of GetSystemTime.
  */
 void gettimeofday (struct timeval *tp, struct timezone *tzp)
 {
   tp->tv_sec = time (NULL);
-  tp->tv_usec = 0;
+  tp->tv_usec = (GetTickCount() % 1000) * 1000;
 }
+
 #endif
 
