@@ -241,7 +241,7 @@ void do_insult (struct char_data *ch, char *argument, int cmd)
         sprintf (buf, "You insult %s.\n\r", GET_NAME (victim));
         send_to_char (buf, ch);
 
-        switch (RAND () % 3) {
+        switch (OS_RAND () % 3) {
         case 0:{
             if (GET_SEX (ch) == SEX_MALE) {
               if (GET_SEX (victim) == SEX_MALE)

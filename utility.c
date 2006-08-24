@@ -28,7 +28,7 @@ int MAX (int a, int b)
 /* creates a random number in interval [from;to] */
 int number (int from, int to)
 {
-  return ((RAND () % (to - from + 1)) + from);
+  return ((OS_RAND () % (to - from + 1)) + from);
 }
 
 
@@ -42,7 +42,7 @@ int dice (int number, int size)
   assert (size >= 1);
 
   for (r = 1; r <= number; r++)
-    sum += ((RAND () % size) + 1);
+    sum += ((OS_RAND () % size) + 1);
   return (sum);
 }
 

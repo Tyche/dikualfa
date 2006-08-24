@@ -159,7 +159,7 @@ int main (int argc, char **argv)
   sprintf (buf, "Using %s as data directory.", dir);
   log (buf);
 
-  SRAND (time (0));
+  OS_SRAND (time (0));
   WIN32STARTUP
   run_the_game (port);
   WIN32CLEANUP
