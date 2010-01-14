@@ -538,7 +538,7 @@ int init_socket (int port)
     exit (1);
   }
   sa.sin_family = hp->h_addrtype;
-  sa.sin_port = htons (port);
+  sa.sin_port = htons ((unsigned short) port);
   s = socket (AF_INET, SOCK_STREAM, 0);
   if (s == INVALID_SOCKET) {
     perror ("Init-socket");

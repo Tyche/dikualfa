@@ -97,7 +97,7 @@ int strn_cmp (char *arg1, char *arg2, int n)
 /* writes a string to the log */
 void log (char *str)
 {
-  long ct;
+  time_t ct;
   char *tmstr;
 
   ct = time (0);

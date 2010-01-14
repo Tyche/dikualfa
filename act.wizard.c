@@ -930,7 +930,7 @@ void do_switch (struct char_data *ch, char *argument, int cmd)
 
 void do_return (struct char_data *ch, char *argument, int cmd)
 {
-  static char arg[MAX_STRING_LENGTH];
+//  static char arg[MAX_STRING_LENGTH];
   char buf[70];
 
   if (!ch->desc)

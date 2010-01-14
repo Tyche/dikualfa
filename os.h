@@ -142,6 +142,9 @@ extern int re_exec (char *);
 #define OS_RAND rand
 #define OS_SRAND srand
 
+#if defined __DMC__
+#define snprintf _snprintf
+#endif
 #if defined _MSC_VER
 #define stat _stat
 #define mkdir _mkdir
@@ -170,6 +173,10 @@ extern void gettimeofday (struct timeval *tp, struct timezone *tzp);
 extern char *crypt (char *pw, char *salt);
 #define FGETS fgets_win
 extern char *fgets_win (char *buf, int n, FILE * fp);
+
+#if defined __TINYC__
+#define isascii __isascii
+#endif
 
 /*-----------------------------------------------------------------------*/
 /* UNIX DEFINITION SECTION                                               */

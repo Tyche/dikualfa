@@ -546,6 +546,7 @@ void check_objects (FILE * fl)
   struct extra_descr_data *new_descr;
 
   old_virtual = -1;
+  virtual_nr = 0;
 
   rewind (fl);
 

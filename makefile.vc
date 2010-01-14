@@ -3,11 +3,11 @@
 #
 CC = cl
 LD = cl
-WINZIP = C:\apps\Winzip\wzzip
+WINZIP = C:\Applications\Winzip\wzzip
 
 # Compiler directives for debugging
 !ifdef DEBUG
-DEBUG_CFLAGS = /MTd /ZI /Od /FD /GZ /D " DEBUG" 
+DEBUG_CFLAGS = /MTd /ZI /Od /FD /D " DEBUG" 
 DEBUG_LFLAGS = /DEBUG /PDBTYPE:SEPT 
 LIBS= libcmtd.lib kernel32.lib ws2_32.lib 
 !else
@@ -17,7 +17,7 @@ LIBS= libcmt.lib kernel32.lib ws2_32.lib
 !endif
 
 DEFS= /D "WIN32" /D "WIN32_LEAN_AND_MEAN" /D "_CONSOLE" /D "_MBCS"   
-OPTIM= /nologo /GX /W1 $(DEBUG_CFLAGS) /G$(PROCESSOR_LEVEL) 
+OPTIM= /nologo /EHsc /W1 $(DEBUG_CFLAGS) 
 
 CFLAGS= $(OPTIM) $(DEFS)
 LFLAGS = /link /NOLOGO /NODEFAULTLIB /SUBSYSTEM:CONSOLE $(DEBUG_LFLAGS) 
@@ -101,7 +101,7 @@ sign.exe : sign.obj
 clean:                                                                        
         del *.pdb *.ilk $(OFILES) $(TARGETS) $(OTARGETS) 2>NUL              
                                                                               
-dist: $(DISTFILES)
+dist: # $(DISTFILES)
 	cd ..
 	$(WINZIP) -pr diku-alfa-$(RELEASE).zip $(DISTFILES) 
 

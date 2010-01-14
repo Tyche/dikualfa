@@ -22,7 +22,7 @@ void signal_setup (void)
   struct timeval interval;
 #endif
 
-#if !defined __DMC__ && !defined _MSC_VER && !defined __LCC__
+#if !defined __DMC__ && !defined _MSC_VER && !defined __LCC__ && !defined __TINYC__
   signal (SIGUSR2, shutdown_request);
 #endif
 
@@ -96,7 +96,7 @@ void block_signals(void)
 {
   signal (SIGINT, SIG_IGN);
   signal (SIGTERM, SIG_IGN);
-#if !defined __DMC__ && !defined _MSC_VER && !defined __LCC__
+#if !defined __DMC__ && !defined _MSC_VER && !defined __LCC__ && !defined __TINYC__
   signal (SIGUSR1, SIG_IGN);
   signal (SIGUSR2, SIG_IGN);
 #endif
@@ -114,7 +114,7 @@ void restore_signals(void)
 {
   signal (SIGINT, SIG_DFL);
   signal (SIGTERM, SIG_DFL);
-#if !defined __DMC__ && !defined _MSC_VER && !defined __LCC__
+#if !defined __DMC__ && !defined _MSC_VER && !defined __LCC__ && !defined __TINYC__
   signal (SIGUSR1, SIG_DFL);
   signal (SIGUSR2, SIG_DFL);
 #endif

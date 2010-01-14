@@ -1225,7 +1225,7 @@ static char *pmatch (char *lp, CHAR * ap)
       }
       return 0;
     default:
-      re_fail ("re_exec: bad nfa.", op);
+      re_fail ("re_exec: bad nfa.", (CHAR)op);
       return 0;
     }
   return lp;

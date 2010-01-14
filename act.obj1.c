@@ -446,9 +446,9 @@ void do_put (struct char_data *ch, char *argument, int cmd)
 /*                obj_to_char(sub_object,ch);do not rearrange order... */
                 } else {
                   obj_from_char (obj_object);
-                  /* Do we need obj_from_room???(sub_object,....); */
+                  /* Do we need obj_from_room? (sub_object,....); */
                   obj_to_obj (obj_object, sub_object);
-                  /* Dow we need obj_to_room???(sub_object,ch);    */
+                  /* Do we need obj_to_room? (sub_object,ch);    */
                 }
 
                 act ("$n puts $p in $s $P", TRUE, ch, obj_object, sub_object,
