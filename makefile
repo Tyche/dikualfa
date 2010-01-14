@@ -1,7 +1,14 @@
 # DikuMUD makefile 
 CC = gcc 
+#CC = gcc-3 
+#CC = gcc-4 
 CFLAGS = -g -O2 -pipe -Wall -W -Wno-parentheses -Wno-unused -fno-builtin-log
 LIBS= -lcrypt
+
+# The suffix appended to executables.  
+# This should be set for Cygwin and Windows.
+EXE = .exe
+#EXE =
 
 HEADERS = comm.h db.h handler.h interpreter.h limits.h maildef.h \
 	os.h spells.h structs.h utils.h prototypes.h 
@@ -40,35 +47,35 @@ DISTFILES= $(CFILES) $(HEADERS) $(PDOCS) $(PDATA) $(UTILITIES) \
 PDIST= $(patsubst %,diku-alfa/%,$(DISTFILES))
 RELEASE=dist
 
-TARGETS= dmserver list delplay insert_any repairgo \
-	syntax_checker update sign
+TARGETS= dmserver$(EXE) list$(EXE) delplay$(EXE) insert_any$(EXE) repairgo$(EXE) \
+	syntax_checker$(EXE) update$(EXE) sign$(EXE)
 OTARGETS=  list.o delplay.o insert_any.o repairgo.o syntax_checker.o \
 	update.o sign.o	
 
 all: $(TARGETS)
 
-dmserver : $(OFILES)
+dmserver$(EXE) : $(OFILES)
 	$(CC) $(CFLAGS) -o dmserver $(OFILES) $(LIBS)
 
-list : list.o
+list$(EXE) : list.o
 	$(CC) $(CFLAGS) -o list list.o
 	
-delplay : delplay.o
+delplay$(EXE) : delplay.o
 	$(CC) $(CFLAGS) -o delplay delplay.o
 
-insert_any : insert_any.o
+insert_any$(EXE) : insert_any.o
 	$(CC) $(CFLAGS) -o insert_any insert_any.o
 
-repairgo : repairgo.o
+repairgo$(EXE) : repairgo.o
 	$(CC) $(CFLAGS) -o repairgo repairgo.o
 
-syntax_checker : syntax_checker.o
+syntax_checker$(EXE) : syntax_checker.o
 	$(CC) $(CFLAGS) -o syntax_checker syntax_checker.o
 
-update : update.o
+update$(EXE) : update.o
 	$(CC) $(CFLAGS) -o update update.o
 
-sign : sign.o
+sign$(EXE) : sign.o
 	$(CC) $(CFLAGS) -o sign sign.o
 
 clean:
