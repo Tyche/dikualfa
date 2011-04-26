@@ -97,7 +97,11 @@ int new_connection (SOCKET s)
 {
   struct sockaddr_in isa;
   /* struct sockaddr peer; */
+#ifdef WIN32
   int i;
+#else
+  socklen_t i;
+#endif
   int t;
   char buf[100];
 

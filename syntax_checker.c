@@ -658,7 +658,7 @@ char *fread_string (FILE * fl)
     } else
       strcat (buf, tmp);
 
-    for (point = buf + strlen (buf) - 2; point >= buf && isspace (*point);
+    for (point = buf + strlen (buf) - 2; point >= buf && isspace ((int)*point);
       point--);
     if (flag = (*point == '~'))
       if (*(buf + strlen (buf) - 3) == '\n') {

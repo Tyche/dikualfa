@@ -156,7 +156,7 @@ void do_at (struct char_data *ch, char *argument, int cmd)
   }
 
 
-  if (isdigit (*loc_str)) {
+  if (isdigit ((int)*loc_str)) {
     loc_nr = atoi (loc_str);
     for (location = 0; location <= top_of_world; location++)
       if (world[location].number == loc_nr)
@@ -216,7 +216,7 @@ void do_goto (struct char_data *ch, char *argument, int cmd)
   }
 
 
-  if (isdigit (*buf)) {
+  if (isdigit ((int)*buf)) {
     loc_nr = atoi (buf);
     for (location = 0; location <= top_of_world; location++)
       if (world[location].number == loc_nr)
@@ -1010,7 +1010,7 @@ void do_load (struct char_data *ch, char *argument, int cmd)
 
   argument_interpreter (argument, type, num);
 
-  if (!*type || !*num || !isdigit (*num)) {
+  if (!*type || !*num || !isdigit ((int)*num)) {
     send_to_char ("Syntax:\n\rload <'char' | 'obj'> <number>.\n\r", ch);
     return;
   }
@@ -1292,7 +1292,7 @@ void do_advance (struct char_data *ch, char *argument, int cmd)
     send_to_char ("You must supply a level number.\n\r", ch);
     return;
   } else {
-    if (!isdigit (*level)) {
+    if (!isdigit ((int)*level)) {
       send_to_char ("Second argument must be a positive integer.\n\r", ch);
       return;
     }

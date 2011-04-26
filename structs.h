@@ -236,7 +236,7 @@ struct room_data {
   struct room_direction_data *dir_option[6];    /* Directions           */
   sh_int room_flags;            /* DEATH,DARK ... etc                 */
   byte light;                   /* Number of lightsources in room     */
-  int (*funct) ();              /* special procedure                  */
+  int (*funct) (struct char_data *ch, int cmd, char *arg);   /* special procedure                  */
 
   struct obj_data *contents;    /* List of items in room              */
   struct char_data *people;     /* List of NPC / PC in room           */

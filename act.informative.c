@@ -893,7 +893,7 @@ void do_help (struct char_data *ch, char *argument, int cmd)
   if (!ch->desc)
     return;
 
-  for (; isspace (*argument); argument++);
+  for (; isspace ((int)*argument); argument++);
 
 
   if (*argument) {

@@ -135,7 +135,7 @@ int main (int argc, char **argv)
   }
 
   if (pos < argc)
-    if (!isdigit (*argv[pos])) {
+    if (!isdigit ((int)*argv[pos])) {
       fprintf (stderr, "Usage: %s [-l] [-s] [-d pathname] [ port # ]\n",
         argv[0]);
       exit (0);
@@ -522,7 +522,7 @@ void flush_queues (struct descriptor_data *d)
 
 int init_socket (int port)
 {
-  int s;
+  SOCKET s;
   char *opt;
   char hostname[MAX_HOSTNAME + 1];
   struct sockaddr_in sa;
@@ -577,8 +577,12 @@ int new_connection (SOCKET s)
 {
   struct sockaddr_in isa;
   /* struct sockaddr peer; */
+#ifdef WIN32
   int i;
-  int t;
+#else
+  socklen_t i;
+#endif
+  SOCKET t;
   char buf[100];
 
   i = sizeof (isa);
@@ -614,7 +618,11 @@ int new_descriptor (SOCKET s)
 {
   int desc;
   struct descriptor_data *newd;
+#ifdef WIN32
   int size;
+#else
+  socklen_t size;
+#endif
   struct sockaddr_in sock;
   struct hostent *from;
   char buf[10];
@@ -788,7 +796,7 @@ int process_input (struct descriptor_data *t)
           i++;
         } else
           i++;                  /* no or just one char.. Skip backsp */
-      else if (isascii (*(t->buf + i)) && isprint (*(t->buf + i))) {
+      else if (isascii (*(t->buf + i)) && isprint ((int)*(t->buf + i))) {
         /* trans char, double for '$' (printf)  */
         if ((*(tmp + k) = *(t->buf + i)) == '$')
           *(tmp + ++k) = '$';

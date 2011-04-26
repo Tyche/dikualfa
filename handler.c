@@ -35,7 +35,7 @@ char *fname (char *namelist)
   static char holder[30];
   register char *point;
 
-  for (point = holder; isalpha (*namelist); namelist++, point++)
+  for (point = holder; isalpha ((int)*namelist); namelist++, point++)
     *point = *namelist;
 
   *point = '\0';
@@ -50,7 +50,7 @@ int isname (char *str, char *namelist)
   curname = namelist;
   for (;;) {
     for (curstr = str;; curstr++, curname++) {
-      if (!*curstr && !isalpha (*curname))
+      if (!*curstr && !isalpha ((int)*curname))
         return (1);
 
       if (!*curname)
@@ -65,7 +65,7 @@ int isname (char *str, char *namelist)
 
     /* skip to next name */
 
-    for (; isalpha (*curname); curname++);
+    for (; isalpha ((int)*curname); curname++);
     if (!*curname)
       return (0);
     curname++;                  /* first char of new name */
@@ -557,7 +557,7 @@ int get_number (char **name)
     strcpy (*name, ppos);
 
     for (i = 0; *(number + i); i++)
-      if (!isdigit (*(number + i)))
+      if (!isdigit ((int)*(number + i)))
         return (0);
 
     return (atoi (number));

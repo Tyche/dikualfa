@@ -296,7 +296,7 @@ void do_idea (struct char_data *ch, char *argument, int cmd)
   }
 
   /* skip whites */
-  for (; isspace (*argument); argument++);
+  for (; isspace ((int)*argument); argument++);
 
   if (!*argument) {
     send_to_char ("That doesn't sound like a good idea to me.. Sorry.\n\r",
@@ -333,7 +333,7 @@ void do_typo (struct char_data *ch, char *argument, int cmd)
   }
 
   /* skip whites */
-  for (; isspace (*argument); argument++);
+  for (; isspace ((int)*argument); argument++);
 
   if (!*argument) {
     send_to_char ("I beg your pardon?\n\r", ch);
@@ -368,7 +368,7 @@ void do_bug (struct char_data *ch, char *argument, int cmd)
   }
 
   /* skip whites */
-  for (; isspace (*argument); argument++);
+  for (; isspace ((int)*argument); argument++);
 
   if (!*argument) {
     send_to_char ("Pardon?\n\r", ch);

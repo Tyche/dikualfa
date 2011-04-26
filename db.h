@@ -126,10 +126,8 @@ struct index_data {
   int virtual;                  /* virtual number of this mob/obj           */
   long pos;                     /* file position of this field              */
   int number;                   /* number of existing units of this mob/obj */
-  int (*func) ();               /* special procedure for this mob/obj       */
+  int (*func) (struct char_data *ch, int cmd, char *arg);   /* special procedure for this mob/obj       */
 };
-
-
 
 
 /* for queueing zones for update   */

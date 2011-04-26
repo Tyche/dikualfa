@@ -92,7 +92,7 @@ void board_write_msg (struct char_data *ch, char *arg)
     return;
   }
   /* skip blanks */
-  for (; isspace (*arg); arg++);
+  for (; isspace ((int)*arg); arg++);
   if (!*arg) {
     send_to_char ("We must have a headline!\n\r", ch);
     return;
@@ -135,7 +135,7 @@ int board_remove_msg (struct char_data *ch, char *arg)
 
   one_argument (arg, number);
 
-  if (!*number || !isdigit (*number))
+  if (!*number || !isdigit ((int)*number))
     return (0);
   if (!(msg = atoi (number)))
     return (0);
@@ -259,7 +259,7 @@ int board_display_msg (struct char_data *ch, char *arg)
   char buf[512], number[MAX_INPUT_LENGTH], buffer[MAX_STRING_LENGTH];
   int msg;
   one_argument (arg, number);
-  if (!*number || !isdigit (*number))
+  if (!*number || !isdigit ((int)*number))
     return (0);
   if (!(msg = atoi (number)))
     return (0);
