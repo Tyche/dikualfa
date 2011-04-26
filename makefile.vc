@@ -3,7 +3,7 @@
 #
 CC = cl
 LD = cl
-WINZIP = C:\Applications\Winzip\wzzip
+WINZIP = C:\apps\winzip\wzzip
 
 # Compiler directives for debugging
 !ifdef DEBUG
@@ -63,6 +63,11 @@ DISTFILES= $(CFILES) $(HEADERS) $(DOCS) $(DATA) $(UTILITIES) \
 	$(OTHERSTUFF) nightrun opstart readme INSTALL_NOTES \
 	makefile makefile.bor makefile.dgm makefile.vc makefile.lcc
 
+# Files in the root of standard distribution
+ROOTDIST= $(CFILES) $(HEADERS) $(UTILITIES) \
+	$(OTHERSTUFF) nightrun opstart readme INSTALL_NOTES \
+	makefile makefile.bor makefile.dgm makefile.vc makefile.lcc
+
 !ifndef RELEASE
 RELEASE=dist
 !endif
@@ -103,10 +108,16 @@ clean:
 	@-del *.pdb *.ilk *.idb $(OFILES) $(TARGETS) $(OTARGETS) 2>NUL
 	@echo "Done."
                                                                               
-dist: $(DISTFILES)
+dist :  $(ROOTDIST)
 	@echo "Building distribution..."
-	cd ..
-	$(WINZIP) -pr diku-alfa-$(RELEASE).zip $(DISTFILES) 
+	@-md diku-alfa
+	@!copy /y $** diku-alfa 1>NUL
+	@echo .svn > ex.tmp
+        @xcopy lib diku-alfa\lib /I /E /Y /Q /EXCLUDE:ex.tmp 
+        @xcopy doc diku-alfa\doc /I /E /Y /Q /EXCLUDE:ex.tmp 
+        @del ex.tmp
+	@$(WINZIP) -Pr diku-alfa-$(RELEASE).zip diku-alfa 1>NUL 2>NUL
+	@rd /s /q diku-alfa
 	@echo "Done."
 
 .c.obj:
