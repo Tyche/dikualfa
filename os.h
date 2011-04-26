@@ -107,6 +107,13 @@ extern char *re_comp (char *);
 extern int re_exec (char *);
 #endif
 
+#undef EWOULDBLOCK
+#undef EADDRINUSE
+#undef ETIMEDOUT
+#undef ECONNRESET
+#undef EMSGSIZE
+#undef EHOSTUNREACH
+#undef ENETUNREACH
 #define EWOULDBLOCK       WSAEWOULDBLOCK
 #define EADDRINUSE        WSAEADDRINUSE
 #define ETIMEDOUT         WSAETIMEDOUT
@@ -114,10 +121,13 @@ extern int re_exec (char *);
 #define EMSGSIZE          WSAEMSGSIZE
 #define EHOSTUNREACH      WSAEHOSTUNREACH
 #define ENETUNREACH       WSAENETRESET
+
 #undef EPIPE
 #undef EINVAL
 #define EPIPE             WSAENOTCONN
 #define EINVAL            WSAEINVAL
+
+#undef ECONNREFUSED
 #define ECONNREFUSED      WSAECONNABORTED
 #undef EINTR
 #undef EMFILE
