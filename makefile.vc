@@ -7,17 +7,17 @@ WINZIP = C:\Applications\Winzip\wzzip
 
 # Compiler directives for debugging
 !ifdef DEBUG
-DEBUG_CFLAGS = /MTd /ZI /Od /FD /D " DEBUG" 
+DEBUG_CFLAGS = /MTd /ZI /Od /DDEBUG 
 DEBUG_LFLAGS = /DEBUG /PDBTYPE:SEPT 
 LIBS= libcmtd.lib kernel32.lib ws2_32.lib 
 !else
-DEBUG_CFLAGS = /MT /Ot /Oy /Ob1 /Gs /Gy /D "NDEBUG" 
+DEBUG_CFLAGS = /MT /Ot /Oy /Ob2 /Gs /GF /Gy /DNDEBUG   
 DEBUG_LFLAGS = 
 LIBS= libcmt.lib kernel32.lib ws2_32.lib 
 !endif
 
-DEFS= /D "WIN32" /D "WIN32_LEAN_AND_MEAN" /D "_CONSOLE" /D "_MBCS"   
-OPTIM= /nologo /EHsc /W1 $(DEBUG_CFLAGS) 
+DEFS= /DWIN32 /DWIN32_LEAN_AND_MEAN /D_CONSOLE /D_MBCS /D_CRT_SECURE_NO_DEPRECATE /D_CRT_NONSTDC_NO_DEPRECATE /D_USE_32BIT_TIME_T
+OPTIM= /nologo /W1 $(DEBUG_CFLAGS) 
 
 CFLAGS= $(OPTIM) $(DEFS)
 LFLAGS = /link /NOLOGO /NODEFAULTLIB /SUBSYSTEM:CONSOLE $(DEBUG_LFLAGS) 
@@ -61,7 +61,7 @@ DATA= actions help_table news readme tinyworld.wld board.messages info \
 # Files in the standard distribution
 DISTFILES= $(CFILES) $(HEADERS) $(DOCS) $(DATA) $(UTILITIES) \
 	$(OTHERSTUFF) nightrun opstart readme INSTALL_NOTES \
-	makefile makefile.bor makefile.dgm makefile.vc6 makefile.lcc
+	makefile makefile.bor makefile.dgm makefile.vc makefile.lcc
 
 !ifndef RELEASE
 RELEASE=dist
@@ -75,35 +75,39 @@ OTARGETS=  list.obj delplay.obj insert_any.obj repairgo.obj syntax_checker.obj \
 all: $(TARGETS)
                                                                               
 dmserver.exe : $(OFILES)
-	$(LD) $(OFILES) $(LIBS) /Fe$@ $(LFLAGS)
+	$(LD) $** $(LIBS) /Fe$@ $(LFLAGS)
 
 list.exe : list.obj                                                           
-	$(LD) list.obj $(LIBS) /Fe$@ $(LFLAGS)
+	$(LD) $** $(LIBS) /Fe$@ $(LFLAGS)
  
 delplay.exe : delplay.obj
-	$(LD) delplay.obj $(LIBS) /Fe$@ $(LFLAGS)
+	$(LD) $** $(LIBS) /Fe$@ $(LFLAGS)
                                                                               
-insert_any.exe : insert_any.obj 
-	$(LD) insert_any.obj os.obj $(LIBS) /Fe$@ $(LFLAGS) 
+insert_any.exe : insert_any.obj os.obj
+	$(LD) $** $(LIBS) /Fe$@ $(LFLAGS) 
                                                                               
 repairgo.exe : repairgo.obj                 
-	$(LD) repairgo.obj $(LIBS) /Fe$@ $(LFLAGS)
+	$(LD) $** $(LIBS) /Fe$@ $(LFLAGS)
                                                                               
-syntax_checker.exe : syntax_checker.obj
-	$(LD) syntax_checker.obj os.obj $(LIBS) /Fe$@ $(LFLAGS)
+syntax_checker.exe : syntax_checker.obj os.obj
+	$(LD) $** $(LIBS) /Fe$@ $(LFLAGS)
 
 update.exe : update.obj                                                       
-	$(LD) update.obj $(LIBS) /Fe$@ $(LFLAGS)
+	$(LD) $** $(LIBS) /Fe$@ $(LFLAGS)
                                                                               
-sign.exe : sign.obj                                                           
-	$(LD) sign.obj os.obj $(LIBS) /Fe$@ $(LFLAGS)
+sign.exe : sign.obj os.obj                                                          
+	$(LD) $** $(LIBS) /Fe$@ $(LFLAGS)
                                                                               
 clean:                                                                        
-        del *.pdb *.ilk $(OFILES) $(TARGETS) $(OTARGETS) 2>NUL              
+	@echo "Cleaning..."
+	@-del *.pdb *.ilk *.idb $(OFILES) $(TARGETS) $(OTARGETS) 2>NUL
+	@echo "Done."
                                                                               
-dist: # $(DISTFILES)
+dist: $(DISTFILES)
+	@echo "Building distribution..."
 	cd ..
 	$(WINZIP) -pr diku-alfa-$(RELEASE).zip $(DISTFILES) 
+	@echo "Done."
 
 .c.obj:
 	$(CC) $(CFLAGS) /c /Tc$(<:\=/)

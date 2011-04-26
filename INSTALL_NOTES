@@ -3,17 +3,27 @@ same and maybe even the bugs.  Hopfully I didn't introduce any new ones.
 
 This release was compiled and tested on the following platforms:
 
-* Microsoft Vista Service Pack 2
-  CYGWIN_NT-6.0 1.7.1(0.218/5/3) using (GCC) 4.3.4 20090804 (release) 1
-  CYGWIN_NT-6.0 1.7.1(0.218/5/3) using (GCC) 3.4.4 (cygming special)
+* Microsoft Windows 7 Service Pack 1
   Microsoft Visual C/C++ v6.0 
-  Microsoft Visual C/C++ v8.0 (Visual C++ 2005)
-  Microsoft Visual C/C++ v9.0 (Visual C++ 2008)
+  Microsoft Visual C/C++ v10.0 (Visual C++ 2010 Express)
+  Embarcadero C++ 6.30 for Win32
   Borland C++ 5.5.1 for Win32 (free compiler release)
   Digital Mars C/C++ Compiler Version 8.42n
-  Logiciels/Informatique lcc-win32 version 3.8 
+  CYGWIN_NT-6.1-WOW64 1.7.9(0.237/5/3) using gcc 4.3.4
 
-* Microsoft Windows XP Service Pack 3 
+* FreeBSD 8.1 amd64
+  gcc version 4.2.1 [FreeBSD] 
+
+* Red Hat Fedora 12 i386 
+  gcc version 4.2.2
+  
+* OpenSuSE 11.2 x86_64
+  gcc (SUSE Linux) 4.4.1 
+
+* Debian 5.0.0 Linux 2.6.26-2-amd64
+  gcc version 4.3.2 (Debian 4.3.2-1.1)
+  
+---------------------------------------------------------------------------------
 
 Previous releases were compiled and tested on the following platforms:
 
@@ -53,8 +63,8 @@ Installation
 
   * For FreeBSD - type 'gmake'.
   
-  * For Windows using Borland - ensure the Borland compiler bin directory 
-    is in your path, then type 'make -f makefile.bor'.
+  * For Windows using Borland/Embarcadero - ensure the /Embarcadero compiler bin 
+    directory is in your path, then type 'make -f makefile.bor'.
     - All executables will be linked with the RTL and without debugging symbols.
       To link a static executable   -   use 'make -f makefile.bor -DSTATIC'.
       To include debugging symbols  -   use 'make -f makefile.bor -DDEBUG'.
@@ -67,8 +77,8 @@ Installation
     is in your path and your INCLUDE and LIBS environment variables are setup
     correctly.
     - With Visual C++ 6.0 you may need to run the vcvars32.bat file.
-    - With Visual C++ Toolkit 2003 and Platform SDK you may need to use both the
-      setenv.cmd and vsvars32.bat
+    - With Visual C++ 2010 Express and the Microsoft SDK you may need to use both 
+      the setenv.cmd and vsvars32.bat
     Then type 'nmake -f makefile.vc'
     - To link with debugging information type 'set DEBUG=1' and then use
       'nmake -f makefile.vc'
@@ -88,4 +98,4 @@ the Dikimud license which are found in doc/license.doc.
 Enjoy.
 
 Jon Lambert - aka Tyche
-jlsysinc@alltel.net
+jlsysinc@hotmail.com

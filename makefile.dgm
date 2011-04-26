@@ -2,8 +2,8 @@
 # Whatever you put in for $(CC) must be able to grok ANSI C.
 #
 CC = dmc
-WINZIP = C:\apps\Winzip\wzzip
-OPTIM = -o -$(PROCESSOR_LEVEL) 
+WINZIP = C:\Applications\Winzip\wzzip
+OPTIM = -o -5
 DEFS = -DWIN32 -DWIN32_LEAN_AND_MEAN 
 CFLAGS = $(OPTIM) $(DEFS) -w2 -w7
 LIBS = wsock32.lib

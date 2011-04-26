@@ -3,14 +3,14 @@
 #
 CC=lcc
 LD=lcclnk
-WINZIP=c:\apps\winzip\wzzip
+WINZIP= C:\Applications\Winzip\wzzip
 OPTIM= -O -g2 
 DEFS = -DWIN32 -DWIN32_LEAN_AND_MEAN
 CFLAGS= $(OPTIM) $(DEFS)
 LFLAGS= -s -subsystem console
 LIBS= ws2_32.lib
 
-HEADERS = comm.h db.h handler.h interpreter.h limits.h maildef.h \
+HEADERS= comm.h db.h handler.h interpreter.h limits.h maildef.h \
 	os.h spells.h structs.h utils.h prototypes.h
 
 CFILES= comm.c act.comm.c act.informative.c act.movement.c act.obj1.c \
