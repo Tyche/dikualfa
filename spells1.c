@@ -56,7 +56,7 @@ void cast_burning_hands (int level, struct char_data *ch, char *arg,
     spell_burning_hands (level, ch, victim, 0);
     break;
   default:
-    log ("Serious screw-up in burning hands!");
+    writelog ("Serious screw-up in burning hands!");
     break;
   }
 }
@@ -98,7 +98,7 @@ void cast_call_lightning (int level, struct char_data *ch, char *arg,
     }
     break;
   default:
-    log ("Serious screw-up in call lightning!");
+    writelog ("Serious screw-up in call lightning!");
     break;
   }
 }
@@ -112,7 +112,7 @@ void cast_chill_touch (int level, struct char_data *ch, char *arg, int type,
     spell_chill_touch (level, ch, victim, 0);
     break;
   default:
-    log ("Serious screw-up in chill touch!");
+    writelog ("Serious screw-up in chill touch!");
     break;
   }
 }
@@ -126,7 +126,7 @@ void cast_shocking_grasp (int level, struct char_data *ch, char *arg,
     spell_shocking_grasp (level, ch, victim, 0);
     break;
   default:
-    log ("Serious screw-up in shocking grasp!");
+    writelog ("Serious screw-up in shocking grasp!");
     break;
   }
 }
@@ -150,7 +150,7 @@ void cast_colour_spray (int level, struct char_data *ch, char *arg, int type,
       spell_colour_spray (level, ch, victim, 0);
     break;
   default:
-    log ("Serious screw-up in colour spray!");
+    writelog ("Serious screw-up in colour spray!");
     break;
   }
 }
@@ -166,7 +166,7 @@ void cast_earthquake (int level, struct char_data *ch, char *arg, int type,
     spell_earthquake (level, ch, 0, 0);
     break;
   default:
-    log ("Serious screw-up in earthquake!");
+    writelog ("Serious screw-up in earthquake!");
     break;
   }
 }
@@ -199,7 +199,7 @@ void cast_energy_drain (int level, struct char_data *ch, char *arg, int type,
         spell_energy_drain (level, ch, victim, 0);
     break;
   default:
-    log ("Serious screw-up in energy drain!");
+    writelog ("Serious screw-up in energy drain!");
     break;
   }
 }
@@ -223,7 +223,7 @@ void cast_fireball (int level, struct char_data *ch, char *arg, int type,
       spell_fireball (level, ch, victim, 0);
     break;
   default:
-    log ("Serious screw-up in fireball!");
+    writelog ("Serious screw-up in fireball!");
     break;
 
   }
@@ -247,7 +247,7 @@ void cast_harm (int level, struct char_data *ch, char *arg, int type,
         spell_harm (level, ch, victim, 0);
     break;
   default:
-    log ("Serious screw-up in harm!");
+    writelog ("Serious screw-up in harm!");
     break;
 
   }
@@ -272,7 +272,7 @@ void cast_lightning_bolt (int level, struct char_data *ch, char *arg,
       spell_lightning_bolt (level, ch, victim, 0);
     break;
   default:
-    log ("Serious screw-up in lightning bolt!");
+    writelog ("Serious screw-up in lightning bolt!");
     break;
 
   }
@@ -297,7 +297,7 @@ void cast_magic_missile (int level, struct char_data *ch, char *arg,
       spell_magic_missile (level, ch, victim, 0);
     break;
   default:
-    log ("Serious screw-up in magic missile!");
+    writelog ("Serious screw-up in magic missile!");
     break;
 
   }

@@ -3,7 +3,7 @@
 #
 CC = cl
 LD = cl
-WINZIP = C:\apps\winzip\wzzip
+WINZIP = D:\apps\winzip\wzzip
 
 # Compiler directives for debugging
 !ifdef DEBUG
@@ -20,7 +20,7 @@ DEFS= /DWIN32 /DWIN32_LEAN_AND_MEAN /D_CONSOLE /D_MBCS /D_CRT_SECURE_NO_DEPRECAT
 OPTIM= /nologo /W1 $(DEBUG_CFLAGS) 
 
 CFLAGS= $(OPTIM) $(DEFS)
-LFLAGS = /link /NOLOGO /NODEFAULTLIB /SUBSYSTEM:CONSOLE $(DEBUG_LFLAGS) 
+LFLAGS = /link /NOLOGO /SUBSYSTEM:CONSOLE $(DEBUG_LFLAGS) 
 
 HEADERS = comm.h db.h handler.h interpreter.h limits.h maildef.h \
 	os.h spells.h structs.h utils.h prototypes.h

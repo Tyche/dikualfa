@@ -102,12 +102,12 @@ void boot_db (void)
   int i;
   extern int no_specials;
 
-  log ("Boot db -- BEGIN.");
+  writelog ("Boot db -- BEGIN.");
 
-  log ("Resetting the game time:");
+  writelog ("Resetting the game time:");
   reset_time ();
 
-  log ("Reading newsfile, credits, help-page, info and motd.");
+  writelog ("Reading newsfile, credits, help-page, info and motd.");
   file_to_string (NEWS_FILE, news);
   file_to_string (CREDITS_FILE, credits);
   file_to_string (MOTD_FILE, motd);
@@ -115,7 +115,7 @@ void boot_db (void)
   file_to_string (INFO_FILE, info);
   file_to_string (WIZLIST_FILE, wizlist);
 
-  log ("Opening mobile, object and help files.");
+  writelog ("Opening mobile, object and help files.");
   if (!(mob_f = fopen (MOB_FILE, "rb"))) {
     perror ("boot");
     WIN32CLEANUP
@@ -128,54 +128,54 @@ void boot_db (void)
     exit (0);
   }
   if (!(help_fl = fopen (HELP_KWRD_FILE, "rb")))
-    log ("   Could not open help file.");
+    writelog ("   Could not open help file.");
   else
     help_index = build_help_index (help_fl, &top_of_helpt);
 
 
-  log ("Loading zone table.");
+  writelog ("Loading zone table.");
   boot_zones ();
 
-  log ("Loading rooms.");
+  writelog ("Loading rooms.");
   boot_world ();
-  log ("Renumbering rooms.");
+  writelog ("Renumbering rooms.");
   renum_world ();
 
-  log ("Generating index tables for mobile and object files.");
+  writelog ("Generating index tables for mobile and object files.");
   mob_index = generate_indices (mob_f, &top_of_mobt);
   obj_index = generate_indices (obj_f, &top_of_objt);
 
-  log ("Renumbering zone table.");
+  writelog ("Renumbering zone table.");
   renum_zone_table ();
 
-  log ("Generating player index.");
+  writelog ("Generating player index.");
   build_player_index ();
 
-  log ("Loading fight messages.");
+  writelog ("Loading fight messages.");
   load_messages ();
 
-  log ("Loading social messages.");
+  writelog ("Loading social messages.");
   boot_social_messages ();
 
-  log ("Loading pose messages.");
+  writelog ("Loading pose messages.");
   boot_pose_messages ();
 
-  log ("Assigning function pointers:");
+  writelog ("Assigning function pointers:");
   if (!no_specials) {
-    log ("   Mobiles.");
+    writelog ("   Mobiles.");
     assign_mobiles ();
-    log ("   Objects.");
+    writelog ("   Objects.");
     assign_objects ();
-    log ("   Room.");
+    writelog ("   Room.");
     assign_rooms ();
   }
 
-  log ("   Commands.");
+  writelog ("   Commands.");
   assign_command_pointers ();
-  log ("   Spells.");
+  writelog ("   Spells.");
   assign_spell_pointers ();
 
-  log ("Updating characters with saved items:");
+  writelog ("Updating characters with saved items:");
   update_obj_file ();
 
   for (i = 0; i <= top_of_zone_table; i++) {
@@ -187,7 +187,7 @@ void boot_db (void)
 
   reset_q.head = reset_q.tail = 0;
 
-  log ("Boot db -- DONE.");
+  writelog ("Boot db -- DONE.");
 }
 
 
@@ -229,13 +229,13 @@ void reset_time (void)
   sprintf(buf,"   Last Gametime: %dH %dD %dM %dY.",
           last_time_info.hours, last_time_info.day,
           last_time_info.month, last_time_info.year);
-  log(buf);
+  writelog(buf);
 
   current_time = time(0);
   diff_time = current_time - last_time;
 
   sprintf(buf,"   Time since last shutdown: %d.", diff_time);
-  log(buf);
+  writelog(buf);
 
   time_info.hours = last_time_info.hours;
   time_info.day   = last_time_info.day;
@@ -246,7 +246,7 @@ void reset_time (void)
   diff_time = diff_time % SEC_PR_HOUR;
 
   sprintf(buf,"   Real time lack : %d sec.", diff_time);
-  log(buf);
+  writelog(buf);
 
   for(;diff_hours > 0; diff_hours--)
     weather_and_time(0);
@@ -303,7 +303,7 @@ void reset_time (void)
 
   sprintf (buf, "   Current Gametime: %dH %dD %dM %dY.",
     time_info.hours, time_info.day, time_info.month, time_info.year);
-  log (buf);
+  writelog (buf);
 
   weather_info.pressure = 960;
   if ((time_info.month >= 7) && (time_info.month <= 12))
@@ -342,7 +342,7 @@ void update_time (void)
   }
 
   current_time = time (0);
-  log ("Time update.");
+  writelog ("Time update.");
 
   fprintf (f1, "#\n");
 
@@ -466,7 +466,7 @@ void boot_world (void)
 
   if (!(fl = fopen (WORLD_FILE, "rb"))) {
     perror ("fopen");
-    log ("boot_world: could not open world file.");
+    writelog ("boot_world: could not open world file.");
     WIN32CLEANUP
     exit (0);
   }
@@ -1370,7 +1370,7 @@ void reset_zone (int zone)
       default:
         sprintf (buf, "Undefd cmd in reset table; zone %d cmd %d.\n\r",
           zone, cmd_no);
-        log (buf);
+        writelog (buf);
         WIN32CLEANUP
         exit (0);
         break;
@@ -1476,7 +1476,7 @@ void reset_zone (int zone)
       default:
         sprintf (buf, "Undefd cmd in reset table; zone %d cmd %d.\n\r",
           zone, cmd_no);
-        log (buf);
+        writelog (buf);
         WIN32CLEANUP
         exit (0);
         break;
@@ -1653,7 +1653,7 @@ void char_to_store (struct char_data *ch, struct char_file_u *st)
   }
 
   if ((i >= MAX_AFFECT) && af && af->next)
-    log ("WARNING: OUT OF STORE ROOM FOR AFFECTED TYPES!!!");
+    writelog ("WARNING: OUT OF STORE ROOM FOR AFFECTED TYPES!!!");
 
 
 
@@ -1837,7 +1837,7 @@ char *fread_string (FILE * fl)
     }
 
     if (strlen (tmp) + strlen (buf) > MAX_STRING_LENGTH) {
-      log ("fread_string: string too large (db.c)");
+      writelog ("fread_string: string too large (db.c)");
       WIN32CLEANUP
       exit (0);
     } else
@@ -1949,7 +1949,7 @@ int file_to_string (char *name, char *buf)
 
     if (!feof (fl)) {
       if (strlen (buf) + strlen (tmp) + 2 > MAX_STRING_LENGTH) {
-        log ("fl->strng: string too big (db.c, file_to_string)");
+        writelog ("fl->strng: string too big (db.c, file_to_string)");
         *buf = '\0';
         return (-1);
       }

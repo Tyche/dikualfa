@@ -55,7 +55,7 @@ void checkpointing (int sig)
   extern int tics;
 
   if (!tics) {
-    log ("CHECKPOINT shutdown: tics not updated");
+    writelog ("CHECKPOINT shutdown: tics not updated");
     abort ();
   } else
     tics = 0;
@@ -68,7 +68,7 @@ void shutdown_request (int sig)
 {
   extern int shutdown_server;
 
-  log ("Received USR2 - shutdown request");
+  writelog ("Received USR2 - shutdown request");
   shutdown_server = 1;
 }
 
@@ -79,7 +79,7 @@ void hupsig (int sig)
 {
   extern int shutdown_server;
 
-  log ("Received SIGHUP, SIGINT, or SIGTERM. Shutting down");
+  writelog ("Received SIGHUP, SIGINT, or SIGTERM. Shutting down");
   WIN32CLEANUP
   exit (0);                     /* something more elegant should perhaps be substituted */
 }
@@ -88,7 +88,7 @@ void hupsig (int sig)
 
 void logsig (int sig)
 {
-  log ("Signal received. Ignoring.");
+  writelog ("Signal received. Ignoring.");
 }
 
 

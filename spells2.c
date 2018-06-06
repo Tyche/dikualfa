@@ -72,7 +72,7 @@ void cast_armor (int level, struct char_data *ch, char *arg, int type,
     spell_armor (level, ch, ch, 0);
     break;
   default:
-    log ("Serious screw-up in armor!");
+    writelog ("Serious screw-up in armor!");
     break;
   }
 }
@@ -105,7 +105,7 @@ void cast_teleport (int level, struct char_data *ch, char *arg, int type,
     break;
 
   default:
-    log ("Serious screw-up in teleport!");
+    writelog ("Serious screw-up in teleport!");
     break;
   }
 }
@@ -173,7 +173,7 @@ void cast_bless (int level, struct char_data *ch, char *arg, int type,
     }
     break;
   default:
-    log ("Serious screw-up in bless!");
+    writelog ("Serious screw-up in bless!");
     break;
   }
 }
@@ -222,7 +222,7 @@ void cast_blindness (int level, struct char_data *ch, char *arg, int type,
           spell_blindness (level, ch, tar_ch, 0);
     break;
   default:
-    log ("Serious screw-up in blindness!");
+    writelog ("Serious screw-up in blindness!");
     break;
   }
 }
@@ -261,7 +261,7 @@ void cast_clone (int level, struct char_data *ch, char *arg, int type,
 
 
     default :
-         log("Serious screw-up in clone!");
+         writelog("Serious screw-up in clone!");
          break;
   }
 */
@@ -291,7 +291,7 @@ void cast_control_weather (int level, struct char_data *ch, char *arg,
       weather_info.change -= (dice (((level) / 3), 4));
     break;
   default:
-    log ("Serious screw-up in control weather!");
+    writelog ("Serious screw-up in control weather!");
     break;
   }
 }
@@ -315,7 +315,7 @@ void cast_create_food (int level, struct char_data *ch, char *arg, int type,
     spell_create_food (level, ch, 0, 0);
     break;
   default:
-    log ("Serious screw-up in create food!");
+    writelog ("Serious screw-up in create food!");
     break;
   }
 }
@@ -334,7 +334,7 @@ void cast_create_water (int level, struct char_data *ch, char *arg, int type,
     spell_create_water (level, ch, 0, tar_obj);
     break;
   default:
-    log ("Serious screw-up in create water!");
+    writelog ("Serious screw-up in create water!");
     break;
   }
 }
@@ -358,7 +358,7 @@ void cast_cure_blind (int level, struct char_data *ch, char *arg, int type,
         spell_cure_blind (level, ch, tar_ch, 0);
     break;
   default:
-    log ("Serious screw-up in cure blind!");
+    writelog ("Serious screw-up in cure blind!");
     break;
   }
 }
@@ -382,7 +382,7 @@ void cast_cure_critic (int level, struct char_data *ch, char *arg, int type,
         spell_cure_critic (level, ch, tar_ch, 0);
     break;
   default:
-    log ("Serious screw-up in cure critic!");
+    writelog ("Serious screw-up in cure critic!");
     break;
 
   }
@@ -407,7 +407,7 @@ void cast_cure_light (int level, struct char_data *ch, char *arg, int type,
         spell_cure_light (level, ch, tar_ch, 0);
     break;
   default:
-    log ("Serious screw-up in cure light!");
+    writelog ("Serious screw-up in cure light!");
     break;
   }
 }
@@ -443,7 +443,7 @@ void cast_curse (int level, struct char_data *ch, char *arg, int type,
         spell_curse (level, ch, tar_ch, 0);
     break;
   default:
-    log ("Serious screw-up in curse!");
+    writelog ("Serious screw-up in curse!");
     break;
   }
 }
@@ -473,7 +473,7 @@ void cast_detect_evil (int level, struct char_data *ch, char *arg, int type,
           spell_detect_evil (level, ch, tar_ch, 0);
     break;
   default:
-    log ("Serious screw-up in detect evil!");
+    writelog ("Serious screw-up in detect evil!");
     break;
   }
 }
@@ -504,7 +504,7 @@ void cast_detect_invisibility (int level, struct char_data *ch, char *arg,
           spell_detect_invisibility (level, ch, tar_ch, 0);
     break;
   default:
-    log ("Serious screw-up in detect invisibility!");
+    writelog ("Serious screw-up in detect invisibility!");
     break;
   }
 }
@@ -535,7 +535,7 @@ void cast_detect_magic (int level, struct char_data *ch, char *arg, int type,
           spell_detect_magic (level, ch, tar_ch, 0);
     break;
   default:
-    log ("Serious screw-up in detect magic!");
+    writelog ("Serious screw-up in detect magic!");
     break;
   }
 }
@@ -562,7 +562,7 @@ void cast_detect_poison (int level, struct char_data *ch, char *arg,
     spell_detect_poison (level, ch, tar_ch, 0);
     break;
   default:
-    log ("Serious screw-up in detect poison!");
+    writelog ("Serious screw-up in detect poison!");
     break;
   }
 }
@@ -598,7 +598,7 @@ void cast_dispel_evil (int level, struct char_data *ch, char *arg, int type,
         spell_dispel_evil (level, ch, tar_ch, 0);
     break;
   default:
-    log ("Serious screw-up in dispel evil!");
+    writelog ("Serious screw-up in dispel evil!");
     break;
   }
 }
@@ -618,7 +618,7 @@ void cast_enchant_weapon (int level, struct char_data *ch, char *arg,
     spell_enchant_weapon (level, ch, 0, tar_obj);
     break;
   default:
-    log ("Serious screw-up in enchant weapon!");
+    writelog ("Serious screw-up in enchant weapon!");
     break;
   }
 }
@@ -643,7 +643,7 @@ void cast_heal (int level, struct char_data *ch, char *arg, int type,
         spell_heal (level, ch, tar_ch, 0);
     break;
   default:
-    log ("Serious screw-up in heal!");
+    writelog ("Serious screw-up in heal!");
     break;
   }
 }
@@ -699,7 +699,7 @@ void cast_invisibility (int level, struct char_data *ch, char *arg, int type,
           spell_invisibility (level, ch, tar_ch, 0);
     break;
   default:
-    log ("Serious screw-up in invisibility!");
+    writelog ("Serious screw-up in invisibility!");
     break;
   }
 }
@@ -715,7 +715,7 @@ void cast_locate_object (int level, struct char_data *ch, char *arg,
     spell_locate_object (level, ch, 0, tar_obj);
     break;
   default:
-    log ("Serious screw-up in locate object!");
+    writelog ("Serious screw-up in locate object!");
     break;
   }
 }
@@ -738,7 +738,7 @@ void cast_poison (int level, struct char_data *ch, char *arg, int type,
         spell_poison (level, ch, tar_ch, 0);
     break;
   default:
-    log ("Serious screw-up in poison!");
+    writelog ("Serious screw-up in poison!");
     break;
   }
 }
@@ -768,7 +768,7 @@ void cast_protection_from_evil (int level, struct char_data *ch, char *arg,
         spell_protection_from_evil (level, ch, tar_ch, 0);
     break;
   default:
-    log ("Serious screw-up in protection from evil!");
+    writelog ("Serious screw-up in protection from evil!");
     break;
   }
 }
@@ -800,7 +800,7 @@ void cast_remove_curse (int level, struct char_data *ch, char *arg, int type,
         spell_remove_curse (level, ch, tar_ch, 0);
     break;
   default:
-    log ("Serious screw-up in remove curse!");
+    writelog ("Serious screw-up in remove curse!");
     break;
   }
 }
@@ -824,7 +824,7 @@ void cast_remove_poison (int level, struct char_data *ch, char *arg,
         spell_remove_poison (level, ch, tar_ch, 0);
     break;
   default:
-    log ("Serious screw-up in remove poison!");
+    writelog ("Serious screw-up in remove poison!");
     break;
   }
 }
@@ -855,7 +855,7 @@ void cast_sanctuary (int level, struct char_data *ch, char *arg, int type,
         spell_sanctuary (level, ch, tar_ch, 0);
     break;
   default:
-    log ("Serious screw-up in sanctuary!");
+    writelog ("Serious screw-up in sanctuary!");
     break;
   }
 }
@@ -890,7 +890,7 @@ void cast_sleep (int level, struct char_data *ch, char *arg, int type,
         spell_sleep (level, ch, tar_ch, 0);
     break;
   default:
-    log ("Serious screw-up in sleep!");
+    writelog ("Serious screw-up in sleep!");
     break;
   }
 }
@@ -920,7 +920,7 @@ void cast_strength (int level, struct char_data *ch, char *arg, int type,
         spell_strength (level, ch, tar_ch, 0);
     break;
   default:
-    log ("Serious screw-up in strength!");
+    writelog ("Serious screw-up in strength!");
     break;
   }
 }
@@ -935,7 +935,7 @@ void cast_ventriloquate (int level, struct char_data *ch, char *arg,
   char buf3[MAX_STRING_LENGTH];
 
   if (type != SPELL_TYPE_SPELL) {
-    log ("Attempt to ventriloquate by non-cast-spell.");
+    writelog ("Attempt to ventriloquate by non-cast-spell.");
     return;
   }
   for (; *arg && (*arg == ' '); arg++);
@@ -997,7 +997,7 @@ void cast_word_of_recall (int level, struct char_data *ch, char *arg,
         spell_word_of_recall (level, ch, tar_ch, 0);
     break;
   default:
-    log ("Serious screw-up in word of recall!");
+    writelog ("Serious screw-up in word of recall!");
     break;
   }
 }
@@ -1012,7 +1012,7 @@ void cast_summon (int level, struct char_data *ch, char *arg, int type,
     spell_summon (level, ch, tar_ch, 0);
     break;
   default:
-    log ("Serious screw-up in summon!");
+    writelog ("Serious screw-up in summon!");
     break;
   }
 }
@@ -1038,7 +1038,7 @@ void cast_charm_person (int level, struct char_data *ch, char *arg, int type,
         spell_charm_person (level, ch, tar_ch, 0);
     break;
   default:
-    log ("Serious screw-up in charm person!");
+    writelog ("Serious screw-up in charm person!");
     break;
   }
 }
@@ -1062,7 +1062,7 @@ void cast_sense_life (int level, struct char_data *ch, char *arg, int type,
         spell_sense_life (level, ch, tar_ch, 0);
     break;
   default:
-    log ("Serious screw-up in sense life!");
+    writelog ("Serious screw-up in sense life!");
     break;
   }
 }
@@ -1076,7 +1076,7 @@ void cast_identify (int level, struct char_data *ch, char *arg, int type,
     spell_identify (level, ch, tar_ch, tar_obj);
     break;
   default:
-    log ("Serious screw-up in identify!");
+    writelog ("Serious screw-up in identify!");
     break;
   }
 }
@@ -1090,7 +1090,7 @@ void cast_fire_breath (int level, struct char_data *ch, char *arg, int type,
     spell_fire_breath (level, ch, tar_ch, 0);
     break;                      /* It's a spell.. But people can't cast it! */
   default:
-    log ("Serious screw-up in firebreath!");
+    writelog ("Serious screw-up in firebreath!");
     break;
   }
 }
@@ -1103,7 +1103,7 @@ void cast_frost_breath (int level, struct char_data *ch, char *arg, int type,
     spell_frost_breath (level, ch, tar_ch, 0);
     break;                      /* It's a spell.. But people can't cast it! */
   default:
-    log ("Serious screw-up in frostbreath!");
+    writelog ("Serious screw-up in frostbreath!");
     break;
   }
 }
@@ -1116,7 +1116,7 @@ void cast_acid_breath (int level, struct char_data *ch, char *arg, int type,
     spell_acid_breath (level, ch, tar_ch, 0);
     break;                      /* It's a spell.. But people can't cast it! */
   default:
-    log ("Serious screw-up in acidbreath!");
+    writelog ("Serious screw-up in acidbreath!");
     break;
   }
 }
@@ -1133,7 +1133,7 @@ void cast_gas_breath (int level, struct char_data *ch, char *arg, int type,
     break;
     /* THIS ONE HURTS!! */
   default:
-    log ("Serious screw-up in gasbreath!");
+    writelog ("Serious screw-up in gasbreath!");
     break;
   }
 }
@@ -1146,7 +1146,7 @@ void cast_lightning_breath (int level, struct char_data *ch, char *arg,
     spell_lightning_breath (level, ch, tar_ch, 0);
     break;                      /* It's a spell.. But people can't cast it! */
   default:
-    log ("Serious screw-up in lightningbreath!");
+    writelog ("Serious screw-up in lightningbreath!");
     break;
   }
 }

@@ -507,7 +507,7 @@ void night_watchman (void)
   if ((t_info->tm_hour == 8) && (t_info->tm_wday > 0) &&
     (t_info->tm_wday < 6))
     if (t_info->tm_min > 50) {
-      log ("Leaving the scene for the serious folks.");
+      writelog ("Leaving the scene for the serious folks.");
       send_to_all ("Closing down. Thank you for flying DikuMUD.\n\r");
       shutdown_server = 1;
     } else if (t_info->tm_min > 40)
@@ -536,16 +536,16 @@ void check_reboot (void)
   if ((t_info->tm_hour + 1) == REBOOT_AT && t_info->tm_min > 30)
     if (boot = fopen ("./reboot", "rb")) {
       if (t_info->tm_min > 50) {
-        log ("Reboot exists.");
+        writelog ("Reboot exists.");
         fread (&dummy, sizeof (dummy), 1, boot);
         if (!feof (boot)) {     /* the file is nonepty */
-          log ("Reboot is nonempty.");
+          writelog ("Reboot is nonempty.");
 
           /* the script can't handle the signals */
           block_signals();
 
           if (system ("./reboot")) {
-            log ("Reboot script terminated abnormally");
+            writelog ("Reboot script terminated abnormally");
             send_to_all ("The reboot was cancelled.\n\r");
             system ("mv ./reboot reboot.FAILED");
             fclose (boot);
@@ -659,7 +659,7 @@ char *nogames (void)
   FILE *fl;
 
   if (fl = fopen ("lib/nogames", "rb")) {
-    log ("/usr/games/nogames exists");
+    writelog ("/usr/games/nogames exists");
     FGETS (text, 200, fl);
     return (text);
     fclose (fl);
@@ -677,7 +677,7 @@ void coma (void)
 
   void close_socket (struct descriptor_data *d);
 
-  log ("Entering comatose state");
+  writelog ("Entering comatose state");
 
   while (descriptor_list)
     close_socket (descriptor_list);
@@ -690,14 +690,14 @@ void coma (void)
 #endif
     tics = 1;
     if (workhours ()) {
-      log ("Working hours collision during coma. Exit.");
+      writelog ("Working hours collision during coma. Exit.");
       WIN32CLEANUP
       exit (0);
     }
   }
   while (load () >= 6);
 
-  log ("Leaving coma");
+  writelog ("Leaving coma");
 }
 
 #endif

@@ -526,7 +526,7 @@ void do_give (struct char_data *ch, char *argument, int cmd)
     if ((GET_LEVEL (ch) > 20) && (!IS_NPC (ch)) && (!IS_NPC (vict))) {
       sprintf (buf, "%s gives %s %d gold coins.", GET_NAME (ch),
         GET_NAME (vict), amount);
-      log (buf);
+      writelog (buf);
     }
     GET_GOLD (vict) += amount;
     return;

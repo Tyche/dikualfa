@@ -109,7 +109,7 @@ int main (int argc, char **argv)
     switch (*(argv[pos] + 1)) {
     case 'l':
       lawful = 1;
-      log ("Lawful mode selected.");
+      writelog ("Lawful mode selected.");
       break;
     case 'd':
       if (*(argv[pos] + 2))
@@ -117,18 +117,18 @@ int main (int argc, char **argv)
       else if (++pos < argc)
         dir = argv[pos];
       else {
-        log ("Directory arg expected after option -d.");
+        writelog ("Directory arg expected after option -d.");
         exit (0);
       }
       break;
     case 's':
       no_specials = 1;
-      log ("Suppressing assignment of special routines.");
+      writelog ("Suppressing assignment of special routines.");
       break;
     default:
       sprintf (buf, "Unknown option -% in argument string.",
         *(argv[pos] + 1));
-      log (buf);
+      writelog (buf);
       break;
     }
     pos++;
@@ -145,7 +145,7 @@ int main (int argc, char **argv)
     }
 
   sprintf (buf, "Running game on port %d.", port);
-  log (buf);
+  writelog (buf);
 
 #ifdef _MSC_VER
   if (_chdir (dir) < 0) {
@@ -157,7 +157,7 @@ int main (int argc, char **argv)
   }
 
   sprintf (buf, "Using %s as data directory.", dir);
-  log (buf);
+  writelog (buf);
 
   OS_SRAND (time (0));
   WIN32STARTUP
@@ -185,20 +185,20 @@ void run_the_game (int port)
 
     descriptor_list = NULL;
 
-  log ("Signal trapping.");
+  writelog ("Signal trapping.");
   signal_setup ();
 
-  log ("Opening mother connection.");
+  writelog ("Opening mother connection.");
   s = init_socket (port);
 
   if (lawful && load () >= 6) {
-    log ("System load too high at startup.");
+    writelog ("System load too high at startup.");
     coma (s);
   }
 
   boot_db ();
 
-  log ("Entering game loop.");
+  writelog ("Entering game loop.");
 
   game_loop (s);
 
@@ -212,12 +212,12 @@ void run_the_game (int port)
 #else
     if (reboot) {
 #endif
-    log ("Rebooting.");
+    writelog ("Rebooting.");
     WIN32CLEANUP
     exit (52);                  /* what's so great about HHGTTG, anyhow? */
   }
 
-  log ("Normal termination of game.");
+  writelog ("Normal termination of game.");
 }
 
 
@@ -602,7 +602,7 @@ int new_connection (SOCKET s)
      {
      *(peer.sa_data + 49) = '\0';
      sprintf(buf, "New connection from addr %s.\n", peer.sa_data);
-     log(buf);
+     writelog(buf);
      }
 
    */
@@ -773,7 +773,7 @@ int process_input (struct descriptor_data *t)
       } else
         break;
     else {
-      log ("EOF encountered on socket read.");
+      writelog ("EOF encountered on socket read.");
       return (-1);
     }
   }
@@ -847,7 +847,7 @@ int process_input (struct descriptor_data *t)
 
 void close_sockets (int s)
 {
-  log ("Closing all sockets.");
+  writelog ("Closing all sockets.");
 
   while (descriptor_list)
     close_socket (descriptor_list);
@@ -888,15 +888,15 @@ void close_socket (struct descriptor_data *d)
       save_char (d->character, NOWHERE);
       act ("$n has lost $s link.", TRUE, d->character, 0, 0, TO_ROOM);
       sprintf (buf, "Closing link to: %s.", GET_NAME (d->character));
-      log (buf);
+      writelog (buf);
       d->character->desc = 0;
     } else {
       sprintf (buf, "Losing player: %s.", GET_NAME (d->character));
-      log (buf);
+      writelog (buf);
 
       free_char (d->character);
   } else
-    log ("Losing descriptor without char.");
+    writelog ("Losing descriptor without char.");
 
 
   if (next_to_process == d)     /* to avoid crashing the process loop */
@@ -961,7 +961,7 @@ void coma (SOCKET s)
   int workhours (void);
   int load (void);
 
-  log ("Entering comatose state.");
+  writelog ("Entering comatose state.");
 
   block_signals();
 
@@ -978,7 +978,7 @@ void coma (SOCKET s)
     }
     if (FD_ISSET (s, &input_set)) {
       if (load () < 6) {
-        log ("Leaving coma with visitor.");
+        writelog ("Leaving coma with visitor.");
         restore_signals();
         return;
       }
@@ -995,14 +995,14 @@ void coma (SOCKET s)
 
     tics = 1;
     if (workhours ()) {
-      log ("Working hours collision during coma. Exit.");
+      writelog ("Working hours collision during coma. Exit.");
       WIN32CLEANUP
       exit (0);
     }
   }
   while (load () >= 6);
 
-  log ("Leaving coma.");
+  writelog ("Leaving coma.");
   restore_signals();
 }
 
@@ -1175,8 +1175,8 @@ void act (char *str, int hide_invisible, struct char_data *ch,
             i = "$";
             break;
           default:
-            log ("Illegal $-code to act():");
-            log (str);
+            writelog ("Illegal $-code to act():");
+            writelog (str);
             break;
           }
           while (*point = *(i++))

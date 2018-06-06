@@ -41,7 +41,7 @@ void mobile_activity (void)
         if (!mob_index[ch->nr].func) {
           sprintf (buf, "Non-Existing MOB[%d] SPEC procedure (mobact.c)",
             mob_index[ch->nr].virtual);
-          log (buf);
+          writelog (buf);
           REMOVE_BIT (ch->specials.act, ACT_SPEC);
         } else {
           if ((*mob_index[ch->nr].func) (ch, 0, ""))

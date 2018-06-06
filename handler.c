@@ -187,7 +187,7 @@ void affect_modify (struct char_data *ch, byte loc, byte mod, long bitv,
     break;
 
   default:
-    log ("Unknown apply adjust attempt (handler.c, affect_modify).");
+    writelog ("Unknown apply adjust attempt (handler.c, affect_modify).");
     break;
 
   }                             /* switch */
@@ -292,7 +292,7 @@ void affect_remove (struct char_data *ch, struct affected_type *af)
       hjp = hjp->next);
 
     if (hjp->next != af) {
-      log
+      writelog
         ("FATAL : Could not locate affected_type in ch->affected. (handler.c, affect_remove)");
       WIN32CLEANUP
       exit (1);
@@ -367,7 +367,7 @@ void char_from_room (struct char_data *ch)
   struct char_data *i;
 
   if (ch->in_room == NOWHERE) {
-    log ("NOWHERE extracting char from room (handler.c, char_from_room)");
+    writelog ("NOWHERE extracting char from room (handler.c, char_from_room)");
     WIN32CLEANUP
     exit (1);
   }
@@ -481,12 +481,12 @@ void equip_char (struct char_data *ch, struct obj_data *obj, int pos)
   assert (!(ch->equipment[pos]));
 
   if (obj->carried_by) {
-    log ("EQUIP: Obj is carried_by when equip.");
+    writelog ("EQUIP: Obj is carried_by when equip.");
     return;
   }
 
   if (obj->in_room != NOWHERE) {
-    log ("EQUIP: Obj is in_room when equip.");
+    writelog ("EQUIP: Obj is in_room when equip.");
     return;
   }
 
@@ -502,7 +502,7 @@ void equip_char (struct char_data *ch, struct obj_data *obj, int pos)
       obj_to_room (obj, ch->in_room);
       return;
     } else {
-      log ("ch->in_room = NOWHERE when equipping char.");
+      writelog ("ch->in_room = NOWHERE when equipping char.");
     }
   }
 
@@ -913,7 +913,7 @@ void extract_char (struct char_data *ch)
   if (ch->in_room == NOWHERE) {
     /* leaves nothing ! */
 
-    log ("NOWHERE, extracting char.");
+    writelog ("NOWHERE, extracting char.");
     WIN32CLEANUP
     exit (1);
   }
@@ -985,7 +985,7 @@ void extract_char (struct char_data *ch)
     if (k)
       k->next = ch->next;
     else {
-      log
+      writelog
         ("Trying to remove ?? from character_list. (handler.c, extract_char)");
       abort ();
     }
@@ -1148,7 +1148,7 @@ struct obj_data *create_money (int amount)
   char *str_dup (char *str);
 
   if (amount <= 0) {
-    log ("ERROR: Try to create negative money.");
+    writelog ("ERROR: Try to create negative money.");
     WIN32CLEANUP
     exit (1);
   }

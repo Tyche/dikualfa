@@ -56,7 +56,7 @@ extern void add_follower (struct char_data *ch, struct char_data *leader);
 extern int str_cmp (char *arg1, char *arg2);
 extern int strn_cmp (char *arg1, char *arg2, int n);
 extern int number (int from, int to);
-extern void log (char *str);
+extern void writelog (char *str);
 extern int dice (int number, int size);
 extern void sprinttype (int type, char *names[], char *result);
 extern void sprintbit (long vektor, char *names[], char *result);

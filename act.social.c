@@ -69,7 +69,7 @@ char *fread_action (FILE * fl)
   for (;;) {
     FGETS (buf, MAX_STRING_LENGTH, fl);
     if (feof (fl)) {
-      log ("Fread_action - unexpected EOF.");
+      writelog ("Fread_action - unexpected EOF.");
       WIN32CLEANUP
       exit (0);
     }

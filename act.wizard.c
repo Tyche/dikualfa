@@ -805,12 +805,12 @@ void do_shutdown (struct char_data *ch, char *argument, int cmd)
   if (!*arg) {
     sprintf (buf, "Shutdown by %s.", GET_NAME (ch));
     send_to_all (buf);
-    log (buf);
+    writelog (buf);
     shutdown_server = 1;
   } else if (!str_cmp (arg, "reboot")) {
     sprintf (buf, "Reboot by %s.", GET_NAME (ch));
     send_to_all (buf);
-    log (buf);
+    writelog (buf);
 #ifdef __FreeBSD__
     shutdown_server = greboot = 1;
 #else
@@ -1033,7 +1033,7 @@ void do_load (struct char_data *ch, char *argument, int cmd)
     send_to_char ("Done.\n\r", ch);
     sprintf (buf, "%s loads %s at %s.", GET_NAME (ch),
       mob->player.short_descr, world[ch->in_room].name);
-    log (buf);
+    writelog (buf);
 
   } else if (is_abbrev (type, "obj")) {
     if ((r_num = real_object (number)) < 0) {
@@ -1047,7 +1047,7 @@ void do_load (struct char_data *ch, char *argument, int cmd)
     send_to_char ("Ok.\n\r", ch);
     sprintf (buf, "%s loads %s at %s.", GET_NAME (ch),
       obj->short_description, world[ch->in_room].name);
-    log (buf);
+    writelog (buf);
 
   } else
     send_to_char ("That'll have to be either 'char' or 'obj'.\n\r", ch);
@@ -1087,7 +1087,7 @@ void do_purge (struct char_data *ch, char *argument, int cmd)
         if (vict->desc) {
           sprintf (buf, "%s purges %s at %s.", GET_NAME (ch), GET_NAME (vict),
             world[ch->in_room].name);
-          log (buf);
+          writelog (buf);
           close_socket (vict->desc);
           vict->desc = 0;
           extract_char (vict);
@@ -1330,7 +1330,7 @@ void do_advance (struct char_data *ch, char *argument, int cmd)
 
   sprintf (buf, "%s advances %s to level %d.", GET_NAME (ch),
     GET_NAME (victim), adv + GET_LEVEL (victim));
-  log (buf);
+  writelog (buf);
 
   if (GET_LEVEL (victim) == 0) {
     do_start (victim);
@@ -1367,7 +1367,7 @@ void do_reroll (struct char_data *ch, char *argument, int cmd)
     send_to_char ("Rerolled...\n\r", ch);
     roll_abilities (victim);
     sprintf (buf, "%s rerolled %s.", GET_NAME (ch), GET_NAME (victim));
-    log (buf);
+    writelog (buf);
   }
 }
 
@@ -1394,7 +1394,7 @@ void do_restore (struct char_data *ch, char *argument, int cmd)
     GET_MOVE (victim) = GET_MAX_MOVE (victim);
 
     sprintf (buf, "%s restored %s.", GET_NAME (ch), GET_NAME (victim));
-    log (buf);
+    writelog (buf);
 
     if (GET_LEVEL (victim) >= 21) {
       for (i = 0; i < MAX_SKILLS; i++) {
