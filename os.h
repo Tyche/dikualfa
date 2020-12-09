@@ -177,7 +177,7 @@ extern int re_exec (char *);
 
 
 /* defined in os.c */
-#ifndef __LCC__                 /* simply does not like our prototype ? */
+#if !defined __LCC__ && !defined __clang__                 /* simply does not like our prototype ? */
 extern void gettimeofday (struct timeval *tp, struct timezone *tzp);
 #endif
 extern char *crypt (char *pw, char *salt);
