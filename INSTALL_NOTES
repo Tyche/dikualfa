@@ -4,18 +4,18 @@ same and maybe even the bugs.  Hopefully I didn't introduce any new ones.
 This release was compiled and tested on the following platforms:
 
 * Windows 10
-  Embarcadero C++ 7.30 for Win32
-  Microsoft Visual C/C++ v19.13.26131.1 for x86 (Visual C++ 2017 Community)
-  CYGWIN_NT-10.0 2.10.0 using gcc 7.3.0
+  Embarcadero C++ 7.40 for Win64
+  Microsoft (R) C/C++ Optimizing Compiler Version 19.25.28611 for x64 (Visual C++ 2019 Community)
+  CYGWIN_NT-10.0 3.1.7 using gcc 10.2.0
 
-* Ubuntu 16.04 LTS
+* Ubuntu 16.04.7 LTS
   gcc version 5.4.0
   
-* Linux Mint 18.3
-  gcc version 5.4.0
+* Debian GNU/Linux 9 (stretch)
+  gcc version 6.3.0  
 
-* OpenSuse 42.3
-  gcc version 4.8.5
+* openSUSE Leap 15.2
+  gcc version 7.5.0
 
 ---------------------------------------------------------------------------------
 
@@ -66,12 +66,43 @@ Previous releases were compiled and tested on the following platforms:
 * OpenSuSE 11.2 x86_64
   gcc (SUSE Linux) 4.4.1 
 
+* Linux Mint 18.3
+  gcc version 5.4.0
+
 * SuSE Linux 2.6.4-52-default
   gcc version 3.3.3 (SuSE Linux)
   
 ---------------------------------------------------------------------------------
 
 Installation
+
+For all operating systems install 'cmake' which can be obtained at:
+  https://cmake.org/
+
+* For Linux and Cygwin 
+  type './cmake_unix.sh'
+* For Windows using the Embarcadero compiler  
+  Install 'ninja' which can be obtained at:
+    https://github.com/ninja-build/ninja/releases
+  type 'cmake_bcc64'
+* For Windows using Microsift Visual C++ compiler
+  type 'cmake_vc64'
+
+The server and utilities will be compiled to the 'build' directory
+
+To run the server from the currentt directory
+  type 'build/dmserver' or 'build\dmserver' depending on your OS shell.
+
+The server will boot on port 4000
+The first user logging in will be created as the adminstrator.
+
+Read the readme file and files in the doc directory for more information
+on how to use it.  
+
+
+---------------------------------------------------------------------------------
+
+Old Installation using older compilers and included makefiles 
 
   * For Linux and Cygwin - type 'make'.   
 
